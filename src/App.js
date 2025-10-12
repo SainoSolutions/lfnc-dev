@@ -1,10 +1,23 @@
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
+import Services from "./pages/Services";
+import Ministries from "./pages/Ministries";
+import GetInvolved from "./pages/GetInvolved";
+import Donate from "./pages/Donate";
 
 function App() {
   return (
-    <div className="App">
-      <h2>Welcome to Living Faith Nepali church Web Development Branch, Please use this branch for developement purpose</h2>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/ministries" element={<Ministries />} />
+        <Route path="/get-involved" element={<GetInvolved />} />
+        <Route path="/donate" element={<Donate />} />
+      </Routes>
+    </Router>
   );
 }
 

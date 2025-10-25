@@ -74,7 +74,7 @@ const Navbar = () => {
             <li>
               <Link 
                 to="/donate" 
-                className="bg-gradient-to-r from-red-600 to-black text-white font-bold py-2 px-4 rounded no-underline hover:opacity-90 transition-opacity whitespace-nowrap"
+                className="px-6 py-3 bg-gradient-to-r from-red-500 to-purple-600 text-white border-none rounded cursor-pointer text-sm font-medium transition-all duration-300 hover:from-red-600 hover:to-purple-700 transform hover:scale-105"
               >
                 Donate
               </Link>
@@ -143,7 +143,7 @@ const Navbar = () => {
               <li className="pt-2">
                 <Link 
                   to="/donate" 
-                  className="bg-gradient-to-r from-red-600 to-black text-white font-bold py-3 px-4 rounded no-underline hover:opacity-90 transition-opacity block text-center"
+                  className="bg-gradient-to-r from-red-500 to-purple-600 text-white font-bold py-3 px-4 rounded no-underline hover:from-red-600 hover:to-purple-700 transition-colors block text-center"
                   onClick={closeMobileMenu}
                 >
                   Donate

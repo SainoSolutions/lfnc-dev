@@ -136,11 +136,11 @@ const Footer = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="px-5 py-3 border border-gray-300 rounded-full w-full sm:w-80 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+              className="px-5 py-3 border border-gray-300 rounded w-full sm:w-80 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
             />
             <button 
               type="submit"
-              className="px-6 py-3 bg-gradient-to-r from-blue-600 to-red-600 text-white border-none rounded-full cursor-pointer text-sm font-medium transition-all duration-300 hover:from-blue-700 hover:to-red-700 transform hover:scale-105"
+              className="px-6 py-3 bg-gradient-to-r from-red-500 to-purple-600 text-white border-none rounded cursor-pointer text-sm font-medium transition-all duration-300 hover:from-red-600 hover:to-purple-700 transform hover:scale-105"
             >
               Subscribe
             </button>

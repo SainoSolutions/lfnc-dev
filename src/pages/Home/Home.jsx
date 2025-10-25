@@ -6,6 +6,7 @@ import slide4 from '../../assets/images/Hero/slide4.jpg'
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const slides = [
     {
@@ -34,13 +35,15 @@ const Home = () => {
     }
   ];
 
-  // Auto slide every 4 seconds
+  // Auto slide every 3 seconds, pause on hover
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [slides.length]);
+    if (!isHovered) {
+      const interval = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [slides.length, isHovered]);
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
@@ -80,7 +83,11 @@ const Home = () => {
             <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
             {/* Slide Content - Responsive */}
-            <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
+            <div 
+              className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 lg:px-8"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
               <div className="text-white text-center lg:text-left max-w-4xl w-full">
                 <h1 
                   className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-6"

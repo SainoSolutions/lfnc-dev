@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Ministries from '../Ministries/Ministries';
+import Services from '../Services/Services';
 import slide1 from '../../assets/images/Hero/slide1.jpg'
 import slide2 from '../../assets/images/Hero/slide2.jpg'
 import slide3 from '../../assets/images/Hero/slide3.jpg'
@@ -61,7 +63,9 @@ const Home = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div>
+      {/* Hero Section */}
+      <div className="relative w-full h-screen overflow-hidden">
       {/* Slides Container */}
       <div 
         className="flex transition-transform duration-500 ease-in-out h-full"
@@ -144,6 +148,17 @@ const Home = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
+      </div>
+      
+      {/* Services Section */}
+      <section id="services">
+        <Services />
+      </section>
+      
+      {/* Ministries Section */}
+      <section id="ministries">
+        <Ministries />
+      </section>
     </div>
   );
 };

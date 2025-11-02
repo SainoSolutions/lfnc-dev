@@ -1,176 +1,261 @@
-import React from 'react';
-import { FaCalendarAlt, FaClock, FaUsers } from 'react-icons/fa';
-import kidsImg from '../../assets/images/Ministries/Kids.jpg'
-import teensImg from '../../assets/images/Ministries/Teens.jpg'
-import youthImg from '../../assets/images/Ministries/Youth.jpg'
-import mensImg from '../../assets/images/Ministries/Mens.jpg'
+import { useState } from 'react';
 
-const Ministries = () => {
+export default function Ministries() {
   const ministries = [
     {
-      id: 1,
-      image: kidsImg,
-      title: "Kids Ministry",
-      description: "Engaging activities and lessons for children to learn about faith.",
+      title: "Youth Fellowship",
+      shortTitle: "Youth",
+      description: "Empowering the next generation through dynamic teaching, mentorship, and community.",
+      imageUrl: "https://images.unsplash.com/photo-1551847633-314d50cd36e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJchaHwxfHx5b3V0aCUyMGdyb3VwJTIwY29tbXVuaXR5fGVufDF8fHx8MTc2MjAxOTQzOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      icon: "👥",
+      day: "Friday",
+      time: "6:30 PM",
+      age: "13-18 Years"
+    },
+    {
+      title: "Kids Fellowship",
+      shortTitle: "Kids",
+      description: "Nurturing young hearts with age-appropriate teaching and fun activities.",
+      imageUrl: "https://images.unsplash.com/photo-1644822861244-1257985cbf0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMHByYXlpbmclMjB0b2dldGhlcnxlbnwxfHx8fDE3NjIwMTk0Mzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      icon: "👶",
       day: "Sunday",
       time: "10:00 AM",
-      age: "Ages 3-12",
-      icon: (
-        <svg className="w-6 h-6 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"/>
-        </svg>
-      ),
-      bgColor: "bg-gradient-to-br from-blue-50 to-indigo-100",
-      borderColor: "border-blue-200"
+      age: "3-12 Years"
     },
     {
-      id: 2,
-      image: teensImg,
-      title: "Teens Ministry",
-      description: "Dynamic programs and discussions for teenagers to explore their faith.",
-      day: "Friday",
+      title: "Worship & Prayer",
+      shortTitle: "Worship",
+      description: "Experience powerful worship and connect with God through prayer.",
+      imageUrl: "https://images.unsplash.com/photo-1543702404-38c2035462ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaHVyY2glMjB3b3JzaGlwJTIwaGFuZHN8ZW58MXx8fHwxNzYxOTg4NDQ2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      icon: "❤️",
+      day: "Wednesday",
       time: "7:00 PM",
-      age: "Ages 13-17",
-      icon: (
-        <svg className="w-6 h-6 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-        </svg>
-      ),
-      bgColor: "bg-gradient-to-br from-purple-50 to-pink-100",
-      borderColor: "border-purple-200"
+      age: "All Ages"
     },
     {
-      id: 3,
-      image: youthImg,
-      title: "Youth Ministry",
-      description: "Dynamic programs and discussions for young adults to explore their faith.",
-      day: "Saturday",
-      time: "6:30 PM",
-      age: "Ages 18-30",
-      icon: (
-        <svg className="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
-        </svg>
-      ),
-      bgColor: "bg-gradient-to-br from-green-50 to-emerald-100",
-      borderColor: "border-green-200"
-    },
-    {
-      id: 5,
-      image: mensImg,
-      title: "Men's Ministry",
-      description: "Building camaraderie and spiritual growth among men through various activities.",
+      title: "Men's Fellowship",
+      shortTitle: "Men",
+      description: "Building strong men of faith through fellowship, study, and accountability.",
+      imageUrl: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      icon: "🤝",
       day: "Saturday",
       time: "8:00 AM",
-      age: "Men 18+",
-      icon: (
-        <svg className="w-6 h-6 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"/>
-        </svg>
-      ),
-      bgColor: "bg-gradient-to-br from-orange-50 to-amber-100",
-      borderColor: "border-orange-200"
+      age: "18+ Years"
+    },
+    {
+      title: "Bible Study",
+      shortTitle: "Bible Study",
+      description: "Dive deeper into God's Word through weekly study groups.",
+      imageUrl: "https://images.unsplash.com/photo-1620175259377-32c2a6394f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZW9wbGUlMjBwcmF5aW5nJTIwYmlibGV8ZW58MXx8fHwxNzYyMDE5NDM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      icon: "📖",
+      day: "Tuesday",
+      time: "7:30 PM",
+      age: "Adults"
+    },
+    {
+      title: "Music & Arts",
+      shortTitle: "Music",
+      description: "Glorifying God through creative expression and worship.",
+      imageUrl: "https://images.unsplash.com/photo-1617544517952-991273adcbdc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaHVyY2glMjBtdXNpYyUyMGNob2lyfGVufDF8fHx8MTc2MjAxOTQ0MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      icon: "🎵",
+      day: "Thursday",
+      time: "6:00 PM",
+      age: "12+ Years"
     }
   ];
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrevious = () => {
+    setCurrentIndex((prev) => (prev === 0 ? ministries.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev === ministries.length - 1 ? 0 : prev + 1));
+  };
+
+  const getLeftIndex = () => {
+    return currentIndex === 0 ? ministries.length - 1 : currentIndex - 1;
+  };
+
+  const getRightIndex = () => {
+    return currentIndex === ministries.length - 1 ? 0 : currentIndex + 1;
+  };
+
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-white to-blue-50 py-8 px-4 sm:py-12 sm:px-6 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-500 via-purple-400 to-orange-400 relative overflow-hidden">
+      {/* Decorative blobs */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-500/30 rounded-full blur-3xl" />
       
-      {/* Header */}
-      <header className="text-center mb-16 sm:mb-20 relative z-10">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-500 via-purple-600 to-blue-600 rounded-2xl mb-6 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
-          <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-          </svg>
-        </div>
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-red-600 to-purple-600 mb-6 tracking-tight">
-          Our Ministries
-        </h1>
-        <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed font-medium">
-          Join our vibrant community and grow in faith together through meaningful connections
-        </p>
-        <div className="mt-8 w-24 h-1 bg-gradient-to-r from-red-500 to-purple-600 mx-auto rounded-full"></div>
-      </header>
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-20">
+        {/* Title - Simple text without button */}
+        <h1 className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wider mb-20">
+  Ministries
+</h1>
 
-      {/* Ministries Grid */}
-      <main className="max-w-full mx-auto w-full px-2 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-9 sm:gap-8 w-full">
-          {ministries.map((ministry, index) => (
-            <div 
-              key={ministry.id}
-              className="group relative"
-              style={{ animationDelay: `${index * 150}ms` }}
-            >
-              {/* Glassmorphism Card */}
-              <div className="bg-white/90 rounded border border-white/20 shadow-lg hover:shadow-xl transition-all duration-150 ease-out hover:-translate-y-1 overflow-hidden h-full flex flex-col">
-                {/* Image Container */}
-                <div className="relative overflow-hidden rounded-t">
-                  <img 
-                    src={ministry.image} 
-                    alt={ministry.title}
-                    className="w-full h-56 sm:h-64 object-cover transition-transform duration-150 group-hover:scale-102"
-                  />
-
-                  {/* Floating Badge */}
-                  <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 text-xs font-bold text-gray-800 shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-                    Join Us
+        {/* Cards Container */}
+        <div className="relative w-full max-w-6xl h-[500px] flex items-center justify-center">
+          {/* Left Card - Rotated with Image */}
+          <div
+            className="absolute left-0 md:left-8 lg:left-16 z-10 cursor-pointer"
+            onClick={handlePrevious}
+          >
+            <div className="bg-white rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform -rotate-12 hover:scale-105 transition-all duration-300">
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={ministries[getLeftIndex()].imageUrl}
+                  alt={ministries[getLeftIndex()].title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              </div>
+              <div className="p-4 bg-white">
+                <h2 className="text-black text-xl font-black text-center mb-2">{ministries[getLeftIndex()].shortTitle}</h2>
+                <div className="text-xs text-gray-600 space-y-1">
+                  <div className="flex justify-between">
+                    <span>Day:</span>
+                    <span className="font-medium">{ministries[getLeftIndex()].day}</span>
                   </div>
-                </div>
-                
-                {/* Content */}
-                <div className="p-4 flex-1 flex flex-col">
-                  <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors duration-150">
-                    {ministry.title}
-                  </h2>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-3 line-clamp-3">
-                    {ministry.description}
-                  </p>
-                  
-                  {/* Info Grid */}
-                  <div className="grid grid-cols-1 gap-2 mb-3 flex-1">
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded">
-                      <div className="w-8 h-8 bg-red-100 rounded flex items-center justify-center">
-                        <FaCalendarAlt className="w-4 h-4 text-red-600" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700">{ministry.day}</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded">
-                      <div className="w-8 h-8 bg-red-100 rounded flex items-center justify-center">
-                        <FaClock className="w-4 h-4 text-red-600" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700">{ministry.time}</span>
-                    </div>
-                    <div className="flex items-center gap-3 p-3 bg-gray-50 rounded">
-                      <div className="w-8 h-8 bg-red-100 rounded flex items-center justify-center">
-                        <FaUsers className="w-4 h-4 text-red-600" />
-                      </div>
-                      <span className="text-sm font-semibold text-gray-700">{ministry.age}</span>
-                    </div>
+                  <div className="flex justify-between">
+                    <span>Time:</span>
+                    <span className="font-medium">{ministries[getLeftIndex()].time}</span>
                   </div>
-                  
-                  {/* CTA Button */}
-                  <button className="w-full bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded transition-colors duration-150">
-                    <span className="flex items-center justify-center gap-2">
-                      Learn More
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </button>
+                  <div className="flex justify-between">
+                    <span>Age:</span>
+                    <span className="font-medium">{ministries[getLeftIndex()].age}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Center Featured Card - Straight */}
+          <div className="relative z-20 bg-white rounded-3xl shadow-2xl overflow-hidden w-80 md:w-96 transform rotate-0">
+            <div className="relative h-80 overflow-hidden">
+              <img
+                src={ministries[currentIndex].imageUrl}
+                alt={ministries[currentIndex].title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            </div>
+            <div className="p-6 bg-white">
+              <h2 className="text-red-500 text-xl font-black mb-2">{ministries[currentIndex].title}</h2>
+              <p className="text-gray-600 leading-relaxed mb-4">{ministries[currentIndex].description}</p>
+              <div className="text-sm text-gray-700 space-y-2 bg-gray-50 rounded-lg p-3">
+                <div className="flex justify-between">
+                  <span className="font-medium">Day:</span>
+                  <span>{ministries[currentIndex].day}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-medium">Time:</span>
+                  <span>{ministries[currentIndex].time}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="font-medium">Age Group:</span>
+                  <span>{ministries[currentIndex].age}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Card - Rotated with Image */}
+          <div
+            className="absolute right-0 md:right-8 lg:right-16 z-10 cursor-pointer"
+            onClick={handleNext}
+          >
+            <div className="bg-white rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform rotate-12 hover:scale-105 transition-all duration-300">
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={ministries[getRightIndex()].imageUrl}
+                  alt={ministries[getRightIndex()].title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              </div>
+              <div className="p-4 bg-white">
+                <h2 className="text-black text-xl font-black text-center mb-2">{ministries[getRightIndex()].shortTitle}</h2>
+                <div className="text-xs text-gray-600 space-y-1">
+                  <div className="flex justify-between">
+                    <span>Day:</span>
+                    <span className="font-medium">{ministries[getRightIndex()].day}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Time:</span>
+                    <span className="font-medium">{ministries[getRightIndex()].time}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Age:</span>
+                    <span className="font-medium">{ministries[getRightIndex()].age}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={handlePrevious}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hidden md:block"
+          >
+            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hidden md:block"
+          >
+            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
-      </main>
+
+        {/* Indicator Dots - More spacing from cards */}
+        {/* Indicator Dots - More spacing from cards */}
+<div className="flex gap-1.5 mt-20">
+  {ministries.map((_, index) => (
+    <button
+      key={index}
+      onClick={() => setCurrentIndex(index)}
+      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+        index === currentIndex
+          ? 'bg-white w-6'
+          : 'bg-white/50 hover:bg-white/75'
+      }`}
+    />
+  ))}
+</div>
+{/* Mobile Navigation */}
+<div className="flex gap-4 mt-8 md:hidden">
+  <button
+    onClick={handlePrevious}
+    className="bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
+  >
+    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+  <button
+    onClick={handleNext}
+    className="bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
+  >
+    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</div>
+
+{/* Bottom CTA - More spacing from dots */}
+<div className="mt-9 text-center">
+  <p className="text-white mb-4 text-lg font-medium leading-relaxed">Find Your Place to Serve and Grow</p>
+  <button className="px-8 py-4 bg-white text-purple-600 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-xl font-bold text-lg">
+    Get Involved Today
+  </button>
+</div>
+      </div>
     </div>
   );
-};
-
-export default Ministries;
+}

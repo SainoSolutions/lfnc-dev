@@ -96,6 +96,15 @@ const Navbar = () => {
                 Get Involved
               </Link>
             </li>
+
+            <li>
+              <Link 
+                to="/events" 
+                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline"
+              >
+                Events
+              </Link>
+            </li>
             <li>
               <Link 
                 to="/donate" 
@@ -103,6 +112,7 @@ const Navbar = () => {
               >
                 Donate
               </Link>
+              
             </li>
           </ul>
         </div>

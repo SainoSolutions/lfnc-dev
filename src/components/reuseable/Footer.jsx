@@ -13,6 +13,12 @@ const Footer = () => {
     alert('Thank you for subscribing!');
   };
 
+  const handleSocialClick = (platform) => {
+    // Handle social media clicks - you can add your actual URLs here
+    console.log(`Clicked ${platform}`);
+    // Example: window.open('https://facebook.com/yourchurch', '_blank');
+  };
+
   return (
     <footer className="bg-white text-black py-10 border-t-2 border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -150,26 +156,26 @@ const Footer = () => {
         {/* Social Media Links */}
         <div className="text-center mb-6">
           <div className="flex justify-center gap-6">
-            <a 
-              href="#" 
-              className="group transition-transform duration-300 hover:scale-110"
+            <button 
+              onClick={() => handleSocialClick('Facebook')}
+              className="group transition-transform duration-300 hover:scale-110 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded"
             >
               <img 
                 src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" 
                 alt="Facebook" 
                 className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
               />
-            </a>
-            <a 
-              href="#" 
-              className="group transition-transform duration-300 hover:scale-110"
+            </button>
+            <button 
+              onClick={() => handleSocialClick('YouTube')}
+              className="group transition-transform duration-300 hover:scale-110 cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded"
             >
               <img 
                 src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" 
                 alt="YouTube" 
                 className="w-8 h-8 group-hover:scale-110 transition-transform duration-300"
               />
-            </a>
+            </button>
           </div>
         </div>
 

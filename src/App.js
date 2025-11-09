@@ -5,6 +5,7 @@ import AboutUs from "./pages/About/AboutUs";
 import GetInvolved from "./pages/GetInvolved/GetInvolved";
 import Donate from "./pages/Donate/Donate";
 import Layout from "./components/Layout/Layout";
+import Events from "./pages/Events/Events";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -26,6 +27,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />       
         <Route path="/get-involved" element={<GetInvolved />} />
         <Route path="/donate" element={<Donate />} />
+        <Route path="/events" element={<Events />} />
       </Routes>
       </Layout>
     </Router>

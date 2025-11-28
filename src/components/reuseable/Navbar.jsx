@@ -10,12 +10,18 @@ const Navbar = () => {
   const handleSectionClick = (sectionId) => {
     if (location.pathname === '/') {
       // Already on home page, just scroll
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     } else {
       // Navigate to home page first, then scroll
       navigate('/');
       setTimeout(() => {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }, 100);
     }
   };
@@ -65,12 +71,12 @@ const Navbar = () => {
               </button>
             </li>
             <li>
-              <Link 
-                to="/aboutus" 
-                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline"
+              <button 
+                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline bg-transparent border-none cursor-pointer"
+                onClick={() => handleSectionClick('aboutus')}
               >
                 About Us
-              </Link>
+              </button>
             </li>
             <li>
               <button 
@@ -89,30 +95,28 @@ const Navbar = () => {
               </button>
             </li>
             <li>
-              <Link 
-                to="/get-involved" 
-                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline"
+              <button 
+                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline bg-transparent border-none cursor-pointer"
+                onClick={() => handleSectionClick('get-involved')}
               >
                 Get Involved
-              </Link>
+              </button>
             </li>
-
             <li>
-              <Link 
-                to="/events" 
-                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline"
+              <button 
+                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline bg-transparent border-none cursor-pointer"
+                onClick={() => handleSectionClick('events')}
               >
                 Events
-              </Link>
+              </button>
             </li>
             <li>
-              <Link 
-                to="/donate" 
+              <button 
                 className="px-6 py-3 bg-gradient-to-r from-red-500 to-purple-600 text-white border-none rounded cursor-pointer text-sm font-medium transition-all duration-300 hover:from-red-600 hover:to-purple-700 transform hover:scale-105"
+                onClick={() => handleSectionClick('donate')}
               >
                 Donate
-              </Link>
-              
+              </button>
             </li>
           </ul>
         </div>
@@ -142,13 +146,15 @@ const Navbar = () => {
                 </button>
               </li>
               <li>
-                <Link 
-                  to="/aboutus" 
-                  className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline block py-3 px-4 rounded hover:bg-gray-50"
-                  onClick={closeMobileMenu}
+                <button 
+                  className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline block py-3 px-4 rounded hover:bg-gray-50 bg-transparent border-none cursor-pointer w-full text-left"
+                  onClick={() => {
+                    handleSectionClick('aboutus');
+                    closeMobileMenu();
+                  }}
                 >
                   About Us
-                </Link>
+                </button>
               </li>
               <li>
                 <button 
@@ -173,22 +179,37 @@ const Navbar = () => {
                 </button>
               </li>
               <li>
-                <Link 
-                  to="/get-involved" 
-                  className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline block py-3 px-4 rounded hover:bg-gray-50"
-                  onClick={closeMobileMenu}
+                <button 
+                  className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline block py-3 px-4 rounded hover:bg-gray-50 bg-transparent border-none cursor-pointer w-full text-left"
+                  onClick={() => {
+                    handleSectionClick('get-involved');
+                    closeMobileMenu();
+                  }}
                 >
                   Get Involved
-                </Link>
+                </button>
+              </li>
+              <li>
+                <button 
+                  className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline block py-3 px-4 rounded hover:bg-gray-50 bg-transparent border-none cursor-pointer w-full text-left"
+                  onClick={() => {
+                    handleSectionClick('events');
+                    closeMobileMenu();
+                  }}
+                >
+                  Events
+                </button>
               </li>
               <li className="pt-2">
-                <Link 
-                  to="/donate" 
-                  className="bg-gradient-to-r from-red-500 to-purple-600 text-white font-bold py-3 px-4 rounded no-underline hover:from-red-600 hover:to-purple-700 transition-colors block text-center"
-                  onClick={closeMobileMenu}
+                <button 
+                  className="bg-gradient-to-r from-red-500 to-purple-600 text-white font-bold py-3 px-4 rounded no-underline hover:from-red-600 hover:to-purple-700 transition-colors block text-center w-full border-none cursor-pointer"
+                  onClick={() => {
+                    handleSectionClick('donate');
+                    closeMobileMenu();
+                  }}
                 >
                   Donate
-                </Link>
+                </button>
               </li>
             </ul>
           </div>

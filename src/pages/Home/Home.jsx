@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Ministries from '../Ministries/Ministries';
 import Services from '../Services/Services';
-import AboutUs from '../About/AboutUs'; // Add this import
-import GetInvolved from '../GetInvolved/GetInvolved'; // Add this import
-import Events from '../Events/Events'; // Add this import
-import Donate from '../Donate/Donate'; // Add this import
-import slide1 from '../../assets/images/Hero/slide1.jpg'
-import slide2 from '../../assets/images/Hero/slide2.jpg'
-import slide3 from '../../assets/images/Hero/slide3.jpg'
-import slide4 from '../../assets/images/Hero/slide4.jpg'
+import slide1 from '../../assets/images/Hero/slide1.jpg';
+import slide2 from '../../assets/images/Hero/slide2.jpg';
+import slide3 from '../../assets/images/Hero/slide3.jpg';
+import slide4 from '../../assets/images/Hero/slide4.jpg';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -69,9 +65,9 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section id="home"> {/* Added id="home" for navbar scrolling */}
+      <section id="home">
         <div className="relative w-full h-screen overflow-hidden">
-          {/* Your existing hero slider code */}
+          {/* Slides Container */}
           <div 
             className="flex transition-transform duration-500 ease-in-out h-full"
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -81,12 +77,17 @@ const Home = () => {
                 key={slide.id}
                 className="w-full h-full flex-shrink-0 relative"
               >
+                {/* Background Image - Fixed for mobile */}
                 <img
                   src={slide.image}
                   alt={`Slide ${slide.id}`}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
+                
+                {/* Overlay for better text readability */}
                 <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+
+                {/* Slide Content - Responsive */}
                 <div 
                   className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 lg:px-8"
                   onMouseEnter={() => setIsHovered(true)}
@@ -115,7 +116,7 @@ const Home = () => {
             ))}
           </div>
 
-          {/* Navigation Dots */}
+          {/* Navigation Dots - Responsive */}
           <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3">
             {slides.map((_, index) => (
               <button
@@ -130,7 +131,7 @@ const Home = () => {
             ))}
           </div>
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows - Hidden on mobile, show on tablet+ */}
           <button
             onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
             className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 sm:p-3 rounded-full transition duration-300"
@@ -151,11 +152,6 @@ const Home = () => {
         </div>
       </section>
       
-      {/* About Us Section */}
-      <section id="aboutus">
-        <AboutUs />
-      </section>
-      
       {/* Services Section */}
       <section id="services">
         <Services />
@@ -164,21 +160,6 @@ const Home = () => {
       {/* Ministries Section */}
       <section id="ministries">
         <Ministries />
-      </section>
-
-      {/* Get Involved Section */}
-      <section id="get-involved">
-        <GetInvolved />
-      </section>
-
-      {/* Events Section */}
-      <section id="events">
-        <Events />
-      </section>
-
-      {/* Donate Section */}
-      <section id="donate">
-        <Donate />
       </section>
     </div>
   );

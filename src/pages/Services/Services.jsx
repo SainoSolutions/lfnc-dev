@@ -1,9 +1,39 @@
 import React from 'react';
-import { FaCross, FaBirthdayCake, FaHeart, FaHandsHelping } from 'react-icons/fa';
 import baptismImg from '../../assets/images/Baptisim.jpg';
 import birthdayImg from '../../assets/images/birthday.jpg';
 import funeralImg from '../../assets/images/Funeral.jpg';
 import volunteerImg from '../../assets/images/Volunteer.jpg';
+
+// Custom SVG Icons
+const CrossIcon = () => (
+  <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 3v14M3 10h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+  </svg>
+);
+
+const CakeIcon = () => (
+  <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 2a2 2 0 00-2 2v1a2 2 0 104 0V4a2 2 0 00-2-2zM3 8a2 2 0 012-2h10a2 2 0 012 2v1a2 2 0 01-2 2H5a2 2 0 01-2-2V8zM4 13a1 1 0 011-1h10a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4z"/>
+  </svg>
+);
+
+const HeartIcon = () => (
+  <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd"/>
+  </svg>
+);
+
+const HandsIcon = () => (
+  <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+  </svg>
+);
+
+const ChevronRightIcon = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+  </svg>
+);
 
 const Services = () => {
   const services = [
@@ -11,112 +41,129 @@ const Services = () => {
       id: 1,
       image: baptismImg,
       title: "Baptism Service",
-      description: "We offer a special baptism service for infants and adults alike, conducted by our senior pastor.",
-      icon: <FaCross className="w-6 h-6 text-red-600" />
+      description: "Experience a sacred baptism ceremony conducted by our senior pastor, welcoming you into our faith community with reverence and joy.",
+      icon: <CrossIcon />,
     },
     {
       id: 2,
       image: birthdayImg,
       title: "Birthday Service",
-      description: "Celebrate your special day with a personalized birthday service, including prayers and blessings.",
-      icon: <FaBirthdayCake className="w-6 h-6 text-red-600" />
+      description: "Celebrate your special day with a personalized service that combines joyful celebration with spiritual blessings and meaningful prayers.",
+      icon: <CakeIcon />,
     },
     {
       id: 3,
       image: funeralImg,
       title: "Funeral Service",
-      description: "We provide compassionate funeral services to honor and remember your loved ones.",
-      icon: <FaHeart className="w-6 h-6 text-red-600" />
+      description: "Compassionate and dignified funeral services that honor your loved ones' memory while providing comfort and support to grieving families.",
+      icon: <HeartIcon />,
     },
     {
       id: 4,
       image: volunteerImg,
       title: "Volunteer Services",
-      description: "Opportunities to serve the community and church through volunteering.",
-      icon: <FaHandsHelping className="w-6 h-6 text-red-600" />
+      description: "Join our vibrant community of volunteers and make a meaningful impact through various outreach programs and church activities.",
+      icon: <HandsIcon />,
     }
   ];
 
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-white to-blue-50 py-8 px-4 sm:py-12 sm:px-6 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{animationDelay: '4s'}}></div>
       </div>
-      
-      {/* Header */}
-      <header className="text-center mb-16 sm:mb-20 relative z-10">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-500 via-purple-600 to-blue-600 rounded-2xl mb-6 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
-          <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </div>
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-red-600 to-purple-600 mb-6 tracking-tight">
-          Our Services
-        </h1>
-        <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed font-medium">
-          Comprehensive spiritual services to support you through life's important moments
-        </p>
-        <div className="mt-8 w-24 h-1 bg-gradient-to-r from-red-500 to-purple-600 mx-auto rounded-full"></div>
-      </header>
 
-      {/* Services Grid */}
-      <main className="max-w-full mx-auto w-full px-2 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-9 sm:gap-8 w-full">
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header Section */}
+        <div className="text-center mb-20">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight">
+            Spiritual <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">Services</span>
+          </h1>
+          
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Supporting you through life's most meaningful moments with compassion, faith, and dedication
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
-            <div 
+            <div
               key={service.id}
               className="group relative"
-              style={{ animationDelay: `${index * 150}ms` }}
+              style={{
+                animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
+              }}
             >
-              {/* Glassmorphism Card */}
-              <div className="bg-white/90 rounded border border-white/20 shadow-lg hover:shadow-xl transition-all duration-150 ease-out hover:-translate-y-1 overflow-hidden h-full flex flex-col">
-                {/* Image Container */}
-                <div className="relative overflow-hidden rounded-t">
-                  <img 
-                    src={service.image} 
+              {/* Card Container */}
+              <div className="relative h-full bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden transition-all duration-500 hover:scale-105 hover:bg-white/15 hover:shadow-2xl hover:shadow-purple-500/30">
+                {/* Image Section */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={service.image}
                     alt={service.title}
-                    className="w-full h-56 sm:h-64 object-cover transition-transform duration-150 group-hover:scale-102"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  {/* Floating Badge */}
-                  <div className="absolute top-4 right-4 bg-white rounded-full px-3 py-1 text-xs font-bold text-gray-800 shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-150">
-                    Available
+                  
+                  {/* Image Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+                  
+                  {/* Icon Badge */}
+                  <div className="absolute top-4 right-4 w-14 h-14 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center text-white shadow-lg">
+                    {service.icon}
                   </div>
                 </div>
-                
-                {/* Content */}
-                <div className="p-4 flex-1 flex flex-col">
-                  <div className="flex items-start gap-4 mb-3">
-                    <div className="flex-shrink-0">
-                      {service.icon}
-                    </div>
-                    <div className="flex-1">
-                      <h2 className="text-xl sm:text-2xl font-black text-gray-900 mb-2 group-hover:text-red-600 transition-colors duration-150">
-                        {service.title}
-                      </h2>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">
+
+                {/* Content Section */}
+                <div className="p-6 space-y-4">
+                  <h3 className="text-2xl font-black text-white">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-gray-400 text-sm leading-relaxed">
                     {service.description}
                   </p>
-                  
-                  {/* CTA Button */}
-                  <button className="w-full bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded transition-colors duration-150">
-                    <span className="flex items-center justify-center gap-2">
-                      Learn More
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
+
+                  {/* CTA Button - Same as Donate button */}
+                  <button className="w-full mt-4 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                    <span>Learn More</span>
+                    <ChevronRightIcon />
                   </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
-      </main>
+
+        {/* Bottom CTA Section */}
+        <div className="mt-20 text-center">
+          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300">
+            <div className="text-left">
+              <h3 className="text-2xl font-bold text-white mb-2">Need Immediate Assistance?</h3>
+              <p className="text-gray-400">Our pastoral team is available 24/7 for urgent matters</p>
+            </div>
+            <button className="bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap">
+              Contact Us Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 };

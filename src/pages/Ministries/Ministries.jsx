@@ -88,14 +88,17 @@ export default function Ministries() {
       <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-500/30 rounded-full blur-3xl" />
       
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-20">
-        {/* Title - Simple text without button */}
-        <h1 className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wider mb-20">
-  Ministries
-</h1>
+      <div className="relative z-10 min-h-screen flex flex-col items-center px-4 pt-20">
+        {/* Title */}
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 leading-tight text-center">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-purple-400 to-blue-400">
+            Our{' '}
+          </span>
+          <span className="text-white">Ministries</span>
+        </h1>
 
         {/* Cards Container */}
-        <div className="relative w-full max-w-6xl h-[500px] flex items-center justify-center">
+        <div className="relative w-full max-w-6xl h-[500px] flex items-center justify-center mt-20">
           {/* Left Card - Rotated with Image */}
           <div
             className="absolute left-0 md:left-8 lg:left-16 z-10 cursor-pointer"
@@ -213,48 +216,48 @@ export default function Ministries() {
           </button>
         </div>
 
-        {/* Indicator Dots - More spacing from cards */}
-        {/* Indicator Dots - More spacing from cards */}
-<div className="flex gap-1.5 mt-20">
-  {ministries.map((_, index) => (
-    <button
-      key={index}
-      onClick={() => setCurrentIndex(index)}
-      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-        index === currentIndex
-          ? 'bg-white w-6'
-          : 'bg-white/50 hover:bg-white/75'
-      }`}
-    />
-  ))}
-</div>
-{/* Mobile Navigation */}
-<div className="flex gap-4 mt-8 md:hidden">
-  <button
-    onClick={handlePrevious}
-    className="bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
-  >
-    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-    </svg>
-  </button>
-  <button
-    onClick={handleNext}
-    className="bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
-  >
-    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-    </svg>
-  </button>
-</div>
+        {/* Indicator Dots */}
+        <div className="flex gap-1.5 mt-20">
+          {ministries.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? 'bg-white w-6'
+                  : 'bg-white/50 hover:bg-white/75'
+              }`}
+            />
+          ))}
+        </div>
 
-{/* Bottom CTA - More spacing from dots */}
-<div className="mt-9 text-center">
-  <p className="text-white mb-4 text-lg font-medium leading-relaxed">Find Your Place to Serve and Grow</p>
-  <button className="px-8 py-4 bg-white text-purple-600 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-xl font-bold text-lg">
-    Get Involved Today
-  </button>
-</div>
+        {/* Mobile Navigation */}
+        <div className="flex gap-4 mt-8 md:hidden">
+          <button
+            onClick={handlePrevious}
+            className="bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
+          >
+            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className="bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
+          >
+            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-9 text-center">
+          <p className="text-white mb-4 text-lg font-medium leading-relaxed">Find Your Place to Serve and Grow</p>
+          <button className="px-8 py-4 bg-white text-purple-600 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-xl font-bold text-lg">
+            Get Involved Today
+          </button>
+        </div>
       </div>
     </div>
   );

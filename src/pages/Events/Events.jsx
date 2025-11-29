@@ -5,9 +5,8 @@ import { useEffect, useState } from 'react';
 
 export default function ChurchEvents() {
   const [eventData, setEventData] = useState(null);
-  const [showAllEvents, setShowAllEvents] = useState(false);
 
-  useEffect(() => {
+  useEffect(()=> {
     EventService.getAllEvents().then((data) => {
       if (data && data[0]) {
         setEventData(data[0]);
@@ -15,13 +14,10 @@ export default function ChurchEvents() {
     }).catch((error) => {
       console.error("Error fetching events:", error);
     });
-  }, []);
-
-  // Get first 4 events or all events based on showAllEvents state
-  const displayedEvents = eventData?.events ? 
-    (showAllEvents ? eventData.events : eventData.events.slice(0, 4)) : 
-    [];
-
+    // EventService.getEventById(1).then((data) => {
+    //   console.log("Event by ID:", data);
+    // })
+  }, [])
   return (
     <div className="min-h-screen bg-zinc-950">
       {/* Hero Section */}
@@ -70,12 +66,10 @@ export default function ChurchEvents() {
       {/* Upcoming Events Section */}
       <section className="px-4 py-16 bg-zinc-900">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-white text-center mb-12 text-3xl font-bold">
-            {eventData?.events?.length > 0 ? 'Upcoming Events' : 'Loading Events...'}
-          </h2>
+          <h2 className="text-white text-center mb-12 text-3xl font-bold">{eventData?.events?.length > 0 ? 'Upcoming Events' : 'Loading Events...'}</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {displayedEvents.map((event) => (
+            {eventData?.events?.map((event) => (
               <button key={event.id} className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50">
                 <img
                   src={event.image}
@@ -102,20 +96,13 @@ export default function ChurchEvents() {
             ))}
           </div>
 
-          {/* View All Events Button - Only show if there are more than 4 events */}
-          {eventData?.events && eventData.events.length > 4 && (
-            <div className="text-center mt-12">
-              <button 
-                className="flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50 mx-auto"
-                onClick={() => setShowAllEvents(!showAllEvents)}
-              >
-                <Calendar className="w-5 h-5" />
-                <span className="font-semibold">
-                  {showAllEvents ? 'Show Less Events' : 'View All Events'}
-                </span>
-              </button>
-            </div>
-          )}
+          {/* View All Events Button */}
+          <div className="text-center mt-12">
+            <button className="flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50 mx-auto">
+              <Calendar className="w-5 h-5" />
+              <span className="font-semibold">View All Events</span>
+            </button>
+          </div>
         </div>
       </section>
     </div>

@@ -10,17 +10,12 @@ const Navbar = () => {
   // Keep scroll functionality ONLY for Services and Ministries (home page sections)
   const handleSectionClick = (sectionId) => {
     if (location.pathname === '/') {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      // Already on home page, just scroll
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } else {
       navigate('/');
       setTimeout(() => {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     }
   };
@@ -91,6 +86,7 @@ const Navbar = () => {
                 Get Involved
               </Link>
             </li>
+
             <li>
               <Link 
                 to="/events" 
@@ -106,6 +102,7 @@ const Navbar = () => {
               >
                 Donate
               </Link>
+              
             </li>
           </ul>
         </div>
@@ -170,15 +167,6 @@ const Navbar = () => {
                   onClick={closeMobileMenu}
                 >
                   Get Involved
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/events" 
-                  className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline block py-3 px-4 rounded hover:bg-gray-50"
-                  onClick={closeMobileMenu}
-                >
-                  Events
                 </Link>
               </li>
               <li className="pt-2">

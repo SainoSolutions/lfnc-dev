@@ -7,26 +7,16 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   
+  // Keep scroll functionality ONLY for Services and Ministries (home page sections)
   const handleSectionClick = (sectionId) => {
     if (location.pathname === '/') {
       // Already on home page, just scroll
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // Navigate to home page first, then scroll
       navigate('/');
       setTimeout(() => {
         document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
-    }
-  };
-  
-  const handleHomeClick = () => {
-    if (location.pathname === '/') {
-      // Already on home page, scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      // Navigate to home page
-      navigate('/');
     }
   };
 
@@ -53,16 +43,16 @@ const Navbar = () => {
           </span>
         </Link>
 
-        {/* Desktop Navigation Links - Hidden on mobile */}
+        {/* Desktop Navigation Links */}
         <div className="hidden md:block">
           <ul className="flex items-center space-x-6 list-none m-0 p-0">
             <li>
-              <button 
-                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline bg-transparent border-none cursor-pointer"
-                onClick={handleHomeClick}
+              <Link 
+                to="/" 
+                className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline"
               >
                 Home
-              </button>
+              </Link>
             </li>
             <li>
               <Link 
@@ -117,7 +107,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Mobile Menu Button - Hidden on desktop */}
+        {/* Mobile Menu Button */}
         <button 
           className="md:hidden text-2xl cursor-pointer text-gray-700 bg-transparent border-none p-2"
           onClick={toggleMenu}
@@ -126,20 +116,18 @@ const Navbar = () => {
           &#9776;
         </button>
 
-        {/* Mobile Navigation Links - Only shows when menu is open */}
+        {/* Mobile Navigation Links */}
         {isMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-200">
             <ul className="flex flex-col list-none m-0 p-4 space-y-3">
               <li>
-                <button 
-                  className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline block py-3 px-4 rounded hover:bg-gray-50 bg-transparent border-none cursor-pointer w-full text-left"
-                  onClick={() => {
-                    handleHomeClick();
-                    closeMobileMenu();
-                  }}
+                <Link 
+                  to="/" 
+                  className="text-gray-900 font-medium hover:text-red-600 transition-colors duration-300 no-underline block py-3 px-4 rounded hover:bg-gray-50"
+                  onClick={closeMobileMenu}
                 >
                   Home
-                </button>
+                </Link>
               </li>
               <li>
                 <Link 

@@ -1,24 +1,22 @@
 import { useState } from "react";
-import { FaChevronDown, FaChevronUp, FaCalendarAlt, FaClock } from "react-icons/fa";
+import { FaChevronRight, FaCalendarAlt, FaClock, FaMapMarkerAlt, FaPray, FaUsers, FaBible, FaHeart } from "react-icons/fa";
 
 export default function GetInvolved() {
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const [activeTab, setActiveTab] = useState(0);
 
   const sections = [
     {
       title: "Sunday Services",
+      icon: FaPray,
       activities: [
         "Worship & The Word: 8:00 am – 9:30 am",
-        "Kid’s Service: 8:30 am – 9:30 am",
+        "Kid's Service: 8:30 am – 9:30 am",
         "Electronic City Branch: 8:00 am – 9:30 am",
       ],
     },
     {
       title: "House Fellowships",
+      icon: FaUsers,
       activities: [
         "HSR Layout: 1st & 3rd Monday, 8:00 pm – 9:30 pm",
         "Indiranagar: 1st Tuesday, 7:00 pm – 8:30 pm",
@@ -31,6 +29,7 @@ export default function GetInvolved() {
     },
     {
       title: "Bible & Prayer",
+      icon: FaBible,
       activities: [
         "Bible Study: Thursday, 8:00 am – 9:00 am",
         "Intercessory Prayer: Friday, 7:30 am – 8:30 am",
@@ -39,24 +38,28 @@ export default function GetInvolved() {
     },
     {
       title: "Youth & Teen Activities",
+      icon: FaHeart,
       activities: [
         "Youth Fellowship: Tuesday, 7:30 am – 9:00 am",
-        "Teen’s Fellowship: Saturday, 4:00 pm – 5:30 pm",
+        "Teen's Fellowship: Saturday, 4:00 pm – 5:30 pm",
       ],
     },
     {
       title: "Women & Couple Fellowships",
+      icon: FaUsers,
       activities: [
         "Couple Fellowship: 2nd Tuesday, 11:00 am – 12:30 pm",
-        "Women’s Fellowship: Last Wednesday, 9:00 pm – 10:30 pm",
+        "Women's Fellowship: Last Wednesday, 9:00 pm – 10:30 pm",
       ],
     },
     {
       title: "Saturday Worship & Practice",
+      icon: FaPray,
       activities: ["Worship Practice: Saturday, 7:30 am – 9:30 am"],
     },
     {
       title: "Monthly Activities",
+      icon: FaCalendarAlt,
       activities: [
         "Communion Service: 1st Sunday of Every Month",
         "Sunday House Fellowship: 1st Sunday, 6:00 pm – 7:00 pm",
@@ -64,88 +67,176 @@ export default function GetInvolved() {
     },
   ];
 
+  const scrollTabsRight = () => {
+    const container = document.querySelector('.tabs-container');
+    if (container) {
+      container.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollTabsLeft = () => {
+    const container = document.querySelector('.tabs-container');
+    if (container) {
+      container.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-white to-blue-50 py-8 px-4 sm:py-12 sm:px-6 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-red-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-20 left-1/2 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+        <div className="absolute top-60 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-1000"></div>
+        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-2000"></div>
       </div>
-      
-      {/* Header */}
-      <header className="text-center mb-16 sm:mb-20 relative z-10">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-500 via-purple-600 to-blue-600 rounded-2xl mb-6 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
-          <FaCalendarAlt className="w-10 h-10 text-white" />
+
+      {/* Content Container */}
+      <div className="relative z-10 px-4 py-12 sm:px-6 lg:px-8">
+        {/* Hero Header */}
+        <div className="text-center mb-16 max-w-4xl mx-auto">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-6 leading-tight">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-purple-400 to-blue-400">
+  A Year of&nbsp;
+</span>
+<span className="text-white">Provision</span>
+          </h1>
+          
+          <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+            Discover meaningful ways to connect, grow, and serve in our vibrant faith community
+          </p>
         </div>
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-red-600 to-purple-600 mb-6 tracking-tight">
-          2025 – A Year of Provision
-        </h1>
-        <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed font-medium">
-          Join our vibrant church activities and grow in faith together
-        </p>
-        <div className="mt-8 w-24 h-1 bg-gradient-to-r from-red-500 to-purple-600 mx-auto rounded-full"></div>
-      </header>
 
-      {/* Activities Section */}
-      <section className="max-w-4xl mx-auto relative z-10">
-        <div className="space-y-6">
-          {sections.map((section, index) => (
-            <div
-              key={index}
-              className="group relative"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Glassmorphism Card */}
-              <div className="bg-white/90 rounded border border-white/20 shadow-lg hover:shadow-xl transition-all duration-150 ease-out overflow-hidden">
-                {/* Header */}
+        {/* Tab Navigation with Arrows */}
+        <div className="max-w-6xl mx-auto mb-8 relative">
+          {/* Left Arrow */}
+          <button
+            onClick={scrollTabsLeft}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-lg"
+          >
+            <FaChevronRight className="w-4 h-4 transform rotate-180" />
+          </button>
+
+          {/* Tabs Container */}
+          <div className="tabs-container flex overflow-x-auto gap-3 pb-4 scrollbar-hide mx-12">
+            {sections.map((section, index) => {
+              const Icon = section.icon;
+              return (
                 <button
-                  onClick={() => toggle(index)}
-                  className="flex justify-between items-center w-full px-6 py-5 text-left focus:outline-none group hover:bg-gray-50/50 transition-colors duration-150"
+                  key={index}
+                  onClick={() => setActiveTab(index)}
+                  className={`flex items-center gap-3 px-6 py-4 rounded-xl font-semibold whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
+                    activeTab === index
+                      ? 'bg-white text-gray-900 shadow-2xl scale-105'
+                      : 'bg-white/10 text-white/70 hover:bg-white/20 backdrop-blur-sm border border-white/10'
+                  }`}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded flex items-center justify-center">
-                      <FaCalendarAlt className="w-5 h-5 text-white" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 group-hover:text-red-600 transition-colors duration-150">
-                      {section.title}
-                    </h3>
-                  </div>
-                  <div className="flex-shrink-0 ml-4">
-                    {openIndex === index ? (
-                      <FaChevronUp className="w-5 h-5 text-red-600 transition-transform duration-150" />
-                    ) : (
-                      <FaChevronDown className="w-5 h-5 text-gray-500 group-hover:text-red-600 transition-colors duration-150" />
-                    )}
-                  </div>
+                  <Icon className="w-5 h-5" />
+                  <span>{section.title}</span>
+                  {activeTab === index && (
+                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-red-500 to-purple-600"></div>
+                  )}
                 </button>
+              );
+            })}
+          </div>
 
-                {/* Content */}
-                {openIndex === index && (
-                  <div className="px-6 pb-6 border-t border-gray-100">
-                    <div className="pt-4">
-                      <ul className="space-y-3">
-                        {section.activities.map((item, i) => {
-                          const hasTime = /\d{1,2}:\d{2}\s?(am|pm|AM|PM)/.test(item);
-                          return (
-                            <li key={i} className="flex items-start gap-3 p-3 bg-gray-50 rounded transition-colors duration-150 hover:bg-gray-100">
-                              {!hasTime && <div className="w-2 h-2 bg-red-600 rounded-full mt-2 flex-shrink-0"></div>}
-                              <span className="text-gray-700 leading-relaxed flex items-center gap-2">
-                                {hasTime && <FaClock className="w-3 h-3 text-red-600 flex-shrink-0" />}
-                                {item}
-                              </span>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
-                )}
+          {/* Right Arrow */}
+          <button
+            onClick={scrollTabsRight}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-lg"
+          >
+            <FaChevronRight className="w-4 h-4" />
+          </button>
+
+          
+        </div>
+
+        {/* Content Area */}
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl">
+            {/* Section Header - Uniform color like Donate button */}
+            <div className="bg-gradient-to-r from-red-500 to-purple-600 px-8 py-8">
+              <div className="flex items-center gap-4">
+                {(() => {
+                  const Icon = sections[activeTab].icon;
+                  return <Icon className="w-10 h-10 text-white" />;
+                })()}
+                <div>
+                  <h2 className="text-3xl font-bold text-white">
+                    {sections[activeTab].title}
+                  </h2>
+                  <p className="text-white/90 mt-1">
+                    {sections[activeTab].activities.length} {sections[activeTab].activities.length === 1 ? 'activity' : 'activities'} scheduled
+                  </p>
+                </div>
               </div>
             </div>
-          ))}
+
+            {/* Activities Grid */}
+            <div className="p-8">
+              <div className="grid md:grid-cols-2 gap-4">
+                {sections[activeTab].activities.map((item, i) => {
+                  const hasTime = /\d{1,2}:\d{2}\s?(am|pm|AM|PM)/.test(item);
+                  const parts = item.split(':');
+                  const title = parts[0];
+                  const details = parts.slice(1).join(':');
+                  
+                  return (
+                    <div
+                      key={i}
+                      className="group bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-6 hover:bg-white/20 hover:scale-105 transition-all duration-300 cursor-pointer"
+                      style={{
+                        animation: `fadeInUp 0.5s ease-out ${i * 0.1}s both`
+                      }}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                          {hasTime ? (
+                            <FaClock className="w-6 h-6 text-white" />
+                          ) : (
+                            <FaMapMarkerAlt className="w-6 h-6 text-white" />
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-white font-bold text-lg mb-1">
+                            {title}
+                          </h3>
+                          {details && (
+                            <p className="text-white/70 text-sm leading-relaxed">
+                              {details.trim()}
+                            </p>
+                          )}
+                        </div>
+                        <FaChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/80 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 }

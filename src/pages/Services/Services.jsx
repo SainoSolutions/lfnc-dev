@@ -43,6 +43,7 @@ const Services = () => {
       title: "Baptism Service",
       description: "Experience a sacred baptism ceremony conducted by our senior pastor, welcoming you into our faith community with reverence and joy.",
       icon: <CrossIcon />,
+      benefits: ["Private or group ceremonies", "Senior pastor officiation", "Photography available"]
     },
     {
       id: 2,
@@ -50,6 +51,7 @@ const Services = () => {
       title: "Birthday Service",
       description: "Celebrate your special day with a personalized service that combines joyful celebration with spiritual blessings and meaningful prayers.",
       icon: <CakeIcon />,
+      benefits: ["Customized blessings", "Group celebration", "Special prayers"]
     },
     {
       id: 3,
@@ -57,6 +59,7 @@ const Services = () => {
       title: "Funeral Service",
       description: "Compassionate and dignified funeral services that honor your loved ones' memory while providing comfort and support to grieving families.",
       icon: <HeartIcon />,
+      benefits: ["Compassionate support", "Memorial arrangements", "Family counseling"]
     },
     {
       id: 4,
@@ -64,6 +67,7 @@ const Services = () => {
       title: "Volunteer Services",
       description: "Join our vibrant community of volunteers and make a meaningful impact through various outreach programs and church activities.",
       icon: <HandsIcon />,
+      benefits: ["Community outreach", "Skill development", "Make a difference"]
     }
   ];
 
@@ -101,7 +105,7 @@ const Services = () => {
               {/* Card Container */}
               <div className="relative h-full bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 overflow-hidden transition-all duration-500 hover:scale-105 hover:bg-white/15 hover:shadow-2xl hover:shadow-purple-500/30">
                 {/* Image Section */}
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-56 overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -123,12 +127,22 @@ const Services = () => {
                     {service.title}
                   </h3>
                   
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <p className="text-gray-400 text-sm leading-relaxed line-clamp-3">
                     {service.description}
                   </p>
 
+                  {/* Benefits List */}
+                  <div className="space-y-2 pt-2">
+                    {service.benefits.map((benefit, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-gray-400 text-xs">
+                        <div className="w-1.5 h-1.5 bg-red-500 rounded-full"></div>
+                        <span>{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+
                   {/* CTA Button - Same as Donate button */}
-                  <button className="w-full mt-4 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                  <button className="w-full mt-6 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
                     <span>Learn More</span>
                     <ChevronRightIcon />
                   </button>
@@ -162,6 +176,13 @@ const Services = () => {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       `}</style>
     </div>

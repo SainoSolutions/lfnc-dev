@@ -103,6 +103,100 @@ const AboutUs = () => {
         </div>
       </section>
 
+      {/* Ministry Timeline Section */}
+      <section className="py-16 px-4 max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-sm uppercase tracking-widest text-red-600 mb-2">Our Journey</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ministry Timeline</h2>
+        </div>
+
+        {/* 2017 Timeline */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">2017</h3>
+          <div className="relative">
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-red-500 to-purple-600"></div>
+            
+            <div className="space-y-12">
+              {/* Timeline Item 1 */}
+              <div className="flex items-center">
+                <div className="w-1/2 pr-8 text-right">
+                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Koramangala</h4>
+                  <p className="text-red-600 font-semibold mb-2">Bangalore (Koramangala)</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">Started our ministry journey in Koramangala, establishing a spiritual home for the Nepali community.</p>
+                </div>
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">1</div>
+                <div className="w-1/2"></div>
+              </div>
+
+              {/* Timeline Item 2 */}
+              <div className="flex items-center">
+                <div className="w-1/2"></div>
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">2</div>
+                <div className="w-1/2 pl-8">
+                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Electronic City</h4>
+                  <p className="text-red-600 font-semibold mb-2">Bangalore (Electronic City)</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">Expanded our reach to Electronic City, serving more families in the Nepali community.</p>
+                </div>
+              </div>
+
+              {/* Timeline Item 3 */}
+              <div className="flex items-center">
+                <div className="w-1/2 pr-8 text-right">
+                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Nepal</h4>
+                  <p className="text-red-600 font-semibold mb-2">Nepal (Kathmandu)</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">Extended our ministry to Nepal, bringing the Gospel to our homeland.</p>
+                </div>
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">3</div>
+                <div className="w-1/2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 2018 Timeline */}
+        <div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">2018</h3>
+          <div className="relative">
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-red-500 to-purple-600"></div>
+            
+            <div className="space-y-12">
+              {/* Timeline Item 1 */}
+              <div className="flex items-center">
+                <div className="w-1/2 pr-8 text-right">
+                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Koramangala Growth</h4>
+                  <p className="text-red-600 font-semibold mb-2">Bangalore (Koramangala)</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">Continued growth and strengthening of our Koramangala congregation with new programs.</p>
+                </div>
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">1</div>
+                <div className="w-1/2"></div>
+              </div>
+
+              {/* Timeline Item 2 */}
+              <div className="flex items-center">
+                <div className="w-1/2"></div>
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">2</div>
+                <div className="w-1/2 pl-8">
+                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Electronic City Expansion</h4>
+                  <p className="text-red-600 font-semibold mb-2">Bangalore (Electronic City)</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">Expanded ministries and community outreach programs in Electronic City branch.</p>
+                </div>
+              </div>
+
+              {/* Timeline Item 3 */}
+              <div className="flex items-center">
+                <div className="w-1/2 pr-8 text-right">
+                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Nepal Development</h4>
+                  <p className="text-red-600 font-semibold mb-2">Nepal (Kathmandu)</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">Strengthened our presence in Nepal with increased community engagement and outreach.</p>
+                </div>
+                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">3</div>
+                <div className="w-1/2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Leadership Section */}
       <section className="py-16 px-4 max-w-6xl mx-auto">
         <div className="text-center mb-12">

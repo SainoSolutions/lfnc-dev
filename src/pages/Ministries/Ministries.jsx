@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Ministries() {
+  const navigate = useNavigate();
   const ministries = [
     {
       title: "Youth Fellowship",
@@ -83,10 +85,13 @@ export default function Ministries() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-500 via-purple-400 to-orange-400 relative overflow-hidden">
-      {/* Decorative blobs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-purple-600/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-500/30 rounded-full blur-3xl" />
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-purple-900 to-blue-900 relative overflow-hidden text-white">
+      {/* Decorative subtle circles (like GetInvolved) */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+        <div className="absolute top-60 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-1000" />
+        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-2000" />
+      </div>
       
       <div className="relative z-10 min-h-screen flex flex-col items-center px-4 pt-20">
         {/* Title */}
@@ -252,9 +257,9 @@ export default function Ministries() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-9 text-center">
+        <div className="mt-9 text-center mb-12">
           <p className="text-white mb-4 text-lg font-medium leading-relaxed">Find Your Place to Serve and Grow</p>
-          <button className="px-8 py-4 bg-white text-purple-600 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-xl font-bold text-lg">
+          <button onClick={() => navigate('/get-involved')} className="px-8 py-4 bg-white text-purple-600 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-xl font-bold text-lg">
             Get Involved Today
           </button>
         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaCross, FaHeart, FaHandsHelping } from 'react-icons/fa';
 
 // Import images for mission and pastors
@@ -8,6 +8,228 @@ import AssociatePastor from '../..//assets/images/Hero/slide2.jpg';
 import YouthPastor from '../../assets/images/Hero/slide1.jpg';
 
 const AboutUs = () => {
+  const [selectedEvent, setSelectedEvent] = useState({ year: 2017, index: 0 });
+  const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
+  const yearsRef = useRef(null);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown on Escape or outside click
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === 'Escape') setYearDropdownOpen(false);
+    }
+    function onClick(e) {
+      if (yearDropdownOpen && dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setYearDropdownOpen(false);
+      }
+    }
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onClick);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClick);
+    };
+  }, [yearDropdownOpen]);
+
+  // Auto-scroll years column to the selected year
+  useEffect(() => {
+    const el = document.getElementById(`year-btn-${selectedEvent.year}`);
+    if (el && yearsRef.current) {
+      const container = yearsRef.current;
+      const top = el.offsetTop - container.offsetTop - 12;
+      container.scrollTo({ top, behavior: 'smooth' });
+    }
+  }, [selectedEvent]);
+
+  const timelineEvents = [
+    {
+      year: 2017,
+      events: [
+        {
+          title: "LFNC Koramangala",
+          location: "Bangalore (Koramangala)",
+          description: "Started our ministry journey in Koramangala, establishing a spiritual home for the Nepali community with powerful worship and teaching. We began with a small group of believers with a vision to reach the Nepali-speaking community.",
+          icon: "🏠"
+        },
+        {
+          title: "LFNC Electronic City",
+          location: "Bangalore (Electronic City)",
+          description: "Expanded our reach to Electronic City, serving more families with vibrant programs and community fellowships. This branch became a beacon of hope for families in the tech corridor.",
+          icon: "🌟"
+        },
+        {
+          title: "LFNC Nepal",
+          location: "Nepal (Kathmandu)",
+          description: "Extended our ministry to Nepal, bringing the Gospel to our homeland and establishing strong roots in Kathmandu. This marked the beginning of our international impact.",
+          icon: "🕊️"
+        }
+      ]
+    },
+    {
+      year: 2018,
+      events: [
+        {
+          title: "LFNC Koramangala Growth",
+          location: "Bangalore (Koramangala)",
+          description: "Continued growth and strengthening of our Koramangala congregation with transformative programs and community impact. We launched new youth and family ministries.",
+          icon: "📈"
+        },
+        {
+          title: "LFNC Electronic City Expansion",
+          location: "Bangalore (Electronic City)",
+          description: "Expanded ministries and launched innovative community outreach programs reaching more families in Electronic City. Our fellowship grew exponentially.",
+          icon: "🚀"
+        },
+        {
+          title: "LFNC Nepal Development",
+          location: "Nepal (Kathmandu)",
+          description: "Strengthened our presence in Nepal with increased community engagement, discipleship, and missionary outreach initiatives across multiple regions.",
+          icon: "💪"
+        }
+      ]
+    },
+    {
+      year: 2019,
+      events: [
+        {
+          title: "Digital Ministry Launch",
+          location: "Online Platform",
+          description: "Launched our first digital ministry platform to reach believers across the globe. This initiative allowed us to connect with the diaspora community and share God's Word beyond geographical boundaries.",
+          icon: "💻"
+        },
+        {
+          title: "Youth Leadership Program",
+          location: "All Branches",
+          description: "Established a comprehensive youth leadership development program to equip young believers for ministry. The program has transformed hundreds of lives through mentorship and training.",
+          icon: "👥"
+        },
+        {
+          title: "Community Outreach Initiative",
+          location: "Bangalore & Nepal",
+          description: "Started extensive community service programs including free medical camps, educational support for underprivileged children, and social welfare projects in local communities.",
+          icon: "❤️"
+        }
+      ]
+    },
+    {
+      year: 2020,
+      events: [
+        {
+          title: "COVID-19 Response Ministry",
+          location: "All Locations",
+          description: "Pivoted to online worship services and launched comprehensive community relief programs during the pandemic. We distributed essential supplies and provided financial assistance to affected families.",
+          icon: "🙏"
+        },
+        {
+          title: "Online Discipleship Groups",
+          location: "Global Reach",
+          description: "Established small group Bible studies and prayer meetings online, enabling deeper spiritual growth and fellowship among our scattered congregation members worldwide.",
+          icon: "📚"
+        },
+        {
+          title: "Humanitarian Aid Campaign",
+          location: "Nepal",
+          description: "Organized special fundraising and aid distribution campaigns to support communities in Nepal affected by economic challenges and natural disasters.",
+          icon: "🤝"
+        }
+      ]
+    },
+    {
+      year: 2021,
+      events: [
+        {
+          title: "Ministry Expansion",
+          location: "New Branches",
+          description: "Opened two new ministry centers in emerging Nepali communities. These centers became vibrant hubs for worship, teaching, and community fellowship.",
+          icon: "🌍"
+        },
+        {
+          title: "Worship Music Production",
+          location: "Recording Studio",
+          description: "Launched our own worship music production team, creating contemporary Christian music in Nepali language to inspire and uplift worshippers globally.",
+          icon: "🎵"
+        },
+        {
+          title: "Missions & Outreach Expansion",
+          location: "Multiple Countries",
+          description: "Expanded our missionary outreach to neighboring countries, sending teams for evangelism, teaching, and community development projects in underserved regions.",
+          icon: "✈️"
+        }
+      ]
+    },
+    {
+      year: 2022,
+      events: [
+        {
+          title: "Annual Leadership Conference",
+          location: "Bangalore",
+          description: "Organized our first annual church leadership conference bringing together leaders and pastors from all our branches to share vision, strategies, and spiritual insights.",
+          icon: "🎯"
+        },
+        {
+          title: "Children's Ministry Enhancement",
+          location: "All Centers",
+          description: "Developed comprehensive children's ministry programs with trained facilitators, creative teaching materials, and age-appropriate spiritual formation activities.",
+          icon: "👶"
+        },
+        {
+          title: "Building Fund Campaign",
+          location: "Various Locations",
+          description: "Launched a major fundraising campaign to construct permanent church facilities in Nepal and strengthen infrastructure in our Bangalore branches.",
+          icon: "🏗️"
+        }
+      ]
+    },
+    {
+      year: 2023,
+      events: [
+        {
+          title: "Women's Empowerment Program",
+          location: "All Branches",
+          description: "Established dedicated women's empowerment and discipleship programs focusing on spiritual growth, leadership development, and addressing community issues affecting women.",
+          icon: "👩‍💼"
+        },
+        {
+          title: "Young Professionals Ministry",
+          location: "Bangalore",
+          description: "Launched specialized ministry targeting young professionals in the tech industry, addressing workplace challenges from a Biblical perspective and building faith-based professional networks.",
+          icon: "💼"
+        },
+        {
+          title: "Mobile Clinic Initiative",
+          location: "Rural Nepal",
+          description: "Started mobile health clinics providing free medical checkups and basic healthcare to remote villages in Nepal, demonstrating Christ's love through practical service.",
+          icon: "🚑"
+        }
+      ]
+    },
+    {
+      year: 2024,
+      events: [
+        {
+          title: "Global Network Building",
+          location: "International",
+          description: "Established partnerships with like-minded churches and ministries worldwide to strengthen our global network and increase collaborative Kingdom impact.",
+          icon: "🌐"
+        },
+        {
+          title: "Next Generation Initiative",
+          location: "All Centers",
+          description: "Launched mentorship programs connecting seasoned believers with younger generations to ensure spiritual legacy and continuity of our ministry vision.",
+          icon: "🔗"
+        },
+        {
+          title: "Vision 2025 Planning",
+          location: "Strategic Sessions",
+          description: "Completed comprehensive strategic planning sessions to define our vision for the next phase of ministry, focusing on deeper spiritual impact and wider community reach.",
+          icon: "🎪"
+        }
+      ]
+    }
+  ];
+
+  const currentYearData = timelineEvents.find(e => e.year === selectedEvent.year);
+  const currentEvent = currentYearData?.events[selectedEvent.index];
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section with Image Background */}
@@ -104,93 +326,136 @@ const AboutUs = () => {
       </section>
 
       {/* Ministry Timeline Section */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-sm uppercase tracking-widest text-red-600 mb-2">Our Journey</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ministry Timeline</h2>
-        </div>
+      <section className="py-20 px-4 bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-widest text-red-600 mb-2 font-semibold">Our Journey</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ministry Timeline</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Click on any year to explore our ministry milestones</p>
+            <div className="mt-6 flex justify-center">
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded={yearDropdownOpen}
+                  onClick={() => setYearDropdownOpen((s) => !s)}
+                  className="inline-flex items-center gap-3 px-4 py-2 bg-white border border-gray-200 rounded-md shadow-sm text-sm font-medium text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-300"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H3.5A1.5 1.5 0 002 5.5v10A1.5 1.5 0 003.5 17h13a1.5 1.5 0 001.5-1.5v-10A1.5 1.5 0 0016.5 4H15V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zM4 8a1 1 0 011-1h10a1 1 0 011 1v2H4V8z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm font-black">{selectedEvent.year}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ml-1 text-gray-500 transform transition-transform ${yearDropdownOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                  </svg>
+                </button>
 
-        {/* 2017 Timeline */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">2017</h3>
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-red-500 to-purple-600"></div>
-            
-            <div className="space-y-12">
-              {/* Timeline Item 1 */}
-              <div className="flex items-center">
-                <div className="w-1/2 pr-8 text-right">
-                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Koramangala</h4>
-                  <p className="text-red-600 font-semibold mb-2">Bangalore (Koramangala)</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">Started our ministry journey in Koramangala, establishing a spiritual home for the Nepali community.</p>
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">1</div>
-                <div className="w-1/2"></div>
-              </div>
-
-              {/* Timeline Item 2 */}
-              <div className="flex items-center">
-                <div className="w-1/2"></div>
-                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">2</div>
-                <div className="w-1/2 pl-8">
-                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Electronic City</h4>
-                  <p className="text-red-600 font-semibold mb-2">Bangalore (Electronic City)</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">Expanded our reach to Electronic City, serving more families in the Nepali community.</p>
-                </div>
-              </div>
-
-              {/* Timeline Item 3 */}
-              <div className="flex items-center">
-                <div className="w-1/2 pr-8 text-right">
-                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Nepal</h4>
-                  <p className="text-red-600 font-semibold mb-2">Nepal (Kathmandu)</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">Extended our ministry to Nepal, bringing the Gospel to our homeland.</p>
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">3</div>
-                <div className="w-1/2"></div>
+                {yearDropdownOpen && (
+                  <ul
+                    role="listbox"
+                    tabIndex={-1}
+                    className="absolute z-50 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg max-h-56 overflow-y-auto py-1"
+                    onMouseLeave={() => setYearDropdownOpen(false)}
+                  >
+                    {timelineEvents.map((item) => (
+                      <li key={item.year} role="option" aria-selected={selectedEvent.year === item.year}>
+                        <button
+                          className={`w-full text-left px-4 py-2 text-sm hover:bg-purple-50 ${selectedEvent.year === item.year ? 'bg-purple-100 font-bold' : ''}`}
+                          onClick={() => {
+                            setSelectedEvent({ year: item.year, index: 0 });
+                            setYearDropdownOpen(false);
+                          }}
+                        >
+                          {item.year}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>
-        </div>
 
-        {/* 2018 Timeline */}
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">2018</h3>
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-red-500 to-purple-600"></div>
-            
-            <div className="space-y-12">
-              {/* Timeline Item 1 */}
-              <div className="flex items-center">
-                <div className="w-1/2 pr-8 text-right">
-                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Koramangala Growth</h4>
-                  <p className="text-red-600 font-semibold mb-2">Bangalore (Koramangala)</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">Continued growth and strengthening of our Koramangala congregation with new programs.</p>
+          <div className="flex flex-col lg:flex-row gap-8 lg:items-stretch">
+            {/* Vertical Timeline */}
+            <div ref={yearsRef} className="lg:w-64 flex lg:flex-col gap-4 lg:gap-6 lg:overflow-y-auto lg:max-h-[420px] overflow-x-hidden bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/10 relative">
+              <div className="hidden lg:block absolute -right-3 top-6 bottom-6 w-1 bg-gradient-to-b from-red-300 to-transparent rounded"></div>
+              {timelineEvents.map((item) => (
+                <div key={item.year} className="flex-shrink-0 flex justify-center">
+                  <button
+                    id={`year-btn-${item.year}`}
+                    onClick={() => setSelectedEvent({ year: item.year, index: 0 })}
+                    className={`w-40 py-2 px-3 rounded-2xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 shadow-sm mx-auto ${
+                      selectedEvent.year === item.year
+                        ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-xl'
+                        : 'bg-white/60 text-gray-800 border border-white/20'
+                    }`}
+                  >
+                    {item.year}
+                  </button>
                 </div>
-                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">1</div>
-                <div className="w-1/2"></div>
-              </div>
+              ))}
+            </div>
 
-              {/* Timeline Item 2 */}
-              <div className="flex items-center">
-                <div className="w-1/2"></div>
-                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">2</div>
-                <div className="w-1/2 pl-8">
-                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Electronic City Expansion</h4>
-                  <p className="text-red-600 font-semibold mb-2">Bangalore (Electronic City)</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">Expanded ministries and community outreach programs in Electronic City branch.</p>
+            {/* Events List & Detail Panel */}
+            <div className="lg:flex-1 lg:min-h-[420px]">
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Events Grid */}
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Year {selectedEvent.year}</h3>
+                  <div className="space-y-3">
+                    {currentYearData?.events.map((event, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setSelectedEvent({ year: selectedEvent.year, index: idx })}
+                        className={`w-full p-4 rounded-xl text-left transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-start gap-4 ${
+                          selectedEvent.index === idx
+                            ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white'
+                            : 'bg-white text-gray-900 border border-gray-200'
+                        }`}
+                      >
+                        <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-xl flex-shrink-0">
+                          {event.icon}
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-black text-sm mb-1">{event.title}</p>
+                          <p className="text-xs opacity-90 mb-2">{event.location}</p>
+                          <p className="text-xs text-gray-600 line-clamp-2">{event.description}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              {/* Timeline Item 3 */}
-              <div className="flex items-center">
-                <div className="w-1/2 pr-8 text-right">
-                  <h4 className="text-lg font-black text-gray-900 mb-2">LFNC Nepal Development</h4>
-                  <p className="text-red-600 font-semibold mb-2">Nepal (Kathmandu)</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">Strengthened our presence in Nepal with increased community engagement and outreach.</p>
-                </div>
-                <div className="w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold relative z-10 flex-shrink-0">3</div>
-                <div className="w-1/2"></div>
+                {/* Detail Panel */}
+                {currentEvent && (
+                  <div className="md:col-span-1">
+                    <div className="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-transparent h-full transform transition-all duration-500 animate-in">
+                      <div className="bg-gradient-to-r from-red-500 to-purple-600 text-white p-4 rounded-xl mb-6 flex items-center gap-4">
+                        <span className="text-5xl">{currentEvent.icon}</span>
+                        <div>
+                          <h4 className="text-xl font-black">{currentEvent.title}</h4>
+                          <p className="text-white/90 font-medium text-sm">{currentEvent.location}</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="text-gray-700 leading-relaxed text-justify">{currentEvent.description}</p>
+                      </div>
+
+                      <div className="mt-6 flex gap-3">
+                        <div className="flex-1 bg-red-50 rounded-lg p-3 text-center">
+                          <p className="text-2xl font-black text-red-600">{selectedEvent.year}</p>
+                          <p className="text-xs text-red-600 font-semibold">Milestone</p>
+                        </div>
+                        <div className="flex-1 bg-purple-50 rounded-lg p-3 text-center">
+                          <p className="text-2xl font-black text-purple-600">{selectedEvent.index + 1}</p>
+                          <p className="text-xs text-purple-600 font-semibold">Event</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

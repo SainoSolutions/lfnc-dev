@@ -61,7 +61,12 @@ export default function ChurchEvents() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
-              }}>{eventData?.eventheader?.eventheader_title || 'Church Events'}</span>
+              }}>Church </span><span style={{
+                background: 'linear-gradient(to right, #EF4444, #8B5CF6)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }} className="animate-pulse">Events</span>
             </h1>
           )}
 
@@ -78,7 +83,19 @@ export default function ChurchEvents() {
       {/* Upcoming Events Section */}
       <section className="px-4 py-16 bg-zinc-900">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-white text-center mb-12 text-3xl font-bold">{isLoading ? 'Loading Events...' : (eventData?.events?.length > 0 ? 'Upcoming Events' : 'No Events Available')}</h2>
+          <h2 className="text-white text-center mb-12 text-3xl font-bold">
+            {isLoading ? (
+              <div className="flex items-center justify-center gap-3">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-cyan-400"></div>
+                <span>Loading Events, stay tuned...</span>
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-purple-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                  <div className="w-2 h-2 bg-red-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                </div>
+              </div>
+            ) : (eventData?.events?.length > 0 ? 'Upcoming Events' : 'No Events Available')}
+          </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {isLoading ? (

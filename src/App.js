@@ -1,37 +1,66 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef, useState, createContext, useContext } from "react";
 import Home from "./pages/Home/Home";
 import AboutUs from "./pages/About/AboutUs";
 import GetInvolved from "./pages/GetInvolved/GetInvolved";
 import Donate from "./pages/Donate/Donate";
+import SowASeed from "./pages/Donate/SowASeed";
+import PrayerRequest from "./pages/PrayerRequest";
+import MessageFromPastor from "./pages/MessageFromPastor";
 import Layout from "./components/Layout/Layout";
 import Events from "./pages/Events/Events";
 import Media from "./pages/Media/Media";
+import LoadingSpinner from "./components/reuseable/LoadingSpinner";
 
-function ScrollToTop() {
+const LoadingContext = createContext();
+export const useGlobalLoading = () => useContext(LoadingContext);
+
+function AppContent() {
   const { pathname } = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
+  const prevPathname = useRef(pathname);
+
+  const showLoading = () => {
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 800);
+  };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (prevPathname.current !== pathname) {
+      setIsLoading(true);
+      window.scrollTo(0, 0);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 800);
+      prevPathname.current = pathname;
+      return () => clearTimeout(timer);
+    }
   }, [pathname]);
 
-  return null;
+  return (
+    <LoadingContext.Provider value={{ showLoading }}>
+      {isLoading && <LoadingSpinner />}
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/aboutus" element={<AboutUs />} />       
+          <Route path="/get-involved" element={<GetInvolved />} />
+          <Route path="/donate" element={<Donate />} />
+          <Route path="/sow-a-seed" element={<SowASeed />} />
+          <Route path="/prayer-request" element={<PrayerRequest />} />
+          <Route path="/message-from-pastor" element={<MessageFromPastor />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/media" element={<Media />} />
+        </Routes>
+      </Layout>
+    </LoadingContext.Provider>
+  );
 }
 
 function App() {
   return (
     <Router>
-      <ScrollToTop />
-      <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/aboutus" element={<AboutUs />} />       
-        <Route path="/get-involved" element={<GetInvolved />} />
-        <Route path="/donate" element={<Donate />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/media" element={<Media />} />
-      </Routes>
-      </Layout>
+      <AppContent />
     </Router>
   );
 }

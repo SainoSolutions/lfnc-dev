@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Ministries from '../Ministries/Ministries';
 import Services from '../Services/Services';
+import SermonsSection from '../../components/reuseable/SermonsSection';
 import slide1 from '../../assets/images/Hero/slide1.jpg'
 import slide2 from '../../assets/images/Hero/slide2.jpg'
 import slide3 from '../../assets/images/Hero/slide3.jpg'
@@ -56,7 +57,7 @@ const Home = () => {
     highlights.forEach(highlight => {
       result = result.replace(
         highlight, 
-        `<span class="text-red-600 font-bold">${highlight}</span>`
+        `<span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 animate-pulse font-bold drop-shadow-lg filter brightness-105 contrast-110" style="text-shadow: 0 0 10px rgba(168, 85, 247, 0.3), 0 0 20px rgba(236, 72, 153, 0.2), 0 0 30px rgba(239, 68, 68, 0.1);">${highlight}</span>`
       );
     });
     return { __html: result };
@@ -66,6 +67,40 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <div className="relative w-full h-screen overflow-hidden">
+      {/* Upcoming Event Card */}
+      <div className="absolute top-4 right-4 z-20 w-80 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 shadow-2xl">
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+          <span className="text-white text-xs font-bold uppercase tracking-wide">Upcoming Event</span>
+        </div>
+        <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">Sunday Message</h3>
+        <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Join Pastor Roshan for an inspiring message</p>
+        <div className="space-y-2 text-xs text-gray-400">
+          <div className="flex items-center gap-2">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span>Every Sunday</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>07:30 AM - 09:00 AM</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>LFNC Koramangala</span>
+          </div>
+        </div>
+        <button className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
+          Join Us
+        </button>
+      </div>
+      
       {/* Slides Container */}
       <div 
         className="flex transition-transform duration-500 ease-in-out h-full"
@@ -80,7 +115,8 @@ const Home = () => {
             <img
               src={slide.image}
               alt={`Slide ${slide.id}`}
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover sm:object-cover object-center md:object-cover"
+              style={{ objectPosition: 'center center' }}
             />
             
             {/* Overlay for better text readability */}
@@ -94,18 +130,18 @@ const Home = () => {
             >
               <div className="text-white text-center lg:text-left max-w-4xl w-full">
                 <h1 
-                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-6"
+                  className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-4 sm:mb-6 text-shadow-glow"
                   dangerouslySetInnerHTML={renderHighlightedText(slide.title, slide.highlight)}
                 >
                 </h1>
-                <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8">
+                <p className="font-body text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 opacity-95">
                   Transforming lives through faith, hope, and love
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                  <button className="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 sm:px-8 rounded-lg transition duration-300 transform hover:scale-105 text-sm sm:text-base">
+                  <button className="font-heading bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">
                     Join Us Today
                   </button>
-                  <button className="border-2 border-white hover:bg-white hover:text-gray-900 text-white font-bold py-3 px-6 sm:px-8 rounded-lg transition duration-300 transform hover:scale-105 text-sm sm:text-base">
+                  <button className="font-heading border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">
                     Learn More
                   </button>
                 </div>
@@ -150,14 +186,19 @@ const Home = () => {
       </button>
       </div>
       
-      {/* Services Section */}
-      <section id="services">
-        <Services />
+      {/* Sermons Section */}
+      <section id="sermons">
+        <SermonsSection />
       </section>
       
       {/* Ministries Section */}
       <section id="ministries">
         <Ministries />
+      </section>
+      
+      {/* Services Section */}
+      <section id="services">
+        <Services />
       </section>
     </div>
   );

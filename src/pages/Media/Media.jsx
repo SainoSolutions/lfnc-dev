@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { FaImages, FaVideo, FaPlay, FaExpand, FaTimes, FaSpinner } from 'react-icons/fa';
 
 import image1 from "../../assets/images/Media/1.jpg";
 import image2 from "../../assets/images/Media/2.jpg";
@@ -9,173 +10,377 @@ import image6 from "../../assets/images/Media/8.jpg";
 import image7 from "../../assets/images/Media/9.jpg";
 
 export default function Media() {
-  const images = [image1, image2, image3, image4, image5, image6, image7];
-  const [isLoading, setIsLoading] = useState(true);
+  // Base media data
+  const baseImages = [image1, image2, image3, image4, image5, image6, image7];
+  const baseVideos = [
+    { id: '-gove3-uNRw', title: 'Sunday Service Highlights', thumbnail: 'https://img.youtube.com/vi/-gove3-uNRw/maxresdefault.jpg' },
+    { id: 'diXb6nM6MKk', title: 'Youth Fellowship', thumbnail: 'https://img.youtube.com/vi/diXb6nM6MKk/maxresdefault.jpg' },
+    { id: 'oiDyYGbi4-4', title: 'Prayer Meeting', thumbnail: 'https://img.youtube.com/vi/oiDyYGbi4-4/maxresdefault.jpg' },
+    { id: 'vkQTE-djCF8', title: 'Bible Study Session', thumbnail: 'https://img.youtube.com/vi/vkQTE-djCF8/maxresdefault.jpg' },
+    { id: 'f4QtbRcbc8U', title: 'Community Outreach', thumbnail: 'https://img.youtube.com/vi/f4QtbRcbc8U/maxresdefault.jpg' },
+    { id: 'tyJBx0L0vTI', title: 'Worship Night', thumbnail: 'https://img.youtube.com/vi/tyJBx0L0vTI/maxresdefault.jpg' }
+  ];
 
-  // Simulate data loading
-  useState(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
-    return () => clearTimeout(timer);
-  }, []);
+  // All available media data (simulating larger dataset)
+  const allImages = [
+    ...baseImages,
+    ...Array(20).fill(null).map((_, i) => baseImages[i % baseImages.length])
+  ];
+  
+  const allVideos = [
+    ...baseVideos,
+    ...Array(15).fill(null).map((_, i) => ({
+      id: baseVideos[i % baseVideos.length].id,
+      title: `${baseVideos[i % baseVideos.length].title} ${Math.floor(i / baseVideos.length) + 2}`,
+      thumbnail: baseVideos[i % baseVideos.length].thumbnail
+    }))
+  ];
 
-  const [modals, setModals] = useState({ imageModal: false, videoModal: false });
+  const [activeTab, setActiveTab] = useState('images');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
+  
+  // Pagination states
+  const [displayedImages, setDisplayedImages] = useState([]);
+  const [displayedVideos, setDisplayedVideos] = useState([]);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState('down');
+  
+  const ITEMS_PER_LOAD = 6;
+  const MIN_ITEMS = 6; // Minimum items to keep loaded
 
-  const openModal = (modalId) => setModals((m) => ({ ...m, [modalId]: true }));
-  const closeModal = (modalId) => setModals((m) => ({ ...m, [modalId]: false }));
+  // Load initial content
+  useEffect(() => {
+    setDisplayedImages(allImages.slice(0, ITEMS_PER_LOAD));
+    setDisplayedVideos(allVideos.slice(0, ITEMS_PER_LOAD));
+  }, []);
+
+  // Load more images
+  const loadMoreImages = useCallback(() => {
+    if (imageLoading) return;
+    
+    setImageLoading(true);
+    setTimeout(() => {
+      const currentLength = displayedImages.length;
+      const newImages = allImages.slice(currentLength, currentLength + ITEMS_PER_LOAD);
+      
+      if (newImages.length > 0) {
+        setDisplayedImages(prev => [...prev, ...newImages]);
+      }
+      setImageLoading(false);
+    }, 300);
+  }, [displayedImages.length, imageLoading]);
+
+  // Remove images from end (but keep initial content)
+  const removeImagesFromEnd = useCallback(() => {
+    if (displayedImages.length > ITEMS_PER_LOAD) {
+      setDisplayedImages(prev => prev.slice(0, Math.max(ITEMS_PER_LOAD, prev.length - ITEMS_PER_LOAD)));
+    }
+  }, [displayedImages.length]);
+
+  // Load more videos
+  const loadMoreVideos = useCallback(() => {
+    if (videoLoading) return;
+    
+    setVideoLoading(true);
+    setTimeout(() => {
+      const currentLength = displayedVideos.length;
+      const newVideos = allVideos.slice(currentLength, currentLength + ITEMS_PER_LOAD);
+      
+      if (newVideos.length > 0) {
+        setDisplayedVideos(prev => [...prev, ...newVideos]);
+      }
+      setVideoLoading(false);
+    }, 300);
+  }, [displayedVideos.length, videoLoading]);
+
+  // Remove videos from end (but keep initial content)
+  const removeVideosFromEnd = useCallback(() => {
+    if (displayedVideos.length > ITEMS_PER_LOAD) {
+      setDisplayedVideos(prev => prev.slice(0, Math.max(ITEMS_PER_LOAD, prev.length - ITEMS_PER_LOAD)));
+    }
+  }, [displayedVideos.length]);
+
+  // Scroll event handler
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const direction = currentScrollY > lastScrollY ? 'down' : 'up';
+      
+      setScrollDirection(direction);
+      setLastScrollY(currentScrollY);
+
+      // Load more content when scrolling down near bottom
+      if (direction === 'down' && window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 1000) {
+        if (activeTab === 'images') {
+          loadMoreImages();
+        } else {
+          loadMoreVideos();
+        }
+      }
+      
+      // Remove content when scrolling up past certain threshold
+      if (direction === 'up' && currentScrollY < document.documentElement.offsetHeight * 0.3) {
+        if (activeTab === 'images') {
+          removeImagesFromEnd();
+        } else {
+          removeVideosFromEnd();
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [activeTab, lastScrollY, loadMoreImages, loadMoreVideos, removeImagesFromEnd, removeVideosFromEnd]);
 
   const openLightbox = (idx) => {
     setLightboxIndex(idx);
     setLightboxOpen(true);
   };
+  
   const closeLightbox = () => setLightboxOpen(false);
-  const prevLightbox = () => setLightboxIndex((i) => (i - 1 + images.length) % images.length);
-  const nextLightbox = () => setLightboxIndex((i) => (i + 1) % images.length);
-
-  const slide = (id, direction) => {
-    const track = document.getElementById(id);
-    if (track) track.scrollBy({ left: direction * 350, behavior: 'smooth' });
+  const prevLightbox = () => setLightboxIndex((i) => (i - 1 + displayedImages.length) % displayedImages.length);
+  const nextLightbox = () => setLightboxIndex((i) => (i + 1) % displayedImages.length);
+  
+  const closeVideo = () => setSelectedVideo(null);
+  const prevVideo = () => {
+    const newIndex = (selectedVideoIndex - 1 + displayedVideos.length) % displayedVideos.length;
+    setSelectedVideoIndex(newIndex);
+    setSelectedVideo(displayedVideos[newIndex].id);
+  };
+  const nextVideo = () => {
+    const newIndex = (selectedVideoIndex + 1) % displayedVideos.length;
+    setSelectedVideoIndex(newIndex);
+    setSelectedVideo(displayedVideos[newIndex].id);
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white">
-      {/* Decorative subtle circles (like GetInvolved) */}
+    <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/50 via-pink-50/40 via-red-50/35 via-orange-50/30 to-blue-50/25 relative overflow-hidden">
+      {/* Background gradient elements */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute top-60 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-1000" />
-        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-2000" />
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br from-purple-400/30 via-pink-300/25 to-red-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+        <div className="absolute top-60 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-red-400/30 via-orange-300/25 to-yellow-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000" />
+        <div className="absolute -bottom-40 right-1/3 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/25 via-purple-300/30 to-pink-400/25 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000" />
       </div>
 
-      {isLoading ? (
-        // Loading Skeleton
-        <div className="relative z-10 px-4 py-12 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <div className="h-16 bg-white/10 rounded-lg animate-pulse mb-6 mx-auto w-3/4 max-w-2xl" />
-            <div className="h-6 bg-white/10 rounded-lg animate-pulse mx-auto w-1/2 max-w-xl" />
-          </div>
-
-          {/* Image Gallery Skeleton */}
-          <section className="max-w-7xl mx-auto mb-12">
-            <div className="h-8 bg-white/10 rounded-lg animate-pulse mb-6 w-1/3 mx-auto" />
-            <div className="flex flex-wrap gap-6 justify-center">
-              {[...Array(5)].map((_, idx) => (
-                <div key={idx} className="w-80 h-48 bg-white/10 rounded-lg animate-pulse" />
-              ))}
-            </div>
-            <div className="text-center mt-6">
-              <div className="h-12 bg-white/10 rounded-full animate-pulse w-48 mx-auto" />
-            </div>
-          </section>
-
-          {/* Video Gallery Skeleton */}
-          <section className="max-w-7xl mx-auto mb-12">
-            <div className="h-8 bg-white/10 rounded-lg animate-pulse mb-6 w-1/3 mx-auto" />
-            <div className="flex flex-wrap gap-6 justify-center">
-              {[...Array(5)].map((_, idx) => (
-                <div key={idx} className="w-80 h-48 bg-white/10 rounded-lg animate-pulse" />
-              ))}
-            </div>
-            <div className="text-center mt-6">
-              <div className="h-12 bg-white/10 rounded-full animate-pulse w-48 mx-auto" />
-            </div>
-          </section>
-        </div>
-      ) : (
-        // Content
-        <div className="relative z-10 px-4 py-12 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="mx-auto mb-6 font-black leading-tight" style={{ fontSize: 'clamp(2.2rem, 8vw, 4rem)', lineHeight: 0.95 }}>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-purple-400 to-blue-400">Media Section</span>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 text-gray-900">
+            Media <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-purple-600 to-blue-600 animate-pulse">Gallery</span>
           </h1>
-          <p className="text-white/80 max-w-2xl mx-auto">Browse our images and videos from recent events and gatherings.</p>
+          <p className="font-body text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Explore our collection of memorable moments, inspiring services, and community events through photos and videos.
+          </p>
         </div>
 
-        {/* Image Gallery */}
-        <section className="max-w-7xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold text-center mb-6">Image Gallery</h2>
-          <div className="flex flex-wrap gap-6 justify-center">
-            {images.slice(0,5).map((src, idx) => (
-              <button key={idx} onClick={() => openLightbox(idx)} className="overflow-hidden rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 backdrop-blur-md bg-white/10 border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-purple-500/50">
-                <img src={src} alt={`Media ${idx+1}`} className="w-80 h-48 object-cover" />
-              </button>
-            ))}
+        {/* Tab Navigation */}
+        <div className="flex justify-center mb-12">
+          <div className="bg-white/80 backdrop-blur-lg border border-gray-200/50 rounded-2xl p-2 shadow-xl flex">
+            <button
+              onClick={() => setActiveTab('images')}
+              className={`flex items-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold transition-all duration-300 ${
+                activeTab === 'images'
+                  ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-lg transform scale-105'
+                  : 'text-gray-700 hover:bg-gray-100/50'
+              }`}
+            >
+              <FaImages className="w-5 h-5" />
+              Photo Gallery
+            </button>
+            <button
+              onClick={() => setActiveTab('videos')}
+              className={`flex items-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold transition-all duration-300 ${
+                activeTab === 'videos'
+                  ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-lg transform scale-105'
+                  : 'text-gray-700 hover:bg-gray-100/50'
+              }`}
+            >
+              <FaVideo className="w-5 h-5" />
+              Video Gallery
+            </button>
           </div>
-          <div className="text-center mt-6">
-            <button onClick={() => openModal('imageModal')} className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-purple-600 text-white font-semibold rounded-full hover:scale-110 transition transform shadow-lg hover:shadow-xl hover:shadow-purple-500/50 backdrop-blur-sm">More Images →</button>
-          </div>
-        </section>
+        </div>
 
-        {/* Video Gallery */}
-        <section className="max-w-7xl mx-auto mb-12">
-          <h2 className="text-3xl font-bold text-center mb-6">Video Gallery</h2>
-          <div className="flex flex-wrap gap-6 justify-center">
-            <iframe className="w-80 h-48 rounded-xl shadow-lg backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50" src="https://www.youtube.com/embed/-gove3-uNRw" title="Video 1" allowFullScreen></iframe>
-            <iframe className="w-80 h-48 rounded-xl shadow-lg backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50" src="https://www.youtube.com/embed/diXb6nM6MKk" title="Video 2" allowFullScreen></iframe>
-            <iframe className="w-80 h-48 rounded-xl shadow-lg backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50" src="https://www.youtube.com/embed/oiDyYGbi4-4" title="Video 3" allowFullScreen></iframe>
-            <iframe className="w-80 h-48 rounded-xl shadow-lg backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50" src="https://www.youtube.com/embed/vkQTE-djCF8" title="Video 4" allowFullScreen></iframe>
-            <iframe className="w-80 h-48 rounded-xl shadow-lg backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50" src="https://www.youtube.com/embed/f4QtbRcbc8U" title="Video 5" allowFullScreen></iframe>
-          </div>
-          <div className="text-center mt-6">
-            <button onClick={() => openModal('videoModal')} className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500 to-purple-600 text-white font-semibold rounded-full hover:scale-110 transition transform shadow-lg hover:shadow-xl hover:shadow-purple-500/50 backdrop-blur-sm">More Videos →</button>
-          </div>
-        </section>
+        {/* Content */}
+        {activeTab === 'images' ? (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {displayedImages.map((src, idx) => (
+                <div key={idx} className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img 
+                      src={src} 
+                      alt={`Gallery ${idx + 1}`} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <button
+                    onClick={() => openLightbox(idx)}
+                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    <div className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-full p-4 transform scale-75 group-hover:scale-100 transition-transform duration-300">
+                      <FaExpand className="w-6 h-6 text-white" />
+                    </div>
+                  </button>
+                </div>
+              ))}
+            </div>
+            
+            {/* Loading indicator for images */}
+            {imageLoading && (
+              <div className="flex justify-center items-center py-12">
+                <div className="bg-white/20 backdrop-blur-sm rounded-full p-4">
+                  <FaSpinner className="w-8 h-8 text-gray-700 animate-spin" />
+                </div>
+              </div>
+            )}
+            
+            {/* Load more button for images */}
+            {!imageLoading && displayedImages.length < allImages.length && (
+              <div className="text-center mt-12">
+                <button
+                  onClick={loadMoreImages}
+                  className="px-8 py-4 bg-gradient-to-r from-red-500 to-purple-600 text-white font-heading font-semibold rounded-full hover:from-red-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  Load More Images
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {displayedVideos.map((video, idx) => (
+                <div key={idx} className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                  <div className="aspect-video overflow-hidden relative">
+                    <img 
+                      src={video.thumbnail} 
+                      alt={video.title} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />
+                    <button
+                      onClick={() => {
+                        setSelectedVideo(video.id);
+                        setSelectedVideoIndex(idx);
+                      }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <div className="bg-red-600/90 backdrop-blur-sm rounded-full p-6 transform scale-75 group-hover:scale-100 transition-all duration-300 hover:bg-red-700">
+                        <FaPlay className="w-8 h-8 text-white ml-1" />
+                      </div>
+                    </button>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                    <h3 className="font-heading text-white font-semibold text-lg">{video.title}</h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Loading indicator for videos */}
+            {videoLoading && (
+              <div className="flex justify-center items-center py-12">
+                <div className="bg-white/20 backdrop-blur-sm rounded-full p-4">
+                  <FaSpinner className="w-8 h-8 text-gray-700 animate-spin" />
+                </div>
+              </div>
+            )}
+            
+            {/* Load more button for videos */}
+            {!videoLoading && displayedVideos.length < allVideos.length && (
+              <div className="text-center mt-12">
+                <button
+                  onClick={loadMoreVideos}
+                  className="px-8 py-4 bg-gradient-to-r from-red-500 to-purple-600 text-white font-heading font-semibold rounded-full hover:from-red-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg"
+                >
+                  Load More Videos
+                </button>
+              </div>
+            )}
+          </>
+        )}
 
-        {/* Lightbox (react-controlled) */}
+        {/* Image Lightbox */}
         {lightboxOpen && (
-          <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-6">
-            <button onClick={closeLightbox} className="absolute top-20 right-6 w-12 h-12 rounded-full bg-red-600 flex items-center justify-center text-white text-2xl shadow-lg z-50">&times;</button>
-            <button onClick={prevLightbox} className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-purple-700/80 flex items-center justify-center text-white text-2xl shadow-lg z-50">❮</button>
-            <img src={images[lightboxIndex]} alt={`Media ${lightboxIndex+1}`} className="max-w-[90vw] max-h-[80vh] object-contain rounded-lg shadow-2xl z-10" />
-            <button onClick={nextLightbox} className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-purple-700/80 flex items-center justify-center text-white text-2xl shadow-lg z-50">❯</button>
+          <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
+            <div className="relative">
+              <button 
+                onClick={closeLightbox}
+                className="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 rounded-full p-3 text-white transition-colors duration-300 z-[10000]"
+              >
+                <FaTimes className="w-6 h-6" />
+              </button>
+              <img 
+                src={displayedImages[lightboxIndex]} 
+                alt={`Gallery ${lightboxIndex + 1}`} 
+                className="max-w-[90vw] max-h-[80vh] object-contain rounded-lg shadow-2xl" 
+              />
+            </div>
+            <button 
+              onClick={prevLightbox}
+              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-4 text-white transition-all duration-300 z-[10000]"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button 
+              onClick={nextLightbox}
+              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-4 text-white transition-all duration-300 z-[10000]"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         )}
 
-        {/* Image Carousel Modal */}
-        {modals.imageModal && (
-          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white/10 backdrop-blur-xl border border-white/30 w-11/12 max-w-5xl rounded-2xl p-6 shadow-2xl shadow-purple-500/50">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-white">More Images</h3>
-                <button onClick={() => closeModal('imageModal')} className="w-10 h-10 rounded-full bg-gradient-to-r from-red-600 to-purple-600 flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:shadow-purple-500/50 transition-all">&times;</button>
-              </div>
-              <div className="flex items-center gap-4 mt-4">
-                <button onClick={() => slide('imageCarousel', -1)} className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm border border-white/30 transition-all hover:shadow-lg">❮</button>
-                <div id="imageCarousel" className="flex gap-4 overflow-x-auto py-4">
-                  {images.map((src, i) => (
-                    <img key={i} src={src} alt={`More ${i+1}`} className="w-80 h-48 rounded-lg object-cover flex-shrink-0 shadow-lg backdrop-blur-sm border border-white/20" />
-                  ))}
-                </div>
-                <button onClick={() => slide('imageCarousel', 1)} className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm border border-white/30 transition-all hover:shadow-lg">❯</button>
-              </div>
+        {/* Video Modal */}
+        {selectedVideo && (
+          <div className="fixed inset-0 bg-black/95 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
+            <div className="relative w-full max-w-4xl aspect-video">
+              <button 
+                onClick={closeVideo}
+                className="absolute -top-2 -right-2 bg-red-600 hover:bg-red-700 rounded-full p-3 text-white transition-colors duration-300 z-[10000]"
+              >
+                <FaTimes className="w-6 h-6" />
+              </button>
+              <iframe
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                title="Video Player"
+                className="w-full h-full rounded-lg shadow-2xl"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              />
             </div>
+            <button 
+              onClick={prevVideo}
+              className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-4 text-white transition-all duration-300 z-[10000]"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button 
+              onClick={nextVideo}
+              className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-4 text-white transition-all duration-300 z-[10000]"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
         )}
-
-        {/* Video Carousel Modal */}
-        {modals.videoModal && (
-          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white/10 backdrop-blur-xl border border-white/30 w-11/12 max-w-5xl rounded-2xl p-6 shadow-2xl shadow-purple-500/50">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-white">More Videos</h3>
-                <button onClick={() => closeModal('videoModal')} className="w-10 h-10 rounded-full bg-gradient-to-r from-red-600 to-purple-600 flex items-center justify-center text-white shadow-lg hover:shadow-xl hover:shadow-purple-500/50 transition-all">&times;</button>
-              </div>
-              <div className="flex items-center gap-4 mt-4">
-                <button onClick={() => slide('videoCarousel', -1)} className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm border border-white/30 transition-all hover:shadow-lg">❮</button>
-                <div id="videoCarousel" className="flex gap-4 overflow-x-auto py-4">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/tyJBx0L0vTI?si=C_4VwGWlSB1bFclB" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="w-96 h-56 rounded-lg flex-shrink-0 shadow-lg backdrop-blur-sm border border-white/20" />
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/VId70DhFiNE?si=qheA8DefgiKSphxL" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="w-96 h-56 rounded-lg flex-shrink-0 shadow-lg backdrop-blur-sm border border-white/20" />
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/jiWnz2tz9e8?si=hNO-Ca1oVG0-k-9d" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="w-96 h-56 rounded-lg flex-shrink-0 shadow-lg backdrop-blur-sm border border-white/20" />
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/ZWhbzBmASok?si=T7L0CULm-TTmuSLB" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="w-96 h-56 rounded-lg flex-shrink-0 shadow-lg backdrop-blur-sm border border-white/20" />
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/t67X22QtJGI?si=46O1mozTk9KSXWM5" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen className="w-96 h-56 rounded-lg flex-shrink-0 shadow-lg backdrop-blur-sm border border-white/20" />
-                </div>
-                <button onClick={() => slide('videoCarousel', 1)} className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm border border-white/30 transition-all hover:shadow-lg">❯</button>
-              </div>
-            </div>
-          </div>
-        )}
-        </div>
-      )}
+      </div>
     </div>
   );
 }

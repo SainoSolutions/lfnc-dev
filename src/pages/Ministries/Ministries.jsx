@@ -85,21 +85,25 @@ export default function Ministries() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-purple-900 to-blue-900 relative overflow-hidden text-white">
-      {/* Decorative subtle circles (like GetInvolved) */}
+    <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/50 via-pink-50/40 via-red-50/35 via-orange-50/30 to-blue-50/25 relative overflow-hidden text-gray-900">
+      {/* Enhanced decorative gradients */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute top-60 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-1000" />
-        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-2000" />
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br from-purple-400/30 via-pink-300/25 to-red-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+        <div className="absolute top-60 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-red-400/30 via-orange-300/25 to-yellow-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000" />
+        <div className="absolute -bottom-40 right-1/3 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/25 via-purple-300/30 to-pink-400/25 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-300/20 via-blue-300/25 to-purple-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-500" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-pink-300/20 via-red-300/25 to-orange-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1500" />
+        <div className="absolute top-10 left-1/2 w-[400px] h-[400px] bg-gradient-to-br from-emerald-300/15 via-teal-300/20 to-cyan-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-750" />
+        <div className="absolute bottom-10 left-1/5 w-[400px] h-[400px] bg-gradient-to-br from-violet-300/15 via-purple-300/20 to-fuchsia-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1250" />
       </div>
       
       <div className="relative z-10 min-h-screen flex flex-col items-center px-4 pt-20">
         {/* Title */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 leading-tight text-center">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-purple-400 to-blue-400">
+        <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-center text-shadow-soft">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-purple-600 to-blue-600">
             Our{' '}
           </span>
-          <span className="text-white">Ministries</span>
+          <span className="text-gray-900 animate-pulse">Ministries</span>
         </h1>
 
         {/* Cards Container */}
@@ -109,7 +113,7 @@ export default function Ministries() {
             className="absolute left-0 md:left-8 lg:left-16 z-10 cursor-pointer"
             onClick={handlePrevious}
           >
-            <div className="bg-white rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform -rotate-12 hover:scale-105 transition-all duration-300">
+            <div className="bg-gray-900/90 backdrop-blur-lg border border-gray-700/50 rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform -rotate-12 hover:scale-105 transition-all duration-300 hover:bg-gray-900/95">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={ministries[getLeftIndex()].imageUrl}
@@ -118,20 +122,35 @@ export default function Ministries() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               </div>
-              <div className="p-4 bg-white">
-                <h2 className="text-black text-xl font-black text-center mb-2">{ministries[getLeftIndex()].shortTitle}</h2>
-                <div className="text-xs text-gray-600 space-y-1">
-                  <div className="flex justify-between">
-                    <span>Day:</span>
-                    <span className="font-medium">{ministries[getLeftIndex()].day}</span>
+              <div className="p-4 bg-gray-900/90 backdrop-blur-lg">
+                <h2 className="font-heading text-white text-xl font-semibold text-center mb-2 text-shadow-soft">{ministries[getLeftIndex()].shortTitle}</h2>
+                <div className="text-xs text-gray-300 space-y-1">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      </svg>
+                      <span>Day:</span>
+                    </div>
+                    <span className="font-medium text-white">{ministries[getLeftIndex()].day}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Time:</span>
-                    <span className="font-medium">{ministries[getLeftIndex()].time}</span>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      <span>Time:</span>
+                    </div>
+                    <span className="font-medium text-white">{ministries[getLeftIndex()].time}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Age:</span>
-                    <span className="font-medium">{ministries[getLeftIndex()].age}</span>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                      </svg>
+                      <span>Age:</span>
+                    </div>
+                    <span className="font-medium text-white">{ministries[getLeftIndex()].age}</span>
                   </div>
                 </div>
               </div>
@@ -139,7 +158,7 @@ export default function Ministries() {
           </div>
 
           {/* Center Featured Card - Straight */}
-          <div className="relative z-20 bg-white rounded-3xl shadow-2xl overflow-hidden w-80 md:w-96 transform rotate-0">
+          <div className="relative z-20 bg-gray-900/90 backdrop-blur-lg border border-gray-700/50 rounded-3xl shadow-2xl overflow-hidden w-80 md:w-96 transform rotate-0 hover:bg-gray-900/95 transition-all duration-300">
             <div className="relative h-80 overflow-hidden">
               <img
                 src={ministries[currentIndex].imageUrl}
@@ -148,21 +167,36 @@ export default function Ministries() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>
-            <div className="p-6 bg-white">
-              <h2 className="text-red-500 text-xl font-black mb-2">{ministries[currentIndex].title}</h2>
-              <p className="text-gray-600 leading-relaxed mb-4">{ministries[currentIndex].description}</p>
-              <div className="text-sm text-gray-700 space-y-2 bg-gray-50 rounded-lg p-3">
-                <div className="flex justify-between">
-                  <span className="font-medium">Day:</span>
-                  <span>{ministries[currentIndex].day}</span>
+            <div className="p-6 bg-gray-900/90 backdrop-blur-lg">
+              <h2 className="font-heading text-red-400 text-xl font-semibold mb-2 text-shadow-soft">{ministries[currentIndex].title}</h2>
+              <p className="font-body text-gray-200 leading-relaxed mb-4 opacity-95">{ministries[currentIndex].description}</p>
+              <div className="text-sm text-gray-200 space-y-2 bg-gray-800/80 backdrop-blur-sm rounded-lg p-3">
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span className="font-medium text-white">Day:</span>
+                  </div>
+                  <span className="text-white">{ministries[currentIndex].day}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Time:</span>
-                  <span>{ministries[currentIndex].time}</span>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span className="font-medium text-white">Time:</span>
+                  </div>
+                  <span className="text-white">{ministries[currentIndex].time}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-medium">Age Group:</span>
-                  <span>{ministries[currentIndex].age}</span>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-4 h-4 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span className="font-medium text-white">Age Group:</span>
+                  </div>
+                  <span className="text-white">{ministries[currentIndex].age}</span>
                 </div>
               </div>
             </div>
@@ -173,7 +207,7 @@ export default function Ministries() {
             className="absolute right-0 md:right-8 lg:right-16 z-10 cursor-pointer"
             onClick={handleNext}
           >
-            <div className="bg-white rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform rotate-12 hover:scale-105 transition-all duration-300">
+            <div className="bg-gray-900/90 backdrop-blur-lg border border-gray-700/50 rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform rotate-12 hover:scale-105 transition-all duration-300 hover:bg-gray-900/95">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={ministries[getRightIndex()].imageUrl}
@@ -182,20 +216,35 @@ export default function Ministries() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               </div>
-              <div className="p-4 bg-white">
-                <h2 className="text-black text-xl font-black text-center mb-2">{ministries[getRightIndex()].shortTitle}</h2>
-                <div className="text-xs text-gray-600 space-y-1">
-                  <div className="flex justify-between">
-                    <span>Day:</span>
-                    <span className="font-medium">{ministries[getRightIndex()].day}</span>
+              <div className="p-4 bg-gray-900/90 backdrop-blur-lg">
+                <h2 className="font-heading text-white text-xl font-semibold text-center mb-2 text-shadow-soft">{ministries[getRightIndex()].shortTitle}</h2>
+                <div className="text-xs text-gray-300 space-y-1">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      </svg>
+                      <span>Day:</span>
+                    </div>
+                    <span className="font-medium text-white">{ministries[getRightIndex()].day}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Time:</span>
-                    <span className="font-medium">{ministries[getRightIndex()].time}</span>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      </svg>
+                      <span>Time:</span>
+                    </div>
+                    <span className="font-medium text-white">{ministries[getRightIndex()].time}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Age:</span>
-                    <span className="font-medium">{ministries[getRightIndex()].age}</span>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-1">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                      </svg>
+                      <span>Age:</span>
+                    </div>
+                    <span className="font-medium text-white">{ministries[getRightIndex()].age}</span>
                   </div>
                 </div>
               </div>
@@ -205,17 +254,17 @@ export default function Ministries() {
           {/* Navigation Arrows */}
           <button
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hidden md:block"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 p-3 rounded-full shadow-lg transition-all duration-300 hidden md:block"
           >
-            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300 hidden md:block"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 p-3 rounded-full shadow-lg transition-all duration-300 hidden md:block"
           >
-            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -229,8 +278,8 @@ export default function Ministries() {
               onClick={() => setCurrentIndex(index)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? 'bg-white w-6'
-                  : 'bg-white/50 hover:bg-white/75'
+                  ? 'bg-gray-900 w-6'
+                  : 'bg-gray-900/50 hover:bg-gray-900/75'
               }`}
             />
           ))}
@@ -240,17 +289,17 @@ export default function Ministries() {
         <div className="flex gap-4 mt-8 md:hidden">
           <button
             onClick={handlePrevious}
-            className="bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
+            className="bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 p-3 rounded-full shadow-lg transition-all duration-300"
           >
-            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
             onClick={handleNext}
-            className="bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-300"
+            className="bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 p-3 rounded-full shadow-lg transition-all duration-300"
           >
-            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
@@ -258,8 +307,8 @@ export default function Ministries() {
 
         {/* Bottom CTA */}
         <div className="mt-9 text-center mb-12">
-          <p className="text-white mb-4 text-lg font-medium leading-relaxed">Find Your Place to Serve and Grow</p>
-          <button onClick={() => navigate('/get-involved')} className="px-8 py-4 bg-white text-purple-600 rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-xl font-bold text-lg">
+          <p className="font-body text-gray-800 mb-4 text-lg font-medium leading-relaxed text-shadow-soft">Find Your Place to Serve and Grow</p>
+          <button onClick={() => navigate('/get-involved')} className="font-heading px-8 py-4 bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 text-white rounded-full transition-all duration-300 shadow-xl font-semibold text-lg tracking-wide">
             Get Involved Today
           </button>
         </div>

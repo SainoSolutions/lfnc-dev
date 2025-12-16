@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaCross, FaHeart, FaHandsHelping } from 'react-icons/fa';
+import LeadershipSection from '../../components/reuseable/LeadershipSection';
+
 
 // Import images for mission and pastors
 import MissionImage from '../../assets/images/Hero/slide4.jpg'
@@ -30,6 +32,8 @@ const AboutUs = () => {
       document.removeEventListener('mousedown', onClick);
     };
   }, [yearDropdownOpen]);
+
+
 
   // Auto-scroll years column to the selected year
   useEffect(() => {
@@ -231,7 +235,17 @@ const AboutUs = () => {
   const currentYearData = timelineEvents.find(e => e.year === selectedEvent.year);
   const currentEvent = currentYearData?.events[selectedEvent.index];
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/50 via-pink-50/40 via-red-50/35 via-orange-50/30 to-blue-50/25 relative overflow-hidden">
+      {/* Enhanced decorative gradients */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br from-purple-400/30 via-pink-300/25 to-red-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+        <div className="absolute top-60 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-red-400/30 via-orange-300/25 to-yellow-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000" />
+        <div className="absolute -bottom-40 right-1/3 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/25 via-purple-300/30 to-pink-400/25 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-300/20 via-blue-300/25 to-purple-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-500" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-pink-300/20 via-red-300/25 to-orange-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1500" />
+        <div className="absolute top-10 left-1/2 w-[400px] h-[400px] bg-gradient-to-br from-emerald-300/15 via-teal-300/20 to-cyan-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-750" />
+        <div className="absolute bottom-10 left-1/5 w-[400px] h-[400px] bg-gradient-to-br from-violet-300/15 via-purple-300/20 to-fuchsia-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1250" />
+      </div>
       {/* Hero Section with Image Background */}
       <section className="relative h-96 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
@@ -247,7 +261,7 @@ const AboutUs = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 via-purple-600/20 to-blue-600/20"></div>
         </div>
         
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl">
+        <div className="relative z-20 text-center text-white px-4 max-w-4xl">
           <p className="text-sm uppercase tracking-widest text-red-400 mb-4">Living Faith Nepali Church</p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Our Story</h1>
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-medium">
@@ -257,7 +271,7 @@ const AboutUs = () => {
       </section>
 
       {/* Story Section */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
+      <section className="relative z-10 py-16 px-4 max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Mission Image */}
           <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
@@ -284,7 +298,7 @@ const AboutUs = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <section className="relative z-10 py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-sm uppercase tracking-widest text-red-600 mb-2">Our Foundation</p>
@@ -326,7 +340,7 @@ const AboutUs = () => {
       </section>
 
       {/* Ministry Timeline Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-slate-50 via-purple-50 to-blue-50">
+      <section className="relative z-10 py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-widest text-red-600 mb-2 font-semibold">Our Journey</p>
@@ -385,10 +399,10 @@ const AboutUs = () => {
                   <button
                     id={`year-btn-${item.year}`}
                     onClick={() => setSelectedEvent({ year: item.year, index: 0 })}
-                    className={`w-40 py-2 px-3 rounded-2xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 shadow-sm mx-auto ${
+                    className={`w-40 py-3 px-4 rounded-2xl font-bold text-base transition-all duration-300 transform hover:scale-110 shadow-lg mx-auto border-2 ${
                       selectedEvent.year === item.year
-                        ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-xl'
-                        : 'bg-white/60 text-gray-800 border border-white/20'
+                        ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-2xl border-red-400 ring-4 ring-red-200/50'
+                        : 'bg-white text-gray-900 border-gray-300 hover:border-purple-400 hover:bg-purple-50 hover:text-purple-700 shadow-md'
                     }`}
                   >
                     {item.year}
@@ -463,59 +477,10 @@ const AboutUs = () => {
       </section>
 
       {/* Leadership Section */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-sm uppercase tracking-widest text-red-600 mb-2">Our Leadership</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Meet Our Pastors</h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Senior Pastor */}
-          <div className="text-center group">
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg mx-auto mb-4 group-hover:shadow-xl transition-shadow duration-300">
-              <img 
-                src={SeniorPastor}
-                alt="Senior Pastor"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
-            </div>
-            <h3 className="text-xl font-black text-gray-900">Pastor Roshan Rai</h3>
-            <p className="text-red-600">Senior Pastor</p>
-          </div>
-
-          {/* Associate Pastor */}
-          <div className="text-center group">
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg mx-auto mb-4 group-hover:shadow-xl transition-shadow duration-300">
-              <img 
-                src={AssociatePastor}
-                alt="Associate Pastor"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
-            </div>
-            <h3 className="text-xl font-black text-gray-900">Pastor Samuel Rai</h3>
-            <p className="text-red-600">Associate Pastor</p>
-          </div>
-
-          {/* Youth Pastor */}
-          <div className="text-center group">
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg mx-auto mb-4 group-hover:shadow-xl transition-shadow duration-300">
-              <img 
-                src={YouthPastor}
-                alt="Youth Pastor"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
-            </div>
-            <h3 className="text-xl font-black text-gray-900">Elder Joshen</h3>
-            <p className="text-red-600">Youth Leader</p>
-          </div>
-        </div>
-      </section>
+      <LeadershipSection />
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-gray-900 to-black text-white">
+      <section className="relative z-10 py-16 bg-gradient-to-br from-gray-900 to-black text-white">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Us This Sunday</h2>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto font-medium">

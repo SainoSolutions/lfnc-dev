@@ -46,7 +46,7 @@ const Navbar = () => {
       navigate('/');
       setTimeout(() => {
         document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-      }, 200);
+      }, 500);
     }
   };
   
@@ -65,7 +65,8 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`sticky top-0 z-50 border-b border-gray-300 relative overflow-hidden transition-all duration-300 ${isScrolled ? 'bg-white/70 backdrop-blur-lg shadow-md' : 'bg-gradient-to-br from-white via-purple-50/50 via-pink-50/40 via-red-50/35 via-orange-50/30 to-blue-50/25'}`}>
+    <>
+    <header className={`sticky top-0 z-[100000] border-b border-gray-300 relative overflow-hidden transition-all duration-300 ${isScrolled ? 'bg-white/70 backdrop-blur-lg shadow-md' : 'bg-gradient-to-br from-white via-purple-50/50 via-pink-50/40 via-red-50/35 via-orange-50/30 to-blue-50/25'}`}>
       {/* Background gradient elements */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-purple-400/20 via-pink-300/15 to-red-400/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse" />
@@ -175,13 +176,12 @@ const Navbar = () => {
                 Get Involved
               </Link>
             </li>
-
           </ul>
         </div>
 
         {/* Mobile Menu Button */}
         <div 
-          className="md:hidden cursor-pointer p-3 z-50 relative bg-gray-100 rounded-md"
+          className="md:hidden cursor-pointer p-3 z-[100000] relative bg-gray-100 rounded-md"
           onClick={() => {
             console.log('Menu toggle clicked');
             setIsMenuOpen(!isMenuOpen);
@@ -195,119 +195,122 @@ const Navbar = () => {
         {/* Debug indicator */}
         {isMenuOpen && <div className="md:hidden text-xs text-red-500 absolute top-16 right-4">Menu Open</div>}
 
-        {/* Mobile Navigation Links */}
-        <div className={`md:hidden fixed top-16 right-0 w-80 h-screen bg-white/80 backdrop-blur-lg border-l border-white/20 shadow-2xl transition-all duration-300 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`} style={{zIndex: 9999}}>
-            <ul className="flex flex-col list-none m-0 p-4 space-y-3">
-              <li>
-                <button 
-                  onClick={() => {
-                    handleHomeClick();
-                    closeMobileMenu();
-                  }}
-                  className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded bg-transparent border-none cursor-pointer w-full text-left ${
-                    location.pathname === '/' && activeSection === 'home' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
-                  }`}
-                >
-                  Home
-                </button>
-              </li>
-              <li>
-                <button 
-                  className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded bg-transparent border-none cursor-pointer w-full text-left ${
-                    location.pathname === '/' && activeSection === 'sermons' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
-                  }`}
-                  onClick={() => {
-                    handleSectionClick('sermons');
-                    closeMobileMenu();
-                  }}
-                >
-                  Sermons
-                </button>
-              </li>
-              <li>
-                <button 
-                  className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded bg-transparent border-none cursor-pointer w-full text-left ${
-                    location.pathname === '/' && activeSection === 'ministries' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
-                  }`}
-                  onClick={() => {
-                    handleSectionClick('ministries');
-                    closeMobileMenu();
-                  }}
-                >
-                  Ministries
-                </button>
-              </li>
-              <li>
-                <button 
-                  className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded bg-transparent border-none cursor-pointer w-full text-left ${
-                    location.pathname === '/' && activeSection === 'services' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
-                  }`}
-                  onClick={() => {
-                    handleSectionClick('services');
-                    closeMobileMenu();
-                  }}
-                >
-                  Services
-                </button>
-              </li>
-              <li>
-                <Link 
-                  to="/events" 
-                  className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded ${
-                    location.pathname === '/events' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
-                  }`}
-                  onClick={closeMobileMenu}
-                >
-                  Events
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/media" 
-                  className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded ${
-                    location.pathname === '/media' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
-                  }`}
-                  onClick={closeMobileMenu}
-                >
-                  Media
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/aboutus" 
-                  className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded ${
-                    location.pathname === '/aboutus' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
-                  }`}
-                  onClick={closeMobileMenu}
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  to="/message-from-pastor" 
-                  className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded ${
-                    location.pathname === '/message-from-pastor' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
-                  }`}
-                  onClick={closeMobileMenu}
-                >
-                  Pastor's Message
-                </Link>
-              </li>
-              <li className="pt-2">
-                <Link 
-                  to="/get-involved" 
-                  className="bg-gradient-to-r from-red-500 to-purple-600 text-white font-bold py-3 px-4 rounded-full no-underline hover:from-red-600 hover:to-purple-700 transition-colors block text-center"
-                  onClick={closeMobileMenu}
-                >
-                  Get Involved
-                </Link>
-              </li>
-
-            </ul>
-          </div>
       </nav>
     </header>
+      
+    {/* Mobile Navigation Links - Completely outside header for proper z-index */}
+    {isMenuOpen && (
+      <div className="md:hidden fixed top-16 right-0 w-80 h-screen bg-white/80 backdrop-blur-lg border-l border-white/20 shadow-2xl transition-all duration-300 z-[999999]">
+          <ul className="flex flex-col list-none m-0 p-4 space-y-3">
+            <li>
+              <button 
+                onClick={() => {
+                  handleHomeClick();
+                  closeMobileMenu();
+                }}
+                className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded bg-transparent border-none cursor-pointer w-full text-left ${
+                  location.pathname === '/' && activeSection === 'home' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
+                }`}
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button 
+                className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded bg-transparent border-none cursor-pointer w-full text-left ${
+                  location.pathname === '/' && activeSection === 'sermons' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
+                }`}
+                onClick={() => {
+                  handleSectionClick('sermons');
+                  closeMobileMenu();
+                }}
+              >
+                Sermons
+              </button>
+            </li>
+            <li>
+              <button 
+                className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded bg-transparent border-none cursor-pointer w-full text-left ${
+                  location.pathname === '/' && activeSection === 'ministries' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
+                }`}
+                onClick={() => {
+                  handleSectionClick('ministries');
+                  closeMobileMenu();
+                }}
+              >
+                Ministries
+              </button>
+            </li>
+            <li>
+              <button 
+                className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded bg-transparent border-none cursor-pointer w-full text-left ${
+                  location.pathname === '/' && activeSection === 'services' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
+                }`}
+                onClick={() => {
+                  handleSectionClick('services');
+                  closeMobileMenu();
+                }}
+              >
+                Services
+              </button>
+            </li>
+            <li>
+              <Link 
+                to="/events" 
+                className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded ${
+                  location.pathname === '/events' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
+                }`}
+                onClick={closeMobileMenu}
+              >
+                Events
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/media" 
+                className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded ${
+                  location.pathname === '/media' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
+                }`}
+                onClick={closeMobileMenu}
+              >
+                Media
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/aboutus" 
+                className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded ${
+                  location.pathname === '/aboutus' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
+                }`}
+                onClick={closeMobileMenu}
+              >
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link 
+                to="/message-from-pastor" 
+                className={`font-medium transition-colors duration-300 no-underline block py-3 px-4 rounded ${
+                  location.pathname === '/message-from-pastor' ? 'text-red-600 bg-red-50' : 'text-gray-900 hover:text-red-600 hover:bg-gray-50'
+                }`}
+                onClick={closeMobileMenu}
+              >
+                Pastor's Message
+              </Link>
+            </li>
+            <li className="pt-2">
+              <Link 
+                to="/get-involved" 
+                className="bg-gradient-to-r from-red-500 to-purple-600 text-white font-bold py-3 px-4 rounded-full no-underline hover:from-red-600 hover:to-purple-700 transition-colors block text-center"
+                onClick={closeMobileMenu}
+              >
+                Get Involved
+              </Link>
+            </li>
+        </ul>
+      </div>
+    )}
+    </>
   );
 };
 

@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaHome, FaInfoCircle, FaEnvelope, FaHandsHelping, FaMicrophone, FaChurch, FaPrayingHands, FaCalendarAlt, FaCamera, FaMapMarkerAlt, FaPhone, FaHeart, FaClock } from 'react-icons/fa';
 import logo from '../../assets/images/logo.png';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSectionClick = (sectionId) => {
+    if (location.pathname === '/') {
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      navigate('/');
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 200);
+    }
+  };
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -118,9 +133,7 @@ const Footer = () => {
             </h3>
             <div className="space-y-3">
               <button 
-                onClick={() => {
-                  window.location.href = '/#sermons';
-                }}
+                onClick={() => handleSectionClick('sermons')}
                 className="group flex items-center gap-3 text-gray-800 text-sm font-medium transition-all duration-300 hover:text-gray-900 hover:translate-x-2 p-2 rounded-lg hover:bg-white/60 hover:backdrop-blur-sm hover:shadow-md w-full text-left bg-transparent border-none cursor-pointer"
               >
                 <div className="w-8 h-8 bg-white/70 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover:bg-white/90 transition-all duration-300 shadow-sm border border-white/40">
@@ -129,9 +142,7 @@ const Footer = () => {
                 Sermons
               </button>
               <button 
-                onClick={() => {
-                  window.location.href = '/#services';
-                }}
+                onClick={() => handleSectionClick('services')}
                 className="group flex items-center gap-3 text-gray-800 text-sm font-medium transition-all duration-300 hover:text-gray-900 hover:translate-x-2 p-2 rounded-lg hover:bg-white/60 hover:backdrop-blur-sm hover:shadow-md w-full text-left bg-transparent border-none cursor-pointer"
               >
                 <div className="w-8 h-8 bg-white/70 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover:bg-white/90 transition-all duration-300 shadow-sm border border-white/40">
@@ -140,9 +151,7 @@ const Footer = () => {
                 Services
               </button>
               <button 
-                onClick={() => {
-                  window.location.href = '/#ministries';
-                }}
+                onClick={() => handleSectionClick('ministries')}
                 className="group flex items-center gap-3 text-gray-800 text-sm font-medium transition-all duration-300 hover:text-gray-900 hover:translate-x-2 p-2 rounded-lg hover:bg-white/60 hover:backdrop-blur-sm hover:shadow-md w-full text-left bg-transparent border-none cursor-pointer"
               >
                 <div className="w-8 h-8 bg-white/70 backdrop-blur-sm rounded-lg flex items-center justify-center group-hover:bg-white/90 transition-all duration-300 shadow-sm border border-white/40">

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { FaCrown, FaUsers, FaHandsHelping, FaStar, FaMusic, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaCrown, FaUsers, FaHandsHelping, FaMusic, FaMapMarkerAlt } from 'react-icons/fa';
 import { GiPrayer } from 'react-icons/gi';
 import SeniorPastor from '../../assets/images/Hero/slide3.jpg';
 import AsstPastor from '../../assets/images/AboutUs/Pastors/AsstPastor.jpeg';
+import CustomDropdown from './CustomDropdown';
 
 const LeadershipSection = () => {
   const [activeTab, setActiveTab] = useState('pastors');
+  const [selectedArea, setSelectedArea] = useState('koramangala');
 
   const leadershipData = {
     pastors: {
@@ -68,26 +70,6 @@ const LeadershipSection = () => {
         }
       ]
     },
-    founders: {
-      title: 'Founders',
-      icon: <FaStar className="w-5 h-5" />,
-      members: [
-        {
-          name: 'Pastor Roshan Rai',
-          position: 'Founding Pastor',
-          description: 'Visionary founder who established LFNC in 2017 with a heart to serve the Nepali community and spread the Gospel across multiple locations.',
-          experience: 'Since 2017',
-          specialization: 'Vision Casting & Church Planting'
-        },
-        {
-          name: 'Elder Joshen Lepcha',
-          position: 'Co-Founder',
-          description: "Instrumental in the early establishment of LFNC, Elder David provided foundational support and continues to guide the church's strategic direction.",
-          experience: 'Since 2017',
-          specialization: 'Strategic Planning & Governance'
-        }
-      ]
-    },
     worship: {
       title: 'Worship Leaders',
       icon: <FaMusic className="w-5 h-5" />,
@@ -111,29 +93,44 @@ const LeadershipSection = () => {
     area: {
       title: 'Area Leaders',
       icon: <FaMapMarkerAlt className="w-5 h-5" />,
-      members: [
-        {
-          name: 'Pastor John Doe',
-          position: 'Koramangala Area Leader',
-          description: 'Overseeing our Koramangala branch, Pastor Binod ensures effective ministry and pastoral care for families in the area.',
-          experience: '4+ Years Leadership',
-          specialization: 'Local Church Leadership'
+      areas: {
+        koramangala: {
+          name: 'Koramangala',
+          members: [
+            {
+              name: 'Pastor John Doe',
+              position: 'Koramangala Area Leader',
+              description: 'Overseeing our Koramangala branch, Pastor Binod ensures effective ministry and pastoral care for families in the area.',
+              experience: '4+ Years Leadership',
+              specialization: 'Local Church Leadership'
+            }
+          ]
         },
-        {
-          name: 'Elder John Doe',
-          position: 'Electronic City Area Leader',
-          description: 'Leading our Electronic City congregation with dedication, Elder Ramesh focuses on community building and spiritual growth.',
-          experience: '3+ Years Leadership',
-          specialization: 'Community Building & Discipleship'
+        electronicCity: {
+          name: 'Electronic City',
+          members: [
+            {
+              name: 'Elder John Doe',
+              position: 'Electronic City Area Leader',
+              description: 'Leading our Electronic City congregation with dedication, Elder Ramesh focuses on community building and spiritual growth.',
+              experience: '3+ Years Leadership',
+              specialization: 'Community Building & Discipleship'
+            }
+          ]
         },
-        {
-          name: 'Pastor John Doe',
-          position: 'Nepal Branch Leader',
-          description: 'Overseeing our ministry in Nepal, Pastor Krishna leads evangelism efforts and church planting initiatives in the homeland.',
-          experience: '5+ Years Ministry',
-          specialization: 'Missions & Church Planting'
+        nepal: {
+          name: 'Nepal',
+          members: [
+            {
+              name: 'Pastor John Doe',
+              position: 'Nepal Branch Leader',
+              description: 'Overseeing our ministry in Nepal, Pastor Krishna leads evangelism efforts and church planting initiatives in the homeland.',
+              experience: '5+ Years Ministry',
+              specialization: 'Missions & Church Planting'
+            }
+          ]
         }
-      ]
+      }
     }
   };
 
@@ -141,12 +138,13 @@ const LeadershipSection = () => {
     { key: 'pastors', label: 'Pastors', icon: <FaCrown className="w-4 h-4" /> },
     { key: 'leaders', label: 'Leaders', icon: <FaUsers className="w-4 h-4" /> },
     { key: 'deacons', label: 'Deacons', icon: <FaHandsHelping className="w-4 h-4" /> },
-    { key: 'founders', label: 'Founders', icon: <FaStar className="w-4 h-4" /> },
     { key: 'worship', label: 'Worship', icon: <FaMusic className="w-4 h-4" /> },
     { key: 'area', label: 'Area Leaders', icon: <FaMapMarkerAlt className="w-4 h-4" /> }
   ];
 
-  const currentData = leadershipData[activeTab];
+  const currentData = activeTab === 'area' 
+    ? { ...leadershipData.area, members: leadershipData.area.areas[selectedArea].members }
+    : leadershipData[activeTab];
 
   return (
     <section className="py-20 px-4 bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900">
@@ -198,8 +196,30 @@ const LeadershipSection = () => {
                 <h3 className="text-2xl font-bold text-gray-900">{currentData.title}</h3>
               </div>
 
+              {/* Area Dropdown */}
+              {activeTab === 'area' && (
+                <div className="mb-6 flex justify-center">
+                  <div className="w-64">
+                    <CustomDropdown
+                      options={['Koramangala', 'Electronic City', 'Nepal']}
+                      value={selectedArea === 'koramangala' ? 'Koramangala' : selectedArea === 'electronicCity' ? 'Electronic City' : 'Nepal'}
+                      onChange={(value) => {
+                        const areaMap = {
+                          'Koramangala': 'koramangala',
+                          'Electronic City': 'electronicCity',
+                          'Nepal': 'nepal'
+                        };
+                        setSelectedArea(areaMap[value]);
+                      }}
+                      placeholder="Select Area"
+                      className="membership-dropdown"
+                    />
+                  </div>
+                </div>
+              )}
+
               {/* Members Grid */}
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className={`grid md:grid-cols-2 gap-8 ${activeTab === 'area' ? 'max-h-[500px] overflow-y-auto pr-2' : ''}`}>
                 {currentData.members.map((member, index) => (
                   <div
                     key={index}

@@ -7,6 +7,10 @@ import Donate from "./pages/Donate/Donate";
 import SowASeed from "./pages/Donate/SowASeed";
 import PrayerRequest from "./pages/PrayerRequest";
 import MessageFromPastor from "./pages/MessageFromPastor";
+import FuneralService from "./pages/FuneralService/FuneralService";
+import BaptismService from "./pages/BaptismService/BaptismService";
+import BirthdayService from "./pages/BirthdayService/BirthdayService";
+import VolunteerService from "./pages/VolunteerService/VolunteerService";
 import Layout from "./components/Layout/Layout";
 import Events from "./pages/Events/Events";
 import Media from "./pages/Media/Media";
@@ -49,6 +53,10 @@ function AppContent() {
           <Route path="/sow-a-seed" element={<SowASeed />} />
           <Route path="/prayer-request" element={<PrayerRequest />} />
           <Route path="/message-from-pastor" element={<MessageFromPastor />} />
+          <Route path="/funeral-service" element={<FuneralService />} />
+          <Route path="/baptism-service" element={<BaptismService />} />
+          <Route path="/birthday-service" element={<BirthdayService />} />
+          <Route path="/volunteer-service" element={<VolunteerService />} />
           <Route path="/events" element={<Events />} />
           <Route path="/media" element={<Media />} />
         </Routes>

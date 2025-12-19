@@ -33,9 +33,11 @@ const CustomDropdown = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white text-left flex justify-between items-center"
+        className={`font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none text-left flex justify-between items-center ${
+          isDarker ? 'bg-white/20 text-gray-900' : 'bg-white/20 text-white'
+        }`}
       >
-        <span className={value ? 'text-white' : 'text-gray-300'}>
+        <span className={value ? (isDarker ? 'text-gray-900' : 'text-white') : 'text-gray-300'}>
           {value || placeholder}
         </span>
         <svg 
@@ -57,7 +59,9 @@ const CustomDropdown = ({
               key={index}
               type="button"
               onClick={() => handleSelect(option)}
-              className="w-full px-4 py-3 text-left text-white hover:bg-white/20 transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl"
+              className={`w-full px-4 py-3 text-left transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl ${
+                isDarker ? 'text-gray-900 hover:bg-white/20' : 'text-white hover:bg-white/20'
+              }`}
             >
               {option}
             </button>

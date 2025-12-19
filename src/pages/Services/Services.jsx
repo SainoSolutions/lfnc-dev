@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import baptismImg from '../../assets/images/Baptisim.jpg';
 import birthdayImg from '../../assets/images/birthday.jpg';
 import funeralImg from '../../assets/images/Funeral.jpg';
@@ -36,6 +37,7 @@ const ChevronRightIcon = () => (
 );
 
 const Services = () => {
+  const navigate = useNavigate();
   const services = [
     {
       id: 1,
@@ -73,11 +75,11 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-t from-blue-900 via-purple-900 to-slate-900 py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Decorative subtle circles (like GetInvolved) */}
+      {/* Decorative subtle circles - Optimized for mobile */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute top-60 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-1000" />
-        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-2000" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-red-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 md:animate-pulse" />
+        <div className="absolute top-60 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 md:animate-pulse delay-1000" />
+        <div className="absolute -bottom-40 right-1/3 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 md:animate-pulse delay-2000" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -142,7 +144,15 @@ const Services = () => {
                   </div>
 
                   {/* CTA Button - Same as Donate button */}
-                  <button className="w-full mt-6 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                  <button 
+                    onClick={() => {
+                      if (service.id === 1) navigate('/baptism-service');
+                      else if (service.id === 2) navigate('/birthday-service');
+                      else if (service.id === 3) navigate('/funeral-service');
+                      else if (service.id === 4) navigate('/volunteer-service');
+                    }}
+                    className="w-full mt-6 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                  >
                     <span>Learn More</span>
                     <ChevronRightIcon />
                   </button>

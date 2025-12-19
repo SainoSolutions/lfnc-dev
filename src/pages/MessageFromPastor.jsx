@@ -23,23 +23,23 @@ const MessageFromPastor = () => {
 
   const sections = [
     {
-      title: "Welcome to Our Church Family",
-      content: "Dear beloved congregation and visitors, it brings me immense joy to welcome you to Living Faith Nepali Church. For over a decade, we have been a beacon of hope and faith in our community, touching lives and transforming hearts through the love of Jesus Christ.",
+      title: "Our Humble Beginning",
+      content: "Established on September 9, 2007, with a small group of 12 to 15 members in Rajendra Nagar, Koramangala, Bangalore, our church has grown into a welcoming and supportive community. We pride ourselves on being an extended family, providing a vital sense of belonging for the Nepali-speaking diaspora living in Bangalore city, South India.",
       icon: <FaHeart className="w-8 h-8" />
     },
     {
-      title: "Our Mission & Vision",
-      content: "Our mission is simple yet profound: to spread the Gospel of Jesus Christ, nurture spiritual growth, and serve our community with unwavering love. We believe in building bridges of faith that connect hearts across cultures and generations, creating a family where everyone belongs.",
+      title: "Our Foundation & Fellowship",
+      content: "Beyond our Sunday services, we emphasize genuine fellowship by offering emotional, spiritual, and practical support to our members in all seasons of life. Our services feature dynamic worship and a strong biblical foundation, focusing on the inerrancy of God's Word and its practical application to daily life.",
       icon: <FaCross className="w-8 h-8" />
     },
     {
-      title: "Building Faith Together",
-      content: "Faith is not a solitary journey. Here at LFNC, we walk together, supporting one another through life's challenges and celebrating God's blessings. Through prayer, worship, and fellowship, we grow stronger in our relationship with Christ and with each other.",
+      title: "Spirit-Led Worship",
+      content: "We foster a vibrant prayer life where the tangible presence of the Holy Spirit is felt, and testimonies of healing and miracles are shared. Our worship is not just a ritual, but a genuine encounter with the living God.",
       icon: <GiPrayer className="w-8 h-8" />
     },
     {
-      title: "Serving Our Community",
-      content: "We are called to be the hands and feet of Jesus in our community. Through our various ministries, outreach programs, and acts of service, we strive to make a tangible difference in the lives of those around us, showing God's love through our actions.",
+      title: "Make Christ Known",
+      content: "With a clear mission to 'Make Christ Known,' we encourage our congregation to live purpose-driven lives in obedience to the Word. With branches across India and Nepal, we strive to be a beacon of hope and a supportive family for everyone who walks through our doors.",
       icon: <FaHandsHelping className="w-8 h-8" />
     }
   ];
@@ -63,7 +63,7 @@ const MessageFromPastor = () => {
             Message from <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400">Pastor</span>
           </h1>
           <p className="font-body text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            A heartfelt message from Pastor Roshan about our church's mission, vision, and the journey of faith we share together.
+            A heartfelt message from Pastor Roshan about our church's journey, mission, and the family we've built together since 2007.
           </p>
         </div>
 
@@ -85,7 +85,7 @@ const MessageFromPastor = () => {
                 <p className="font-heading text-xl text-purple-300 mb-4">Senior Pastor & Founder</p>
                 <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                   <p className="font-body text-gray-300 italic">
-                    "Serving God's people with love, compassion, and unwavering faith for over 18+ years."
+                    "— Ps. Roshan Rai"
                   </p>
                 </div>
               </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { GiWheat, GiPrayer } from 'react-icons/gi';
 // import logo from '../../assets/images/logo.jpg';
-import logo from '../../assets/images/logo.jpg';
+import logo from '../../assets/images/logo.png';
 import { useGlobalLoading } from '../../App';
 
 const Navbar = () => {
@@ -77,7 +77,7 @@ const Navbar = () => {
           <img 
             src={logo}
             alt="Church Logo" 
-            className="h-10 w-10 mr-3 object-cover"
+            className="h-10 w-full mr-3 object-cover"
           />
           <span className="font-bold text-lg text-gray-900 whitespace-nowrap">
             Living Faith Nepali Church

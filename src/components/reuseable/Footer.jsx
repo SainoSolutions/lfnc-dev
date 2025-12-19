@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaInfoCircle, FaEnvelope, FaHandsHelping, FaMicrophone, FaChurch, FaPrayingHands, FaCalendarAlt, FaCamera, FaMapMarkerAlt, FaPhone, FaHeart, FaClock } from 'react-icons/fa';
-import logo from '../../assets/images/logo.jpg';
+import logo from '../../assets/images/logo.png';
 
 const Footer = () => {
   const [email, setEmail] = useState('');

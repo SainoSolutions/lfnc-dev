@@ -1,14 +1,15 @@
 import { Calendar, Users, Heart } from 'lucide-react';
-import { EventService } from './EventService';
+import { eventsCache } from '../../services/eventsCache';
 import slide3 from '../../assets/images/Hero/slide3.jpg';
 import { useEffect, useState } from 'react';
 
 export default function ChurchEvents() {
   const [eventData, setEventData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   useEffect(()=> {
-    EventService.getAllEvents().then((data) => {
+    eventsCache.getEvents().then((data) => {
       if (data && data[0]) {
         setEventData(data[0]);
       }
@@ -18,6 +19,13 @@ export default function ChurchEvents() {
       setIsLoading(false);
     });
   }, [])
+
+  const loadMore = () => {
+    setVisibleCount(prev => prev + 4);
+  };
+
+  const visibleEvents = eventData?.events?.slice(0, visibleCount) || [];
+  const hasMore = eventData?.events?.length > visibleCount;
   return (
     <div className="min-h-screen bg-zinc-950">
       {/* Hero Section */}
@@ -105,7 +113,7 @@ export default function ChurchEvents() {
               ))
             ) : (
               // Events Content
-              eventData?.events?.map((event) => (
+              visibleEvents.map((event) => (
                 <button key={event.id} className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50">
                   <img
                     src={event.image}
@@ -134,11 +142,14 @@ export default function ChurchEvents() {
           </div>
 
           {/* View All Events Button */}
-          {!isLoading && (
+          {!isLoading && hasMore && (
             <div className="text-center mt-12">
-              <button className="flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50 mx-auto">
+              <button 
+                onClick={loadMore}
+                className="flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50 mx-auto"
+              >
                 <Calendar className="w-5 h-5" />
-                <span className="font-semibold">View All Events</span>
+                <span className="font-semibold">Load More Events</span>
               </button>
             </div>
           )}

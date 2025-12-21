@@ -35,15 +35,11 @@ const Footer = () => {
 
   return (
     <footer className="bg-gradient-to-br from-white via-purple-50/50 via-pink-50/40 via-red-50/35 via-orange-50/30 to-blue-50/25 text-black py-20 relative overflow-hidden">
-      {/* Enhanced decorative gradients */}
+      {/* Optimized decorative gradients - reduced from 7 to 3 */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br from-purple-400/30 via-pink-300/25 to-red-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
-        <div className="absolute top-60 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-red-400/30 via-orange-300/25 to-yellow-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000" />
-        <div className="absolute -bottom-40 right-1/3 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/25 via-purple-300/30 to-pink-400/25 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000" />
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-300/20 via-blue-300/25 to-purple-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-500" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-pink-300/20 via-red-300/25 to-orange-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1500" />
-        <div className="absolute top-10 left-1/2 w-[400px] h-[400px] bg-gradient-to-br from-emerald-300/15 via-teal-300/20 to-cyan-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-750" />
-        <div className="absolute bottom-10 left-1/5 w-[400px] h-[400px] bg-gradient-to-br from-violet-300/15 via-purple-300/20 to-fuchsia-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1250" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-purple-400/20 via-pink-300/15 to-red-400/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+        <div className="absolute top-60 -left-40 w-[500px] h-[500px] bg-gradient-to-br from-red-400/20 via-orange-300/15 to-yellow-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{animationDelay: '1s'}} />
+        <div className="absolute -bottom-40 right-1/3 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/15 via-purple-300/20 to-pink-400/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
       </div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

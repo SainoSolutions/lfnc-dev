@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Ministries from '../Ministries/Ministries';
 import Services from '../Services/Services';
 import SermonsSection from '../../components/reuseable/SermonsSection';
+import { eventsCache } from '../../services/eventsCache';
 import slide1 from '../../assets/images/Hero/slide1.jpg'
 import slide2 from '../../assets/images/Hero/slide2.jpg'
 import slide3 from '../../assets/images/Hero/slide3.jpg'
@@ -10,6 +11,12 @@ import slide4 from '../../assets/images/Hero/slide4.jpg'
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [activeCard, setActiveCard] = useState('sermon');
+
+  // Prefetch events API on home page load
+  useEffect(() => {
+    eventsCache.prefetch();
+  }, []);
 
   const slides = [
     {
@@ -67,38 +74,105 @@ const Home = () => {
     <div>
       {/* Hero Section */}
       <div className="relative w-full h-screen overflow-hidden">
-      {/* Upcoming Event Card */}
-      <div className="absolute top-4 right-4 z-20 w-80 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-4 shadow-2xl">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-          <span className="text-white text-xs font-bold uppercase tracking-wide">Upcoming Event</span>
+      {/* Upcoming Card Switcher */}
+      <div className="absolute top-4 right-4 z-20 w-80">
+        {/* Tab Switcher */}
+        <div className="flex gap-2 mb-3">
+          <button
+            onClick={() => setActiveCard('sermon')}
+            className={`flex-1 py-2 px-4 rounded-xl font-semibold text-xs uppercase tracking-wide transition-all duration-300 ${
+              activeCard === 'sermon'
+                ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-lg'
+                : 'bg-white/10 backdrop-blur-md text-gray-300 hover:bg-white/20'
+            }`}
+          >
+            Sermon
+          </button>
+          <button
+            onClick={() => setActiveCard('event')}
+            className={`flex-1 py-2 px-4 rounded-xl font-semibold text-xs uppercase tracking-wide transition-all duration-300 ${
+              activeCard === 'event'
+                ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white shadow-lg'
+                : 'bg-white/10 backdrop-blur-md text-gray-300 hover:bg-white/20'
+            }`}
+          >
+            Event
+          </button>
         </div>
-        <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">Sunday Message</h3>
-        <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Join Pastor Roshan for an inspiring message</p>
-        <div className="space-y-2 text-xs text-gray-400">
-          <div className="flex items-center gap-2">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-            <span>Every Sunday</span>
+
+        {/* Sermon Card */}
+        {activeCard === 'sermon' && (
+          <div className="bg-gradient-to-br from-purple-500/20 to-blue-500/20 backdrop-blur-lg border border-white/20 rounded-2xl p-4 shadow-2xl">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
+              <span className="text-white text-xs font-bold uppercase tracking-wide">Upcoming Sermon</span>
+            </div>
+            <img src={slide1} alt="Sunday Message" className="w-full h-32 object-cover rounded-xl mb-3" />
+            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">Sunday Message</h3>
+            <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Join Pastor Roshan Rai for an inspiring message</p>
+            <div className="space-y-2 text-xs text-gray-300">
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <span>Every Sunday</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span>07:30 AM - 09:00 AM</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <span>LFNC Koramangala</span>
+              </div>
+            </div>
+            <button className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
+              View Details
+            </button>
           </div>
-          <div className="flex items-center gap-2">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <span>07:30 AM - 09:00 AM</span>
+        )}
+
+        {/* Event Card */}
+        {activeCard === 'event' && (
+          <div className="bg-gradient-to-br from-red-500/20 to-orange-500/20 backdrop-blur-lg border border-white/20 rounded-2xl p-4 shadow-2xl">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+              <span className="text-white text-xs font-bold uppercase tracking-wide">Upcoming Event</span>
+            </div>
+            <img src={slide3} alt="Youth Fellowship" className="w-full h-32 object-cover rounded-xl mb-3" />
+            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">Youth Fellowship Night</h3>
+            <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Join us for worship, games, and fellowship</p>
+            <div className="space-y-2 text-xs text-gray-300">
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <span>Friday, Dec 20</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span>06:00 PM - 09:00 PM</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+                <span>LFNC Electronic City</span>
+              </div>
+            </div>
+            <button className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
+              Register Now
+            </button>
           </div>
-          <div className="flex items-center gap-2">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-            <span>LFNC Koramangala</span>
-          </div>
-        </div>
-        <button className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
-          Join Us
-        </button>
+        )}
       </div>
       
       {/* Slides Container */}
@@ -134,7 +208,7 @@ const Home = () => {
                   dangerouslySetInnerHTML={renderHighlightedText(slide.title, slide.highlight)}
                 >
                 </h1>
-                <p className="font-body text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-6 sm:mb-8 opacity-95">
+                <p className="font-body text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-24 sm:mb-32 md:mb-40 lg:mb-8 opacity-95">
                   Transforming lives through faith, hope, and love
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">

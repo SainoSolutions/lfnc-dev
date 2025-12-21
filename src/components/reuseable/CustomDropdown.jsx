@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const CustomDropdown = ({ 
+const CustomDropdown = React.memo(({ 
   options, 
   value, 
   onChange, 
@@ -19,9 +19,11 @@ const CustomDropdown = ({
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [isOpen]);
 
   const handleSelect = (option) => {
     onChange(option);
@@ -60,7 +62,7 @@ const CustomDropdown = ({
               type="button"
               onClick={() => handleSelect(option)}
               className={`w-full px-4 py-3 text-left transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl ${
-                isDarker ? 'text-gray-900 hover:bg-white/20' : 'text-white hover:bg-white/20'
+                isDarker ? 'text-white hover:bg-white/20' : 'text-white hover:bg-white/20'
               }`}
             >
               {option}
@@ -70,6 +72,6 @@ const CustomDropdown = ({
       )}
     </div>
   );
-};
+});
 
 export default CustomDropdown;

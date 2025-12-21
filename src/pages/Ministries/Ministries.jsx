@@ -86,15 +86,11 @@ export default function Ministries() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/50 via-pink-50/40 via-red-50/35 via-orange-50/30 to-blue-50/25 relative overflow-hidden text-gray-900">
-      {/* Enhanced decorative gradients - Optimized for mobile */}
+      {/* Optimized decorative gradients - reduced for performance */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br from-purple-400/30 via-pink-300/25 to-red-400/30 rounded-full mix-blend-multiply filter blur-3xl md:animate-pulse" />
-        <div className="absolute top-60 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-red-400/30 via-orange-300/25 to-yellow-300/20 rounded-full mix-blend-multiply filter blur-3xl md:animate-pulse delay-1000" />
-        <div className="absolute -bottom-40 right-1/3 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/25 via-purple-300/30 to-pink-400/25 rounded-full mix-blend-multiply filter blur-3xl md:animate-pulse delay-2000" />
-        <div className="hidden md:block absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-300/20 via-blue-300/25 to-purple-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-500" />
-        <div className="hidden md:block absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-pink-300/20 via-red-300/25 to-orange-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1500" />
-        <div className="hidden md:block absolute top-10 left-1/2 w-[400px] h-[400px] bg-gradient-to-br from-emerald-300/15 via-teal-300/20 to-cyan-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-750" />
-        <div className="hidden md:block absolute bottom-10 left-1/5 w-[400px] h-[400px] bg-gradient-to-br from-violet-300/15 via-purple-300/20 to-fuchsia-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1250" />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-purple-400/20 via-pink-300/15 to-red-400/20 rounded-full mix-blend-multiply filter blur-3xl" />
+        <div className="absolute top-60 -left-40 w-[500px] h-[500px] bg-gradient-to-br from-red-400/20 via-orange-300/15 to-yellow-300/15 rounded-full mix-blend-multiply filter blur-3xl" />
+        <div className="absolute -bottom-40 right-1/3 w-[500px] h-[500px] bg-gradient-to-br from-blue-400/15 via-purple-300/20 to-pink-400/15 rounded-full mix-blend-multiply filter blur-3xl" />
       </div>
       
       <div className="relative z-10 min-h-screen flex flex-col items-center px-4 pt-20">
@@ -112,8 +108,9 @@ export default function Ministries() {
           <div
             className="absolute left-0 md:left-8 lg:left-16 z-10 cursor-pointer"
             onClick={handlePrevious}
+            style={{ pointerEvents: 'auto' }}
           >
-            <div className="bg-gray-900/90 backdrop-blur-lg border border-gray-700/50 rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform -rotate-12 hover:scale-105 transition-all duration-300 hover:bg-gray-900/95">
+            <div className="bg-gray-900/90 rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform -rotate-12 hover:scale-105 transition-all duration-300 hover:bg-gray-900/95 border border-gray-800">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={ministries[getLeftIndex()].imageUrl}
@@ -158,7 +155,7 @@ export default function Ministries() {
           </div>
 
           {/* Center Featured Card - Straight */}
-          <div className="relative z-20 bg-gray-900/90 backdrop-blur-lg border border-gray-700/50 rounded-3xl shadow-2xl overflow-hidden w-80 md:w-96 transform rotate-0 hover:bg-gray-900/95 transition-all duration-300">
+          <div className="relative z-20 bg-gray-900/90 rounded-3xl shadow-2xl overflow-hidden w-80 md:w-96 transform rotate-0 hover:bg-gray-900/95 transition-all duration-300 border border-gray-800">
             <div className="relative h-80 overflow-hidden">
               <img
                 src={ministries[currentIndex].imageUrl}
@@ -206,8 +203,9 @@ export default function Ministries() {
           <div
             className="absolute right-0 md:right-8 lg:right-16 z-10 cursor-pointer"
             onClick={handleNext}
+            style={{ pointerEvents: 'auto' }}
           >
-            <div className="bg-gray-900/90 backdrop-blur-lg border border-gray-700/50 rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform rotate-12 hover:scale-105 transition-all duration-300 hover:bg-gray-900/95">
+            <div className="bg-gray-900/90 rounded-3xl shadow-2xl w-64 h-80 overflow-hidden transform rotate-12 hover:scale-105 transition-all duration-300 hover:bg-gray-900/95 border border-gray-800">
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={ministries[getRightIndex()].imageUrl}
@@ -254,7 +252,8 @@ export default function Ministries() {
           {/* Navigation Arrows */}
           <button
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 p-3 rounded-full shadow-lg transition-all duration-300 hidden md:block"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 bg-gray-900/80 rounded-full shadow-lg transition-all duration-300 hidden md:block border border-gray-800 p-3"
+            style={{ pointerEvents: 'auto' }}
           >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -262,7 +261,8 @@ export default function Ministries() {
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 p-3 rounded-full shadow-lg transition-all duration-300 hidden md:block"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-30 bg-gray-900/80 rounded-full shadow-lg transition-all duration-300 hidden md:block border border-gray-800 p-3"
+            style={{ pointerEvents: 'auto' }}
           >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -289,7 +289,8 @@ export default function Ministries() {
         <div className="flex gap-4 mt-8 md:hidden">
           <button
             onClick={handlePrevious}
-            className="bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 p-3 rounded-full shadow-lg transition-all duration-300"
+            className="bg-gray-900/80 rounded-full shadow-lg transition-all duration-300 border border-gray-800 p-3"
+            style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
           >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -297,7 +298,8 @@ export default function Ministries() {
           </button>
           <button
             onClick={handleNext}
-            className="bg-gray-900/80 backdrop-blur-lg border border-gray-700/50 hover:bg-gray-900/90 p-3 rounded-full shadow-lg transition-all duration-300"
+            className="bg-gray-900/80 rounded-full shadow-lg transition-all duration-300 border border-gray-800 p-3"
+            style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
           >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { FaCrown, FaUsers, FaHandsHelping, FaMusic, FaMapMarkerAlt } from 'react-icons/fa';
 import { GiPrayer } from 'react-icons/gi';
 import SeniorPastor from '../../assets/images/Hero/slide3.jpg';
@@ -8,6 +8,15 @@ import CustomDropdown from './CustomDropdown';
 const LeadershipSection = () => {
   const [activeTab, setActiveTab] = useState('pastors');
   const [selectedArea, setSelectedArea] = useState('koramangala');
+
+  const handleAreaChange = useCallback((value) => {
+    const areaMap = {
+      'Koramangala': 'koramangala',
+      'Electronic City': 'electronicCity',
+      'Nepal': 'nepal'
+    };
+    setSelectedArea(areaMap[value]);
+  }, []);
 
   const leadershipData = {
     pastors: {
@@ -23,7 +32,7 @@ const LeadershipSection = () => {
         },
         {
           name: 'Pastor Samuel Rai',
-          position: 'Associate Pastor',
+          position: 'Senior Pastor & Founder',
           description: 'Dedicated to pastoral care and community outreach, Pastor Samuel brings deep theological knowledge and compassionate leadership to our congregation.',
           experience: '16+ Years Ministry',
           specialization: 'Pastoral Care & Counseling'
@@ -90,6 +99,66 @@ const LeadershipSection = () => {
         }
       ]
     },
+    media: {
+      title: 'Media Team',
+      icon: <FaMusic className="w-5 h-5" />,
+      members: [
+        {
+          name: 'Ruthen Santos',
+          position: 'Media Director',
+          description: 'Leading our media ministry with technical expertise, ensuring quality audio-visual production for services and online streaming.',
+          experience: '3+ Years Service',
+          specialization: 'Video Production & Live Streaming'
+        },
+        {
+          name: 'Brother Dipesh Pradhan',
+          position: 'Social Media Coordinator',
+          description: 'Managing our digital presence and online engagement, creating content that reaches and inspires our community.',
+          experience: '2+ Years Service',
+          specialization: 'Social Media & Content Creation'
+        }
+      ]
+    },
+    volunteers: {
+      title: 'Volunteers',
+      icon: <FaHandsHelping className="w-5 h-5" />,
+      members: [
+        {
+          name: 'Brother Andrew Sherpa',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '2+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
+        {
+          name: 'Sister Srijana Rai',
+          position: 'Children Ministry Volunteer',
+          description: 'Dedicated to nurturing young hearts, creating engaging and safe environments for children to learn about God.',
+          experience: '3+ Years Service',
+          specialization: 'Children Ministry & Education'
+        }
+      ]
+    },
+    sundaySchool: {
+      title: 'Sunday School Teachers',
+      icon: <FaUsers className="w-5 h-5" />,
+      members: [
+        {
+          name: 'Teacher Sarah',
+          position: 'Lead Sunday School Teacher',
+          description: 'Passionate about teaching children biblical truths through creative lessons and engaging activities.',
+          experience: '4+ Years Teaching',
+          specialization: 'Children Education & Bible Teaching'
+        },
+        {
+          name: 'Teacher David',
+          position: 'Sunday School Coordinator',
+          description: 'Organizing curriculum and coordinating teachers to provide quality biblical education for all age groups.',
+          experience: '3+ Years Teaching',
+          specialization: 'Curriculum Development & Coordination'
+        }
+      ]
+    },
     area: {
       title: 'Area Leaders',
       icon: <FaMapMarkerAlt className="w-5 h-5" />,
@@ -139,6 +208,9 @@ const LeadershipSection = () => {
     { key: 'leaders', label: 'Leaders', icon: <FaUsers className="w-4 h-4" /> },
     { key: 'deacons', label: 'Deacons', icon: <FaHandsHelping className="w-4 h-4" /> },
     { key: 'worship', label: 'Worship', icon: <FaMusic className="w-4 h-4" /> },
+    { key: 'media', label: 'Media Team', icon: <FaMusic className="w-4 h-4" /> },
+    { key: 'volunteers', label: 'Volunteers', icon: <FaHandsHelping className="w-4 h-4" /> },
+    { key: 'sundaySchool', label: 'Sunday School', icon: <FaUsers className="w-4 h-4" /> },
     { key: 'area', label: 'Area Leaders', icon: <FaMapMarkerAlt className="w-4 h-4" /> }
   ];
 
@@ -186,14 +258,14 @@ const LeadershipSection = () => {
 
           {/* Tab Content */}
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-red-500/5 via-purple-500/5 to-blue-500/5 rounded-3xl"></div>
-            <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-white/20">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-red-500/10 to-blue-500/10 rounded-3xl blur-xl"></div>
+            <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/10">
               {/* Tab Header */}
               <div className="flex items-center justify-center gap-3 mb-8">
-                <div className="p-3 bg-gradient-to-r from-red-500 to-purple-600 rounded-full text-white">
+                <div className="p-3 bg-gradient-to-r from-red-500 to-purple-600 rounded-full text-white shadow-lg">
                   {currentData.icon}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">{currentData.title}</h3>
+                <h3 className="text-2xl font-bold text-white">{currentData.title}</h3>
               </div>
 
               {/* Area Dropdown */}
@@ -203,14 +275,7 @@ const LeadershipSection = () => {
                     <CustomDropdown
                       options={['Koramangala', 'Electronic City', 'Nepal']}
                       value={selectedArea === 'koramangala' ? 'Koramangala' : selectedArea === 'electronicCity' ? 'Electronic City' : 'Nepal'}
-                      onChange={(value) => {
-                        const areaMap = {
-                          'Koramangala': 'koramangala',
-                          'Electronic City': 'electronicCity',
-                          'Nepal': 'nepal'
-                        };
-                        setSelectedArea(areaMap[value]);
-                      }}
+                      onChange={handleAreaChange}
                       placeholder="Select Area"
                       className="membership-dropdown"
                     />
@@ -223,10 +288,16 @@ const LeadershipSection = () => {
                 {currentData.members.map((member, index) => (
                   <div
                     key={index}
-                    className="group bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+                    className="group relative bg-gradient-to-br from-gray-900 to-black rounded-2xl p-6 shadow-2xl border border-gray-800 hover:border-purple-500/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
                   >
+                    {/* Dark glossy overlay effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-red-500/5 pointer-events-none"></div>
+                    <div className="absolute -top-20 -right-20 w-40 h-40 bg-purple-600/20 rounded-full blur-3xl group-hover:bg-purple-600/30 transition-all duration-500"></div>
+                    <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-red-600/20 rounded-full blur-3xl group-hover:bg-red-600/30 transition-all duration-500"></div>
+                    
+                    <div className="relative z-10">
                     {/* Member Avatar */}
-                    <div className="w-48 h-48 rounded-full mb-4 mx-auto group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                    <div className="w-32 h-32 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
                       {member.name === 'Pastor Roshan Rai' ? (
                         <img 
                           src={SeniorPastor} 
@@ -240,7 +311,7 @@ const LeadershipSection = () => {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-red-400 to-purple-600 flex items-center justify-center text-white text-2xl font-bold">
+                        <div className="w-full h-full bg-gradient-to-br from-red-400 to-purple-600 flex items-center justify-center text-white text-lg font-bold">
                           {member.name.split(' ').map(n => n[0]).join('')}
                         </div>
                       )}
@@ -248,29 +319,28 @@ const LeadershipSection = () => {
 
                     {/* Member Info */}
                     <div className="text-center mb-4">
-                      <h4 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h4>
-                      <p className="text-red-600 font-semibold text-sm mb-3">{member.position}</p>
-                      <p className="text-gray-600 text-sm leading-relaxed mb-4">{member.description}</p>
+                      <h4 className="text-lg font-bold text-white mb-1">{member.name}</h4>
+                      <p className="text-red-400 font-semibold text-sm mb-2">{member.position}</p>
+                      <p className="text-gray-200 text-sm leading-relaxed mb-3">{member.description}</p>
                     </div>
 
                     {/* Member Details */}
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-gray-500">Experience:</span>
-                        <span className="font-semibold text-purple-600">{member.experience}</span>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center justify-between text-xs bg-purple-500/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-500/20">
+                        <span className="text-gray-400">Experience:</span>
+                        <span className="font-semibold text-purple-400">{member.experience}</span>
                       </div>
-                      <div className="flex items-center justify-between text-xs">
-                        <span className="text-gray-500">Focus:</span>
-                        <span className="font-semibold text-red-600">{member.specialization}</span>
+                      <div className="flex flex-col text-xs bg-red-500/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-red-500/20">
+                        <span className="text-gray-400 mb-1">Focus:</span>
+                        <span className="font-semibold text-red-400">{member.specialization}</span>
                       </div>
                     </div>
 
                     {/* Prayer Button */}
-                    <div className="mt-4 pt-4 border-t border-gray-100">
-                      <button className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-gradient-to-r from-purple-50 to-red-50 text-purple-700 rounded-lg hover:from-purple-100 hover:to-red-100 transition-colors duration-300 text-sm font-medium">
-                        <GiPrayer className="w-4 h-4" />
-                        <span>Pray for {member.name.split(' ')[0]}</span>
-                      </button>
+                    <button className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-gradient-to-r from-purple-500 to-red-500 text-white rounded-lg hover:from-purple-600 hover:to-red-600 transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
+                      <GiPrayer className="w-4 h-4" />
+                      <span>Pray</span>
+                    </button>
                     </div>
                   </div>
                 ))}

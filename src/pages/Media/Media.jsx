@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
 import { FaImages, FaVideo, FaPlay, FaExpand, FaTimes, FaSpinner } from 'react-icons/fa';
 
 import image1 from "../../assets/images/Media/1.jpg";
@@ -105,36 +105,43 @@ export default function Media() {
     }
   }, [displayedVideos.length]);
 
-  // Scroll event handler
+  // Scroll event handler with debounce
   useEffect(() => {
+    let timeoutId;
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      const direction = currentScrollY > lastScrollY ? 'down' : 'up';
-      
-      setScrollDirection(direction);
-      setLastScrollY(currentScrollY);
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        const currentScrollY = window.scrollY;
+        const direction = currentScrollY > lastScrollY ? 'down' : 'up';
+        
+        setScrollDirection(direction);
+        setLastScrollY(currentScrollY);
 
-      // Load more content when scrolling down near bottom
-      if (direction === 'down' && window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 1000) {
-        if (activeTab === 'images') {
-          loadMoreImages();
-        } else {
-          loadMoreVideos();
+        // Load more content when scrolling down near bottom
+        if (direction === 'down' && window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 1000) {
+          if (activeTab === 'images') {
+            loadMoreImages();
+          } else {
+            loadMoreVideos();
+          }
         }
-      }
-      
-      // Remove content when scrolling up past certain threshold
-      if (direction === 'up' && currentScrollY < document.documentElement.offsetHeight * 0.3) {
-        if (activeTab === 'images') {
-          removeImagesFromEnd();
-        } else {
-          removeVideosFromEnd();
+        
+        // Remove content when scrolling up past certain threshold
+        if (direction === 'up' && currentScrollY < document.documentElement.offsetHeight * 0.3) {
+          if (activeTab === 'images') {
+            removeImagesFromEnd();
+          } else {
+            removeVideosFromEnd();
+          }
         }
-      }
+      }, 100);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [activeTab, lastScrollY, loadMoreImages, loadMoreVideos, removeImagesFromEnd, removeVideosFromEnd]);
 
   const openLightbox = (idx) => {
@@ -183,7 +190,7 @@ export default function Media() {
           <div className="bg-white/80 backdrop-blur-lg border border-gray-200/50 rounded-2xl p-2 shadow-xl flex">
             <button
               onClick={() => setActiveTab('images')}
-              className={`flex items-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold transition-all duration-300 ${
+              className={`flex items-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold transition-all duration-200 ${
                 activeTab === 'images'
                   ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-lg transform scale-105'
                   : 'text-gray-700 hover:bg-gray-100/50'
@@ -194,7 +201,7 @@ export default function Media() {
             </button>
             <button
               onClick={() => setActiveTab('videos')}
-              className={`flex items-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold transition-all duration-300 ${
+              className={`flex items-center gap-3 px-8 py-4 rounded-xl font-heading font-semibold transition-all duration-200 ${
                 activeTab === 'videos'
                   ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-lg transform scale-105'
                   : 'text-gray-700 hover:bg-gray-100/50'

@@ -95,45 +95,61 @@ export default function GetInvolved() {
         {/* Hero Header */}
         <div className="text-center mb-16 max-w-4xl mx-auto">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black mb-6 leading-tight">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-purple-400 to-blue-400">
-  A Year of&nbsp;
-</span>
-<span className="text-white">Provision</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-purple-400 to-blue-400 animate-pulse">
+              A Year of Provision
+            </span>
           </h1>
           
-          <p className="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed mb-8">
             Discover meaningful ways to connect, grow, and serve in our vibrant faith community
           </p>
+          
+          <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+              <FaUsers className="w-3 h-3 text-purple-300" />
+              <span className="text-white/80 text-xs font-medium">7 Ministry Areas</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+              <FaCalendarAlt className="w-3 h-3 text-purple-300" />
+              <span className="text-white/80 text-xs font-medium">Weekly Activities</span>
+            </div>
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-full border border-white/20">
+              <FaHeart className="w-3 h-3 text-purple-300" />
+              <span className="text-white/80 text-xs font-medium">All Ages Welcome</span>
+            </div>
+          </div>
         </div>
 
         {/* Tab Navigation with Arrows */}
-        <div className="max-w-6xl mx-auto mb-8 relative">
+        <div className="max-w-6xl mx-auto mb-12 relative">
           {/* Left Arrow */}
           <button
             onClick={scrollTabsLeft}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-lg"
+            className="hidden md:block absolute left-0 top-1/2 transform -translate-y-1/2 z-20 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-2xl"
           >
             <FaChevronRight className="w-4 h-4 transform rotate-180" />
           </button>
 
           {/* Tabs Container */}
-          <div className="tabs-container flex overflow-x-auto gap-3 pb-4 scrollbar-hide mx-12">
+          <div className="tabs-container flex overflow-x-auto gap-2 pb-4 scrollbar-hide md:mx-12">
             {sections.map((section, index) => {
               const Icon = section.icon;
               return (
                 <button
                   key={index}
                   onClick={() => setActiveTab(index)}
-                  className={`flex items-center gap-3 px-6 py-4 rounded-xl font-semibold whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
+                  className={`group flex items-center gap-2 px-4 py-2.5 rounded-2xl font-semibold whitespace-nowrap transition-all duration-300 flex-shrink-0 ${
                     activeTab === index
-                      ? 'bg-white text-gray-900 shadow-2xl scale-105'
-                      : 'bg-white/10 text-white/70 hover:bg-white/20 backdrop-blur-sm border border-white/10'
+                      ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-2xl scale-105'
+                      : 'bg-white/10 text-white/70 hover:bg-white/20 backdrop-blur-sm border border-white/20 hover:border-white/40'
                   }`}
                 >
-                  <Icon className="w-5 h-5" />
-                  <span>{section.title}</span>
+                  <Icon className={`w-4 h-4 transition-transform duration-300 ${
+                    activeTab === index ? 'scale-110' : 'group-hover:scale-110'
+                  }`} />
+                  <span className="text-sm">{section.title}</span>
                   {activeTab === index && (
-                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-red-500 to-purple-600"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></div>
                   )}
                 </button>
               );
@@ -143,38 +159,46 @@ export default function GetInvolved() {
           {/* Right Arrow */}
           <button
             onClick={scrollTabsRight}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/20 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-lg"
+            className="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 z-20 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white p-3 rounded-full transition-all duration-300 hover:scale-110 shadow-2xl"
           >
             <FaChevronRight className="w-4 h-4" />
           </button>
-
-          
         </div>
 
         {/* Content Area */}
         <div className="max-w-6xl mx-auto">
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl">
-            {/* Section Header - Uniform color like Donate button */}
-            <div className="bg-gradient-to-r from-red-500 to-purple-600 px-8 py-8">
-              <div className="flex items-center gap-4">
-                {(() => {
-                  const Icon = sections[activeTab].icon;
-                  return <Icon className="w-10 h-10 text-white" />;
-                })()}
-                <div>
-                  <h2 className="text-3xl font-bold text-white">
-                    {sections[activeTab].title}
-                  </h2>
-                  <p className="text-white/90 mt-1">
-                    {sections[activeTab].activities.length} {sections[activeTab].activities.length === 1 ? 'activity' : 'activities'} scheduled
-                  </p>
+            {/* Section Header */}
+            <div className="relative bg-gradient-to-r from-red-500 to-purple-600 px-8 py-10 overflow-hidden">
+              <div className="absolute inset-0 bg-black/10"></div>
+              <div className="relative z-10 flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  {(() => {
+                    const Icon = sections[activeTab].icon;
+                    return (
+                      <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center shadow-xl">
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+                    );
+                  })()}
+                  <div>
+                    <h2 className="text-3xl font-bold text-white mb-1">
+                      {sections[activeTab].title}
+                    </h2>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                      <p className="text-white/90 text-sm font-medium">
+                        {sections[activeTab].activities.length} {sections[activeTab].activities.length === 1 ? 'Activity' : 'Activities'} Available
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Activities Grid */}
             <div className="p-8">
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid md:grid-cols-2 gap-5">
                 {sections[activeTab].activities.map((item, i) => {
                   const hasTime = /\d{1,2}:\d{2}\s?(am|pm|AM|PM)/.test(item);
                   const parts = item.split(':');
@@ -184,13 +208,14 @@ export default function GetInvolved() {
                   return (
                     <div
                       key={i}
-                      className="group bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-6 hover:bg-white/20 hover:scale-105 transition-all duration-300 cursor-pointer"
+                      className="group relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl border border-white/20 p-6 hover:from-white/20 hover:to-white/10 hover:border-white/40 hover:scale-[1.02] hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden"
                       style={{
-                        animation: `fadeInUp 0.5s ease-out ${i * 0.1}s both`
+                        animation: `fadeInUp 0.5s ease-out ${i * 0.08}s both`
                       }}
                     >
-                      <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-red-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-red-500/10 to-purple-600/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+                      <div className="relative flex items-start gap-4">
+                        <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-r from-red-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                           {hasTime ? (
                             <FaClock className="w-6 h-6 text-white" />
                           ) : (
@@ -198,16 +223,16 @@ export default function GetInvolved() {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="text-white font-bold text-lg mb-1">
+                          <h3 className="text-white font-bold text-lg mb-2 group-hover:text-purple-200 transition-colors duration-300">
                             {title}
                           </h3>
                           {details && (
-                            <p className="text-white/70 text-sm leading-relaxed">
+                            <p className="text-white/80 text-sm leading-relaxed">
                               {details.trim()}
                             </p>
                           )}
                         </div>
-                        <FaChevronRight className="w-5 h-5 text-white/40 group-hover:text-white/80 group-hover:translate-x-1 transition-all duration-300 flex-shrink-0" />
+                        <FaChevronRight className="w-5 h-5 text-white/30 group-hover:text-white group-hover:translate-x-1 transition-all duration-300 flex-shrink-0 mt-1" />
                       </div>
                     </div>
                   );

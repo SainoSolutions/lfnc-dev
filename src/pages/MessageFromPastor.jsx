@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaQuoteLeft, FaHeart, FaCross, FaHandsHelping } from 'react-icons/fa';
 import { GiPrayer } from 'react-icons/gi';
 import psRoshan from '../assets/images/AboutUs/Pastors/Pastor.jpeg'
+import pastorsAmma from '../assets/images/Pastors/Pastor&Ama.jpg';
 
 
 const MessageFromPastor = () => {
@@ -73,9 +74,9 @@ const MessageFromPastor = () => {
           <div className="relative group">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-red-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
             <div className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-2xl">
-              <div className="aspect-square rounded-2xl mb-6 overflow-hidden shadow-inner">
+              <div className="aspect-[7/8] rounded-2xl mb-6 overflow-hidden shadow-inner">
                 <img 
-                  src={psRoshan} 
+                  src={pastorsAmma} 
                   alt="Pastor Roshan"
                   className="w-full h-full object-cover"
                 />

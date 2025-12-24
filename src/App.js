@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState, createContext, useContext } from "react";
+import { api } from "./api/apiClient";
 import Home from "./pages/Home/Home";
 import AboutUs from "./pages/About/AboutUs";
 import GetInvolved from "./pages/GetInvolved/GetInvolved";
@@ -14,6 +15,7 @@ import VolunteerService from "./pages/VolunteerService/VolunteerService";
 import Layout from "./components/Layout/Layout";
 import Events from "./pages/Events/Events";
 import Media from "./pages/Media/Media";
+import Sermons from "./pages/Sermons/Sermons";
 import LoadingSpinner from "./components/reuseable/LoadingSpinner";
 
 const LoadingContext = createContext();
@@ -41,6 +43,18 @@ function AppContent() {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const events = await api.get("/api/events");
+        console.log("Events:", events);
+      } catch (error) {
+        console.error("Failed to fetch events:", error);
+      }
+    };
+    fetchEvents();
+  }, []);
+
   return (
     <LoadingContext.Provider value={{ showLoading }}>
       {isLoading && <LoadingSpinner />}
@@ -59,6 +73,7 @@ function AppContent() {
           <Route path="/volunteer-service" element={<VolunteerService />} />
           <Route path="/events" element={<Events />} />
           <Route path="/media" element={<Media />} />
+          <Route path="/sermons" element={<Sermons />} />
         </Routes>
       </Layout>
     </LoadingContext.Provider>

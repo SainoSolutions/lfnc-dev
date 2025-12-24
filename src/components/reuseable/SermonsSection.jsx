@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PlayIcon = () => (
   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
@@ -20,38 +21,39 @@ const ClockIcon = () => (
 
 const SermonsSection = () => {
   const [playingVideo, setPlayingVideo] = useState(null);
+  const navigate = useNavigate();
   
   const sermons = [
     {
       id: 1,
-      title: "Walking in Faith",
-      speaker: "Pastor Roshan",
-      date: "Dec 15, 2024",
+      title: "We are seated with Christ in the heavenly places",
+      speaker: "Ps Roshan Rai",
+      date: "Jan 12, 2025",
       duration: "45 min",
-      description: "Discover how to strengthen your faith journey and trust in God's plan for your life.",
-      videoUrl: "https://www.youtube.com/embed/tyJBx0L0vTI?si=C_4VwGWlSB1bFclB",
-      thumbnail: "https://img.youtube.com/vi/tyJBx0L0vTI/hqdefault.jpg",
+      description: "Join us for a powerful time of worship, praise, and sermon in the Nepali language. Whether you are joining from Nepal or around the world, we are glad you are here to experience the presence of God with us",
+      videoUrl: "https://www.youtube.com/embed/q0BlX-BM_oI",
+      thumbnail: "https://img.youtube.com/vi/q0BlX-BM_oI/hqdefault.jpg",
       isNew: true
     },
     {
       id: 2,
-      title: "Love Without Limits",
-      speaker: "Pastor Roshan",
-      date: "Dec 8, 2024",
-      duration: "38 min",
-      description: "Understanding God's unconditional love and how to share it with others in our community.",
-      videoUrl: "https://www.youtube.com/embed/VId70DhFiNE?si=qheA8DefgiKSphxL",
-      thumbnail: "https://img.youtube.com/vi/VId70DhFiNE/maxresdefault.jpg"
+      title: "Worhsip Breaks Bondages",
+      speaker: "Ps Roshan Rai",
+      date: "Jan 5, 2025",
+      duration: "42 min",
+      description: "Join us for a powerful time of worship, praise, and sermon in the Nepali language. Whether you are joining from Nepal or around the world, we are glad you are here to experience the presence of God with us",
+      videoUrl: "https://www.youtube.com/embed/-gove3-uNRw",
+      thumbnail: "https://img.youtube.com/vi/-gove3-uNRw/hqdefault.jpg"
     },
     {
       id: 3,
-      title: "Hope in Difficult Times",
-      speaker: "Pastor Roshan",
-      date: "Dec 1, 2024",
-      duration: "42 min",
-      description: "Finding strength and hope through life's challenges with biblical wisdom and prayer.",
-      videoUrl: "https://www.youtube.com/embed/jiWnz2tz9e8?si=hNO-Ca1oVG0-k-9d",
-      thumbnail: "https://img.youtube.com/vi/jiWnz2tz9e8/hqdefault.jpg"
+      title: "The Lord should be the first place in our lives, not wealth.",
+      speaker: "Ps Roshan Rai",
+      date: "Dec 29, 2024",
+      duration: "38 min",
+      description: "Join us for a powerful time of worship, praise, and sermon in the Nepali language. Whether you are joining from Nepal or around the world, we are glad you are here to experience the presence of God with us",
+      videoUrl: "https://www.youtube.com/embed/sWxGqhckhIQ",
+      thumbnail: "https://img.youtube.com/vi/sWxGqhckhIQ/hqdefault.jpg"
     }
   ];
 
@@ -92,7 +94,7 @@ const SermonsSection = () => {
                 <div className="relative h-48 overflow-hidden">
                   {playingVideo === sermon.id ? (
                     <iframe
-                      src={sermon.videoUrl + '&autoplay=1'}
+                      src={sermon.videoUrl + '?autoplay=1'}
                       className="w-full h-full"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -104,6 +106,11 @@ const SermonsSection = () => {
                         src={sermon.thumbnail}
                         alt={sermon.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => {
+                          if (e.target.src.includes('maxresdefault')) {
+                            e.target.src = e.target.src.replace('hqdefault.jpg', 'hqdefault.jpg');
+                          }
+                        }}
                       />
                       
                       {/* Overlay */}
@@ -145,7 +152,7 @@ const SermonsSection = () => {
                   </div>
 
                   {/* Meta Info */}
-                  <div className="flex items-center justify-between text-gray-500 text-xs">
+                  {/* <div className="flex items-center justify-between text-gray-500 text-xs">
                     <div className="flex items-center gap-1">
                       <CalendarIcon />
                       <span>{sermon.date}</span>
@@ -154,7 +161,7 @@ const SermonsSection = () => {
                       <ClockIcon />
                       <span>{sermon.duration}</span>
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Action Button */}
                   <button 
@@ -172,7 +179,10 @@ const SermonsSection = () => {
 
         {/* View All Button */}
         <div className="text-center">
-          <button className="font-heading bg-white/10 backdrop-blur-lg border border-white/20 hover:bg-white/20 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 tracking-wide">
+          <button 
+            onClick={() => navigate('/sermons')}
+            className="font-heading bg-white/10 backdrop-blur-lg border border-white/20 hover:bg-white/20 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 tracking-wide"
+          >
             View All Sermons
           </button>
         </div>

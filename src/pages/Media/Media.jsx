@@ -1,40 +1,50 @@
 import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
-import { FaImages, FaVideo, FaPlay, FaExpand, FaTimes, FaSpinner } from 'react-icons/fa';
+import { FaImages, FaVideo, FaPlay, FaExpand, FaTimes, FaSpinner, FaFacebook } from 'react-icons/fa';
 
 import image1 from "../../assets/images/Media/1.jpg";
 import image2 from "../../assets/images/Media/2.jpg";
 import image3 from "../../assets/images/Media/3.jpg";
 import image4 from "../../assets/images/Media/4.jpg";
-import image5 from "../../assets/images/Media/6.jpg";
-import image6 from "../../assets/images/Media/8.jpg";
-import image7 from "../../assets/images/Media/9.jpg";
+import image5 from "../../assets/images/Media/10.JPG";
+import image6 from "../../assets/images/Media/11.JPG";
+import image7 from "../../assets/images/Media/12.JPG";
+import image8 from "../../assets/images/Media/13.JPG";
+import image9 from "../../assets/images/Media/14.JPG";
+import image10 from "../../assets/images/Media/15.JPG";
+import image11 from "../../assets/images/Media/16.JPG";
+import image12 from "../../assets/images/Media/17.JPG";
+import image13 from "../../assets/images/Media/18.JPG";
+import image14 from "../../assets/images/Media/19.JPG";
+import image15 from "../../assets/images/Media/20.JPG";
+import image16 from "../../assets/images/Media/21.JPG";
+import image17 from "../../assets/images/Media/22.JPG";
+import image18 from "../../assets/images/Media/23.JPG";
+import fbThumbnail from "../../assets/images/Media/FBthumbnails/11.png";
+import fbThumbnail2 from "../../assets/images/Media/FBthumbnails/12.png";
+import fbThumbnail3 from "../../assets/images/Media/FBthumbnails/carol1.png";
+import fbThumbnail4 from "../../assets/images/Media/FBthumbnails/13.png";
 
 export default function Media() {
-  // Base media data
-  const baseImages = [image1, image2, image3, image4, image5, image6, image7];
+  // Base media data - shuffle for random display
+  const baseImages = useMemo(() => {
+    const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18];
+    return images.sort(() => Math.random() - 0.5);
+  }, []);
   const baseVideos = [
-    { id: '-gove3-uNRw', title: 'Sunday Service Highlights', thumbnail: 'https://img.youtube.com/vi/-gove3-uNRw/maxresdefault.jpg' },
-    { id: 'diXb6nM6MKk', title: 'Youth Fellowship', thumbnail: 'https://img.youtube.com/vi/diXb6nM6MKk/maxresdefault.jpg' },
-    { id: 'oiDyYGbi4-4', title: 'Prayer Meeting', thumbnail: 'https://img.youtube.com/vi/oiDyYGbi4-4/maxresdefault.jpg' },
-    { id: 'vkQTE-djCF8', title: 'Bible Study Session', thumbnail: 'https://img.youtube.com/vi/vkQTE-djCF8/maxresdefault.jpg' },
-    { id: 'f4QtbRcbc8U', title: 'Community Outreach', thumbnail: 'https://img.youtube.com/vi/f4QtbRcbc8U/maxresdefault.jpg' },
-    { id: 'tyJBx0L0vTI', title: 'Worship Night', thumbnail: 'https://img.youtube.com/vi/tyJBx0L0vTI/maxresdefault.jpg' }
+    { id: 'pfbid0aHsHCwrGmKcicWZXUHL6PN4wMGzMzKpf7Sexhdn9cJveapG6PbLhBxcgSteVcdFZl', type: 'facebook', embedUrl: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Froshan.rai.522%2Fposts%2Fpfbid0aHsHCwrGmKcicWZXUHL6PN4wMGzMzKpf7Sexhdn9cJveapG6PbLhBxcgSteVcdFZl&show_text=false&width=500', title: 'Living Faith Nepali Church, Bangalore Kormangala, Church Service', date: '21 Dec, 2025', thumbnail: fbThumbnail },
+    { id: 'pfbid0cdp1rBPqkq8kNtuhiaJqntsDwS8cDvdzWFeBGSDTPyhGXNHTP2DH99hXHVvKQXql', type: 'facebook', embedUrl: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Froshan.rai.522%2Fposts%2Fpfbid0cdp1rBPqkq8kNtuhiaJqntsDwS8cDvdzWFeBGSDTPyhGXNHTP2DH99hXHVvKQXql&show_text=false&width=500', title: 'Living Faith Nepali Church, Bangalore Kormangala, Church Service', date: '14 Dec, 2025', thumbnail: fbThumbnail2 },
+    { id: 'pfbid02Z4mfXncpxowvvgY6VGSYRff2aiFfQKVpho7xz1zyJ1FQWQfmNNnoFzyUeqJw76zvl', type: 'facebook', embedUrl: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Froshan.rai.522%2Fposts%2Fpfbid02Z4mfXncpxowvvgY6VGSYRff2aiFfQKVpho7xz1zyJ1FQWQfmNNnoFzyUeqJw76zvl&show_text=false&width=500', title: 'LFNC, Carol (HSR)',date: '11 Dec, 2025', thumbnail: fbThumbnail3 },
+    { id: 'pfbid02cTtsVbv2g2Qmww2LGTqPf9wSPJ2kFfi9Qm1jh3rUZbnyKjKDq1vgX5eBZhGEyVW3l', type: 'facebook', embedUrl: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Froshan.rai.522%2Fposts%2Fpfbid02cTtsVbv2g2Qmww2LGTqPf9wSPJ2kFfi9Qm1jh3rUZbnyKjKDq1vgX5eBZhGEyVW3l&show_text=false&width=500', title: 'Living Faith Nepali Church, Bangalore Kormangala, Church Service', date: '07 Dec, 2025', thumbnail: fbThumbnail4 },
+    { id: '79MOWtcW7R8', type: 'youtube', title: 'Silver Jubilee Celebration, 25 years of ministry, रजत जयन्ती समारोह, 25 वर्षको सेवकाई ', thumbnail: 'https://img.youtube.com/vi/79MOWtcW7R8/hqdefault.jpg'},
+    { id: 'tqnLAaL-kWg', type: 'youtube', title: 'LFNC 16Th Anniversary', thumbnail: 'https://img.youtube.com/vi/tqnLAaL-kWg/hqdefault.jpg' },
+    { id: 'diXb6nM6MKk', type: 'youtube', title: 'Mother\'s Love', thumbnail: 'https://img.youtube.com/vi/diXb6nM6MKk/maxresdefault.jpg' },
+    
   ];
 
-  // All available media data (simulating larger dataset)
-  const allImages = [
-    ...baseImages,
-    ...Array(20).fill(null).map((_, i) => baseImages[i % baseImages.length])
-  ];
-  
-  const allVideos = [
-    ...baseVideos,
-    ...Array(15).fill(null).map((_, i) => ({
-      id: baseVideos[i % baseVideos.length].id,
-      title: `${baseVideos[i % baseVideos.length].title} ${Math.floor(i / baseVideos.length) + 2}`,
-      thumbnail: baseVideos[i % baseVideos.length].thumbnail
-    }))
-  ];
+
+  // All available media data
+  const allImages = baseImages;
+  const allVideos = baseVideos;
 
   const [activeTab, setActiveTab] = useState('images');
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -157,12 +167,12 @@ export default function Media() {
   const prevVideo = () => {
     const newIndex = (selectedVideoIndex - 1 + displayedVideos.length) % displayedVideos.length;
     setSelectedVideoIndex(newIndex);
-    setSelectedVideo(displayedVideos[newIndex].id);
+    setSelectedVideo(displayedVideos[newIndex]);
   };
   const nextVideo = () => {
     const newIndex = (selectedVideoIndex + 1) % displayedVideos.length;
     setSelectedVideoIndex(newIndex);
-    setSelectedVideo(displayedVideos[newIndex].id);
+    setSelectedVideo(displayedVideos[newIndex]);
   };
 
   return (
@@ -276,7 +286,7 @@ export default function Media() {
                     <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-300" />
                     <button
                       onClick={() => {
-                        setSelectedVideo(video.id);
+                        setSelectedVideo(video);
                         setSelectedVideoIndex(idx);
                       }}
                       className="absolute inset-0 flex items-center justify-center"
@@ -288,6 +298,7 @@ export default function Media() {
                   </div>
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
                     <h3 className="font-heading text-white font-semibold text-lg">{video.title}</h3>
+                    {video.date && <p className="font-body text-gray-300 text-sm mt-1">{video.date}</p>}
                   </div>
                 </div>
               ))}
@@ -361,13 +372,23 @@ export default function Media() {
               >
                 <FaTimes className="w-6 h-6" />
               </button>
-              <iframe
-                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
-                title="Video Player"
-                className="w-full h-full rounded-lg shadow-2xl"
-                allowFullScreen
-                allow="autoplay; encrypted-media"
-              />
+              {selectedVideo.type === 'youtube' ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${selectedVideo.id}?autoplay=1`}
+                  title="Video Player"
+                  className="w-full h-full rounded-lg shadow-2xl"
+                  allowFullScreen
+                  allow="autoplay; encrypted-media"
+                />
+              ) : (
+                <iframe
+                  src={selectedVideo.embedUrl}
+                  title="Video Player"
+                  className="w-full h-full rounded-lg shadow-2xl"
+                  allowFullScreen
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                />
+              )}
             </div>
             <button 
               onClick={prevVideo}

@@ -3,17 +3,30 @@ import { FaCrown, FaUsers, FaHandsHelping, FaMusic, FaMapMarkerAlt } from 'react
 import { GiPrayer } from 'react-icons/gi';
 import SeniorPastor from '../../assets/images/Hero/slide3.jpg';
 import AsstPastor from '../../assets/images/AboutUs/Pastors/AsstPastor.jpeg';
+import PalkoPariyar from '../../assets/images/WorshipLeaders/1.jpeg';
+import SilasDarnal from '../../assets/images/Decons/1.jpg';
+import SunitaDarnal from '../../assets/images/Decons/2.jpeg';
+import Joshen from '../../assets/images/Leaders/Joshen.png';
+import Ruthend from '../../assets/images/MediaTeam/Ruthend.png';
+import Santosh from '../../assets/images/MediaTeam/Santosh.png';
+import Pawan from '../../assets/images/MediaTeam/Pawan.png';
+import Andru from '../../assets/images/Volunteer/Andru.png';
+import GracyTamang from '../../assets/images/SundaySchool/GracyTamang.jpg';
+import Winnie from '../../assets/images/SundaySchool/wini.png';
+import user2 from '../../assets/images/user2.png';
 import CustomDropdown from './CustomDropdown';
 
 const LeadershipSection = () => {
   const [activeTab, setActiveTab] = useState('pastors');
-  const [selectedArea, setSelectedArea] = useState('koramangala');
+  const [selectedArea, setSelectedArea] = useState('ejipura');
 
   const handleAreaChange = useCallback((value) => {
     const areaMap = {
-      'Koramangala': 'koramangala',
-      'Electronic City': 'electronicCity',
-      'Nepal': 'nepal'
+      'Ejipura': 'ejipura',
+      'Madivala': 'madivala',
+      'Neelsandara': 'neelsandara',
+      'HSR Layout': 'hsrLayout',
+      'Indira Nagar': 'indiraNagar'
     };
     setSelectedArea(areaMap[value]);
   }, []);
@@ -44,19 +57,13 @@ const LeadershipSection = () => {
       icon: <FaUsers className="w-5 h-5" />,
       members: [
         {
-          name: 'Elder Joshen',
+          name: 'Elder Joshen Lepcha',
           position: 'Youth Leader',
           description: 'Passionate about empowering the next generation, Elder Joshen leads our youth ministry with energy and biblical wisdom.',
-          experience: '4+ Years Leadership',
-          specialization: 'Youth Ministry & Discipleship'
+          experience: '15+ Years Leadership',
+          specialization: 'Discipleship &  Music Ministry'
         },
-        {
-          name: 'Sister Priya Rai',
-          position: "Women's Ministry Leader",
-          description: "Dedicated to women's spiritual growth and empowerment, Sister Priya leads various programs focused on discipleship and community building.",
-          experience: '3+ Years Leadership',
-          specialization: "Women's Ministry & Mentorship"
-        }
+        
       ]
     },
     deacons: {
@@ -64,19 +71,20 @@ const LeadershipSection = () => {
       icon: <FaHandsHelping className="w-5 h-5" />,
       members: [
         {
-          name: 'Deacon Sunita Darnal',
-          position: 'Head Deacon',
-          description: 'Serving faithfully in church administration and community service, Deacon Rajesh ensures smooth operations and member care.',
-          experience: '6+ Years Service',
-          specialization: 'Administration & Member Care'
-        },
-        {
           name: 'Deacon Silas Darnal',
           position: 'Community Outreach Deacon',
           description: 'Leading our community service initiatives and charitable programs, Deacon Maya coordinates our outreach efforts with local communities.',
-          experience: '4+ Years Service',
+          experience: '10+ Years Service',
           specialization: 'Community Service & Outreach'
-        }
+        },
+        {
+          name: 'Deacon Sunita Darnal',
+          position: 'Head Deacon',
+          description: 'Serving faithfully in church administration and community service, Deacon Rajesh ensures smooth operations and member care.',
+          experience: '10+ Years Service',
+          specialization: 'Administration & Member Care'
+        },
+        
       ]
     },
     worship: {
@@ -85,17 +93,10 @@ const LeadershipSection = () => {
       members: [
         {
           name: 'Brother Palko Pariyar',
-          position: 'Lead Worship Pastor',
+          position: 'Lead Worship Team',
           description: "Gifted musician and worship leader who creates an atmosphere of praise and worship, leading our congregation into God's presence through music.",
-          experience: '5+ Years Ministry',
+          experience: '10+ Years Ministry',
           specialization: 'Worship Leading & Music Ministry'
-        },
-        {
-          name: 'Sister Anjali Tamang',
-          position: 'Worship Team Coordinator',
-          description: 'Coordinates our worship team and leads special music programs, bringing creativity and excellence to our worship services.',
-          experience: '3+ Years Ministry',
-          specialization: 'Team Coordination & Vocal Ministry'
         }
       ]
     },
@@ -104,18 +105,32 @@ const LeadershipSection = () => {
       icon: <FaMusic className="w-5 h-5" />,
       members: [
         {
-          name: 'Ruthen Santos',
+          name: 'Brother Ruthend Santos',
           position: 'Media Director',
           description: 'Leading our media ministry with technical expertise, ensuring quality audio-visual production for services and online streaming.',
           experience: '3+ Years Service',
           specialization: 'Video Production & Live Streaming'
         },
         {
-          name: 'Brother Dipesh Pradhan',
-          position: 'Social Media Coordinator',
-          description: 'Managing our digital presence and online engagement, creating content that reaches and inspires our community.',
+          name: 'Brother Santosh Sunar',
+          position: 'Media Team Member',
+          description: 'Supporting our media operations with dedication, helping to capture and share our church services and events.',
           experience: '2+ Years Service',
-          specialization: 'Social Media & Content Creation'
+          specialization: 'Audio-Visual Production'
+        },
+        {
+          name: 'Brother Pritam Chettry',
+          position: 'Media Team Member',
+          description: 'Contributing to our media ministry with technical skills, ensuring smooth production of church content.',
+          experience: '2+ Years Service',
+          specialization: 'Technical Support & Production'
+        },
+        {
+          name: 'Brother Pawan Mukhia',
+          position: 'Media Team Member',
+          description: 'Serving faithfully in our media team, helping to broadcast God\'s message through modern technology.',
+          experience: '2+ Years Service',
+          specialization: 'Media Production & Support'
         }
       ]
     },
@@ -124,19 +139,19 @@ const LeadershipSection = () => {
       icon: <FaHandsHelping className="w-5 h-5" />,
       members: [
         {
-          name: 'Brother Andrew Sherpa',
+          name: 'Brother Bhupen Tamang',
           position: 'Hospitality Volunteer',
           description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
           experience: '2+ Years Service',
           specialization: 'Guest Services & Hospitality'
         },
         {
-          name: 'Sister Srijana Rai',
-          position: 'Children Ministry Volunteer',
-          description: 'Dedicated to nurturing young hearts, creating engaging and safe environments for children to learn about God.',
-          experience: '3+ Years Service',
-          specialization: 'Children Ministry & Education'
-        }
+          name: 'Brother Andru Sherpa',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '2+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
       ]
     },
     sundaySchool: {
@@ -144,18 +159,18 @@ const LeadershipSection = () => {
       icon: <FaUsers className="w-5 h-5" />,
       members: [
         {
-          name: 'Teacher Sarah',
-          position: 'Lead Sunday School Teacher',
+          name: 'Sister Winnie Thapa',
+          position: 'Sunday School Teacher',
           description: 'Passionate about teaching children biblical truths through creative lessons and engaging activities.',
-          experience: '4+ Years Teaching',
+          experience: '3+ Years Teaching',
           specialization: 'Children Education & Bible Teaching'
         },
         {
-          name: 'Teacher David',
-          position: 'Sunday School Coordinator',
-          description: 'Organizing curriculum and coordinating teachers to provide quality biblical education for all age groups.',
-          experience: '3+ Years Teaching',
-          specialization: 'Curriculum Development & Coordination'
+          name: 'Sister Gracy Tamang',
+          position: 'Sunday School Teacher',
+          description: 'Dedicated to nurturing young hearts, creating engaging and safe environments for children to learn about God.',
+          experience: '2+ Years Teaching',
+          specialization: 'Children Ministry & Education'
         }
       ]
     },
@@ -163,39 +178,63 @@ const LeadershipSection = () => {
       title: 'Area Leaders',
       icon: <FaMapMarkerAlt className="w-5 h-5" />,
       areas: {
-        koramangala: {
-          name: 'Koramangala',
+        ejipura: {
+          name: 'Ejipura',
           members: [
             {
-              name: 'Pastor John Doe',
-              position: 'Koramangala Area Leader',
-              description: 'Overseeing our Koramangala branch, Pastor Binod ensures effective ministry and pastoral care for families in the area.',
-              experience: '4+ Years Leadership',
+              name: 'Area Leader',
+              position: 'Ejipura Area Leader',
+              description: 'Overseeing our Ejipura branch, ensuring effective ministry and pastoral care for families in the area.',
+              experience: '3+ Years Leadership',
               specialization: 'Local Church Leadership'
             }
           ]
         },
-        electronicCity: {
-          name: 'Electronic City',
+        madivala: {
+          name: 'Madivala',
           members: [
             {
-              name: 'Elder John Doe',
-              position: 'Electronic City Area Leader',
-              description: 'Leading our Electronic City congregation with dedication, Elder Ramesh focuses on community building and spiritual growth.',
+              name: 'Area Leader',
+              position: 'Madivala Area Leader',
+              description: 'Leading our Madivala congregation with dedication and spiritual guidance.',
               experience: '3+ Years Leadership',
               specialization: 'Community Building & Discipleship'
             }
           ]
         },
-        nepal: {
-          name: 'Nepal',
+        neelsandara: {
+          name: 'Neelsandara',
           members: [
             {
-              name: 'Pastor John Doe',
-              position: 'Nepal Branch Leader',
-              description: 'Overseeing our ministry in Nepal, Pastor Krishna leads evangelism efforts and church planting initiatives in the homeland.',
-              experience: '5+ Years Ministry',
-              specialization: 'Missions & Church Planting'
+              name: 'Area Leader',
+              position: 'Neelsandara Area Leader',
+              description: 'Serving our Neelsandara community with pastoral care and leadership.',
+              experience: '2+ Years Leadership',
+              specialization: 'Local Church Leadership'
+            }
+          ]
+        },
+        hsrLayout: {
+          name: 'HSR Layout',
+          members: [
+            {
+              name: 'Area Leader',
+              position: 'HSR Layout Area Leader',
+              description: 'Overseeing ministry activities in HSR Layout with commitment and care.',
+              experience: '3+ Years Leadership',
+              specialization: 'Community Outreach & Leadership'
+            }
+          ]
+        },
+        indiraNagar: {
+          name: 'Indira Nagar',
+          members: [
+            {
+              name: 'Area Leader',
+              position: 'Indira Nagar Area Leader',
+              description: 'Leading our Indira Nagar branch with vision and pastoral excellence.',
+              experience: '4+ Years Leadership',
+              specialization: 'Church Leadership & Growth'
             }
           ]
         }
@@ -273,8 +312,8 @@ const LeadershipSection = () => {
                 <div className="mb-6 flex justify-center">
                   <div className="w-64">
                     <CustomDropdown
-                      options={['Koramangala', 'Electronic City', 'Nepal']}
-                      value={selectedArea === 'koramangala' ? 'Koramangala' : selectedArea === 'electronicCity' ? 'Electronic City' : 'Nepal'}
+                      options={['Ejipura', 'Madivala', 'Neelsandara', 'HSR Layout', 'Indira Nagar', ]}
+                      value={selectedArea === 'ejipura' ? 'Ejipura' : selectedArea === 'madivala' ? 'Madivala' : selectedArea === 'neelsandara' ? 'Neelsandara' : selectedArea === 'hsrLayout' ? 'HSR Layout' : 'Indira Nagar'}
                       onChange={handleAreaChange}
                       placeholder="Select Area"
                       className="membership-dropdown"
@@ -297,7 +336,7 @@ const LeadershipSection = () => {
                     
                     <div className="relative z-10">
                     {/* Member Avatar */}
-                    <div className="w-32 h-32 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
+                    <div className="w-40 h-40 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
                       {member.name === 'Pastor Roshan Rai' ? (
                         <img 
                           src={SeniorPastor} 
@@ -310,10 +349,74 @@ const LeadershipSection = () => {
                           alt={member.name}
                           className="w-full h-full object-cover"
                         />
+                      ) : member.name === 'Brother Palko Pariyar' ? (
+                        <img 
+                          src={PalkoPariyar} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : member.name === 'Deacon Silas Darnal' ? (
+                        <img 
+                          src={SilasDarnal} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                          style={{ objectPosition: '40% 30%' }}
+                        />
+                      ) : member.name === 'Deacon Sunita Darnal' ? (
+                        <img 
+                          src={SunitaDarnal} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                          style={{ objectPosition: 'center 30%' }}
+                        />
+                      ) : member.name === 'Elder Joshen Lepcha' ? (
+                        <img 
+                          src={Joshen} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : member.name === 'Brother Ruthend Santos' ? (
+                        <img 
+                          src={Ruthend} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : member.name === 'Brother Santosh Sunar' ? (
+                        <img 
+                          src={Santosh} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : member.name === 'Brother Pawan Mukhia' ? (
+                        <img 
+                          src={Pawan} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : member.name === 'Brother Andru Sherpa' ? (
+                        <img 
+                          src={Andru} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : member.name === 'Sister Gracy Tamang' ? (
+                        <img 
+                          src={GracyTamang} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : member.name === 'Sister Winnie Thapa' ? (
+                        <img 
+                          src={Winnie} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-red-400 to-purple-600 flex items-center justify-center text-white text-lg font-bold">
-                          {member.name.split(' ').map(n => n[0]).join('')}
-                        </div>
+                        <img 
+                          src={user2} 
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
                       )}
                     </div>
 
@@ -335,12 +438,6 @@ const LeadershipSection = () => {
                         <span className="font-semibold text-red-400">{member.specialization}</span>
                       </div>
                     </div>
-
-                    {/* Prayer Button */}
-                    <button className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-gradient-to-r from-purple-500 to-red-500 text-white rounded-lg hover:from-purple-600 hover:to-red-600 transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-xl transform hover:scale-105">
-                      <GiPrayer className="w-4 h-4" />
-                      <span>Pray</span>
-                    </button>
                     </div>
                   </div>
                 ))}

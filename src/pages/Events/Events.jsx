@@ -1,5 +1,6 @@
 import { Calendar, Users, Heart } from 'lucide-react';
 import { eventsCache } from '../../services/eventsCache';
+import DetailsModal from '../../components/reuseable/DetailsModal';
 import slide3 from '../../assets/images/Hero/slide3.jpg';
 import { useEffect, useState } from 'react';
 
@@ -7,6 +8,8 @@ export default function ChurchEvents() {
   const [eventData, setEventData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(4);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
 
   useEffect(()=> {
     eventsCache.getEvents().then((data) => {
@@ -24,10 +27,43 @@ export default function ChurchEvents() {
     setVisibleCount(prev => prev + 4);
   };
 
+  const openEventModal = (index) => {
+    setCurrentEventIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const handleNext = () => {
+    setCurrentEventIndex((prev) => (prev + 1) % visibleEvents.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentEventIndex((prev) => (prev - 1 + visibleEvents.length) % visibleEvents.length);
+  };
+
   const visibleEvents = eventData?.events?.slice(0, visibleCount) || [];
   const hasMore = eventData?.events?.length > visibleCount;
+  const currentEvent = visibleEvents[currentEventIndex];
   return (
     <div className="min-h-screen bg-zinc-950">
+      {/* Event Details Modal */}
+      {currentEvent && (
+        <DetailsModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          data={{
+            title: currentEvent.title,
+            description: currentEvent.description,
+            date: currentEvent.date,
+            time: currentEvent.time || 'TBA',
+            location: currentEvent.location || 'LFNC Church',
+            image: currentEvent.image
+          }}
+          type="event"
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+          showNavigation={visibleEvents.length > 1}
+        />
+      )}
       {/* Hero Section */}
       <section className="relative min-h-[60vh] flex flex-col items-center justify-center overflow-hidden px-4 pt-20 pb-12">
         {/* Background Image */}
@@ -113,8 +149,8 @@ export default function ChurchEvents() {
               ))
             ) : (
               // Events Content
-              visibleEvents.map((event) => (
-                <button key={event.id} className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50">
+              visibleEvents.map((event, index) => (
+                <button key={event.id} onClick={() => openEventModal(index)} className="relative h-80 rounded-2xl overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50">
                   <img
                     src={event.image}
                     alt={event.title}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Ministries from '../Ministries/Ministries';
 import Services from '../Services/Services';
 import SermonsSection from '../../components/reuseable/SermonsSection';
@@ -10,6 +11,7 @@ import slide3 from '../../assets/images/Hero/slide3.jpg'
 import slide4 from '../../assets/images/Hero/slide4.jpg'
 
 const Home = () => {
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [activeCard, setActiveCard] = useState('sermon');
@@ -30,7 +32,7 @@ const Home = () => {
   const sermonData = {
     title: 'Sunday Message',
     description: 'Join Pastor Roshan Rai for an inspiring message that will uplift your spirit and strengthen your faith. This week\'s sermon focuses on God\'s love and grace in our daily lives.',
-    date: `Every Sunday - Next: ${getNextSunday()}`,
+    date: getNextSunday(),
     time: '07:30 AM - 09:00 AM',
     location: 'LFNC Koramangala',
     speaker: 'Pastor Roshan Rai',
@@ -176,13 +178,6 @@ const Home = () => {
                 </svg>
                 <span>07:30 AM - 09:00 AM</span>
               </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span>LFNC Koramangala</span>
-              </div>
             </div>
             <button onClick={() => openModal('sermon')} className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
               View Details
@@ -212,13 +207,6 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
                 <span>09:00 PM - 12:30 AM</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span>LFNC Koramangala</span>
               </div>
             </div>
             <button onClick={() => openModal('event')} className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
@@ -268,7 +256,7 @@ const Home = () => {
                   <button className="font-heading bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">
                     Join Us Today
                   </button>
-                  <button className="font-heading border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">
+                  <button onClick={() => navigate('/aboutus')} className="font-heading border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">
                     Learn More
                   </button>
                 </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Ministries from '../Ministries/Ministries';
 import Services from '../Services/Services';
 import SermonsSection from '../../components/reuseable/SermonsSection';
+import DetailsModal from '../../components/reuseable/DetailsModal';
 import { eventsCache } from '../../services/eventsCache';
 import slide1 from '../../assets/images/Hero/slide1.jpg'
 import slide2 from '../../assets/images/Hero/slide2.jpg'
@@ -12,6 +13,44 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [activeCard, setActiveCard] = useState('sermon');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
+  const [modalType, setModalType] = useState('sermon');
+
+  // Get next Sunday date
+  const getNextSunday = () => {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const daysUntilSunday = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
+    const nextSunday = new Date(today);
+    nextSunday.setDate(today.getDate() + daysUntilSunday);
+    return nextSunday.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  };
+
+  const sermonData = {
+    title: 'Sunday Message',
+    description: 'Join Pastor Roshan Rai for an inspiring message that will uplift your spirit and strengthen your faith. This week\'s sermon focuses on God\'s love and grace in our daily lives.',
+    date: `Every Sunday - Next: ${getNextSunday()}`,
+    time: '07:30 AM - 09:00 AM',
+    location: 'LFNC Koramangala',
+    speaker: 'Pastor Roshan Rai',
+    image: slide1
+  };
+
+  const eventData = {
+    title: 'New Year 2025 Celebration',
+    description: 'Join us for a special New Year celebration service as we welcome 2025 together in worship, prayer, and thanksgiving. Let\'s reflect on God\'s faithfulness and step into the new year with hope and renewed faith.',
+    date: 'Tuesday, December 31, 2024',
+    time: '09:00 PM - 12:30 AM',
+    location: 'LFNC Koramangala',
+    image: slide3
+  };
+
+  const openModal = (type) => {
+    setModalType(type);
+    setModalData(type === 'sermon' ? sermonData : eventData);
+    setIsModalOpen(true);
+  };
 
   // Prefetch events API on home page load
   useEffect(() => {
@@ -72,6 +111,14 @@ const Home = () => {
 
   return (
     <div>
+      {/* Details Modal */}
+      <DetailsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        data={modalData}
+        type={modalType}
+      />
+
       {/* Hero Section */}
       <div className="relative w-full h-screen overflow-hidden">
       {/* Upcoming Card Switcher */}
@@ -113,9 +160,15 @@ const Home = () => {
             <div className="space-y-2 text-xs text-gray-300">
               <div className="flex items-center gap-2">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
                 <span>Every Sunday</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <span>Next: <span className="text-purple-300 font-semibold">{getNextSunday()}</span></span>
               </div>
               <div className="flex items-center gap-2">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -131,7 +184,7 @@ const Home = () => {
                 <span>LFNC Koramangala</span>
               </div>
             </div>
-            <button className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
+            <button onClick={() => openModal('sermon')} className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
               View Details
             </button>
           </div>
@@ -144,32 +197,32 @@ const Home = () => {
               <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
               <span className="text-white text-xs font-bold uppercase tracking-wide">Upcoming Event</span>
             </div>
-            <img src={slide3} alt="Youth Fellowship" className="w-full h-32 object-cover rounded-xl mb-3" />
-            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">Youth Fellowship Night</h3>
-            <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Join us for worship, games, and fellowship</p>
+            <img src={slide3} alt="New Year 2025" className="w-full h-32 object-cover rounded-xl mb-3" />
+            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">New Year 2025 Celebration</h3>
+            <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Welcome 2025 with worship, prayer, and thanksgiving</p>
             <div className="space-y-2 text-xs text-gray-300">
               <div className="flex items-center gap-2">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                <span>Friday, Dec 20</span>
+                <span>Tuesday, December 31, 2024</span>
               </div>
               <div className="flex items-center gap-2">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                <span>06:00 PM - 09:00 PM</span>
+                <span>09:00 PM - 12:30 AM</span>
               </div>
               <div className="flex items-center gap-2">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
-                <span>LFNC Electronic City</span>
+                <span>LFNC Koramangala</span>
               </div>
             </div>
-            <button className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
-              Register Now
+            <button onClick={() => openModal('event')} className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">
+              View Details
             </button>
           </div>
         )}
@@ -211,7 +264,7 @@ const Home = () => {
                 <p className="font-body text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 mb-24 sm:mb-32 md:mb-40 lg:mb-8 opacity-95">
                   Transforming lives through faith, hope, and love
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <div className="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                   <button className="font-heading bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">
                     Join Us Today
                   </button>

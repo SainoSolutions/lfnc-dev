@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { GiWheat, GiPrayer } from 'react-icons/gi';
 // import logo from '../../assets/images/logo.jpg';
 import logo from '../../assets/images/logo.png';
+import cross from '../../assets/images/cross.png';
 import { useGlobalLoading } from '../../App';
 
 const Navbar = () => {
@@ -83,6 +84,7 @@ const Navbar = () => {
           <span className="font-bold text-lg text-gray-900 whitespace-nowrap">
             Living Faith Nepali Church
           </span>
+          <img src={cross} alt="Cross" className="h-5 w-5 object-contain ml-1" />
         </Link>
 
         {/* Desktop Navigation Links */}

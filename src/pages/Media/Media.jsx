@@ -57,6 +57,24 @@ import image034 from "../../assets/images/Media/034.png";
 import image035 from "../../assets/images/Media/035.png";
 import image036 from "../../assets/images/Media/036.png";
 import image037 from "../../assets/images/Media/037.png";
+import image038 from "../../assets/images/Media/038.png";
+import image039 from "../../assets/images/Media/039.png";
+import image040 from "../../assets/images/Media/040.png";
+import image041 from "../../assets/images/Media/041.png";
+import image042 from "../../assets/images/Media/042.png";
+import image043 from "../../assets/images/Media/043.png";
+import image044 from "../../assets/images/Media/044.png";
+import image045 from "../../assets/images/Media/045.png";
+import image046 from "../../assets/images/Media/046.png";
+import image047 from "../../assets/images/Media/047.png";
+import image048 from "../../assets/images/Media/048.png";
+import image049 from "../../assets/images/Media/049.png";
+import image050 from "../../assets/images/Media/050.png";
+import image051 from "../../assets/images/Media/051.png";
+import image052 from "../../assets/images/Media/052.png";
+import image053 from "../../assets/images/Media/053.png";
+import image054 from "../../assets/images/Media/054.png";
+import image055 from "../../assets/images/Media/055.png";
 import fbThumbnail from "../../assets/images/Media/FBthumbnails/11.png";
 import fbThumbnail2 from "../../assets/images/Media/FBthumbnails/12.png";
 import fbThumbnail3 from "../../assets/images/Media/FBthumbnails/carol1.png";
@@ -65,7 +83,7 @@ import fbThumbnail4 from "../../assets/images/Media/FBthumbnails/13.png";
 export default function Media() {
   // Base media data - shuffle for random display
   const baseImages = useMemo(() => {
-    const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18];
+    const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13, image14, image15, image16, image17, image18, image00, image01, image02, image03, image04, image05, image06, image07, image08, image09, image010, image011, image012, image013, image014, image015, image016, image017, image018, image019, image020, image021, image022, image023, image024, image025, image026, image027, image028, image029, image030, image031, image032, image033, image034, image035, image036, image037, image038, image039, image040, image041, image042, image043, image044, image045, image046, image047, image048, image049, image050, image051, image052, image053, image054, image055];
     return images.sort(() => Math.random() - 0.5);
   }, []);
   const baseVideos = [

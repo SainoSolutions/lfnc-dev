@@ -254,7 +254,7 @@ const Home = () => {
                   Transforming lives through faith, hope, and love
                 </p>
                 <div className="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                  <button className="font-heading bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">
+                  <button onClick={() => navigate('/contactus')} className="font-heading bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">
                     Join Us Today
                   </button>
                   <button onClick={() => navigate('/aboutus')} className="font-heading border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold py-3 px-6 sm:px-8 rounded-lg transition duration-300 transform hover:scale-105 text-sm sm:text-base tracking-wide">

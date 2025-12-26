@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AboutUs from '../About/AboutUs';
 import Ministries from '../Ministries/Ministries';
 import Services from '../Services/Services';
 import SermonsSection from '../../components/reuseable/SermonsSection';
@@ -266,7 +267,7 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Navigation Dots - Responsive */}
+      {/* Navigation Dots */}
       <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3">
         {slides.map((_, index) => (
           <button
@@ -281,7 +282,7 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Navigation Arrows - Hidden on mobile, show on tablet+ */}
+      {/* Navigation Arrows */}
       <button
         onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
         className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 sm:p-3 rounded-full transition duration-300"
@@ -299,7 +300,12 @@ const Home = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
-      </div>
+    </div>
+      
+      {/* About Us Section */}
+      <section id="aboutus">
+        <AboutUs />
+      </section>
       
       {/* Sermons Section */}
       <section id="sermons">

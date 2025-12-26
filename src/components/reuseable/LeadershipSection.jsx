@@ -11,12 +11,23 @@ import Ruthend from '../../assets/images/MediaTeam/Ruthend.png';
 import Santosh from '../../assets/images/MediaTeam/Santosh.png';
 import Pawan from '../../assets/images/MediaTeam/Pawan.png';
 import Andru from '../../assets/images/Volunteer/Andru.png';
+import SurenThapa from '../../assets/images/Volunteer/SurenThapa.png';
+import BhupenTamang from '../../assets/images/Volunteer/BhupenTamang.png';
+import SrijanaRai from '../../assets/images/Volunteer/SrijanaRai.jpg';
+import NehaRai from '../../assets/images/Volunteer/NehaRai.jpg';
+import AshaRai from '../../assets/images/Volunteer/AshaRai.jpg';
+import AjayRai from '../../assets/images/Volunteer/AjayRai.jpg';
+import DevKumarLohar from '../../assets/images/Volunteer/DevKumarLohar.jpg';
+import BijenLama from '../../assets/images/Volunteer/BijenLama.jpg';
+import Nipesh from '../../assets/images/Volunteer/Nipesh.jpg';
+import PrameshRai from '../../assets/images/Volunteer/PrameshRai.jpg';
 import GracyTamang from '../../assets/images/SundaySchool/GracyTamang.jpg';
 import Winnie from '../../assets/images/SundaySchool/wini.png';
 import user2 from '../../assets/images/user2.png';
 import CustomDropdown from './CustomDropdown';
 import Manzil from '../../assets/images/AreaLeaders/Manzil.png';
 import Erick from '../../assets/images/AreaLeaders/Erric.png';
+import Jasmine from '../../assets/images/AreaLeaders/Jasmine.png';
 
 const LeadershipSection = () => {
   const [activeTab, setActiveTab] = useState('pastors');
@@ -146,16 +157,73 @@ const LeadershipSection = () => {
           name: 'Brother Bhupen Tamang',
           position: 'Hospitality Volunteer',
           description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
-          experience: '2+ Years Service',
+          experience: '7+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
+         {
+          name: 'Sister Srijana Rai',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '7+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
+          {
+          name: 'Sister Neha Rai',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '7+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
+         {
+          name: 'Sister Asha Rai',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '7+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
+           {
+          name: 'Brother Ajay Rai',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '7+ Years Service',
           specialization: 'Guest Services & Hospitality'
         },
         {
           name: 'Brother Andru Sherpa',
           position: 'Hospitality Volunteer',
           description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
-          experience: '2+ Years Service',
+          experience: '4+ Years Service',
           specialization: 'Guest Services & Hospitality'
         },
+        {
+          name: 'Brother Suren Thapa',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '4+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
+         {
+          name: 'Brother Dev Kumar Lohar',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '4+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
+         {
+          name: 'Brother Bijen Lama',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '4+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        },
+         {
+          name: 'Brother Nipesh Thapa',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '4+ Years Service',
+          specialization: 'Guest Services & Hospitality'
+        }
+        
       ]
     },
     sundaySchool: {
@@ -223,7 +291,7 @@ const LeadershipSection = () => {
           name: 'Neelsandara',
           members: [
             {
-              name: 'Sunita Darnal',
+              name: 'Deacon Sunita Darnal',
               position: 'Neelsandara Area Leader',
               description: 'Serving our Neelsandara community with pastoral care and leadership.',
               experience: '2+ Years Leadership',
@@ -247,7 +315,7 @@ const LeadershipSection = () => {
           name: 'Indra Nagar',
           members: [
             {
-              name: 'Jasmine Thapa',
+              name: 'Sister Jasmine Thapa',
               position: 'Indra Nagar Area Leader',
               description: 'Leading our Indira Nagar branch with vision and pastoral excellence.',
               experience: '4+ Years Leadership',
@@ -420,13 +488,74 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
+                        ) : member.name === 'Brother Bhupen Tamang' || member.name === 'Bhupen Tamang' ? (
+                          <img
+                            src={BhupenTamang}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) :member.name === 'Sister Srijana Rai' ? (
+                          <img
+                            src={SrijanaRai}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) :member.name === 'Sister Neha Rai' ? (
+                          <img
+                            src={NehaRai}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ):member.name === 'Sister Asha Rai' ? (
+                          <img
+                            src={AshaRai}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ):member.name === 'Brother Ajay Rai' ? (
+                          <img
+                            src={AjayRai}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
                         ) : member.name === 'Brother Andru Sherpa' ? (
                           <img
                             src={Andru}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
-                        ) : member.name === 'Sister Gracy Tamang' ? (
+                        ) :member.name === 'Brother Suren Thapa' ? (
+                          <img
+                            src={SurenThapa}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) :member.name === 'Brother Dev Kumar Lohar' ? (
+                          <img
+                            src={DevKumarLohar}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) 
+                        :member.name === 'Brother Pramesh Rai' ? (
+                          <img
+                            src={PrameshRai}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) :member.name === 'Brother Bijen Lama' ? (
+                          <img
+                            src={BijenLama}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) :member.name === 'Brother Nipesh Thapa' ? (
+                          <img
+                            src={Nipesh}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        )  :member.name === 'Sister Gracy Tamang' ? (
                           <img
                             src={GracyTamang}
                             alt={member.name}
@@ -453,6 +582,12 @@ const LeadershipSection = () => {
                         ): member.name === 'Brother Pritam Chettry' ? (
                           <img
                             src={Pritam}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ): member.name === 'Sister Jasmine Thapa' ? (
+                          <img
+                            src={Jasmine}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />

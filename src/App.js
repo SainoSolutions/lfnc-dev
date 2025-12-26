@@ -16,6 +16,7 @@ import Layout from "./components/Layout/Layout";
 import Events from "./pages/Events/Events";
 import Media from "./pages/Media/Media";
 import Sermons from "./pages/Sermons/Sermons";
+import ContactUs from "./pages/ContactUs/ContactUs";
 import LoadingSpinner from "./components/reuseable/LoadingSpinner";
 
 const LoadingContext = createContext();
@@ -74,6 +75,7 @@ function AppContent() {
           <Route path="/events" element={<Events />} />
           <Route path="/media" element={<Media />} />
           <Route path="/sermons" element={<Sermons />} />
+          <Route path="/contactus" element={<ContactUs />} />
         </Routes>
       </Layout>
     </LoadingContext.Provider>

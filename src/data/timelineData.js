@@ -3,10 +3,163 @@ export const timelineEvents = [
     year: 2007,
     events: [
       {
-        title: "Foundation & Vision",
-        location: "Spiritual Foundation",
-        description: "Living Faith Nepali Church was founded with a vision to reach the Nepali-speaking community with the Gospel of Jesus Christ, emphasizing faith, hope, and love.",
-        icon: "🙏"
+        title: "Foundation of LFNC Koramangala",
+        location: "Bangalore (Koramangala)",
+        description: "Started our ministry journey in Koramangala, establishing a spiritual home for the Nepali community with powerful worship and teaching.",
+        icon: "🏠"
+      }
+    ]
+  },
+  {
+    year: 2008,
+    events: [
+      {
+        title: "LFNC 1st Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated our first year of ministry with thanksgiving and renewed commitment to serve the community.",
+        icon: "🎉"
+      },
+      {
+        title: "LFNC 1st Baptism - 6 Persons",
+        location: "Bangalore (Koramangala)",
+        description: "Witnessed the first baptism ceremony with 6 believers publicly declaring their faith in Christ.",
+        icon: "💧"
+      }
+    ]
+  },
+  {
+    year: 2009,
+    events: [
+      {
+        title: "LFNC 2nd Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated two years of faithful ministry and God's blessings upon our congregation.",
+        icon: "🎊"
+      },
+      {
+        title: "First Ministry Tour to Kolhapur Maharashtra",
+        location: "Kolhapur, Maharashtra",
+        description: "Conducted our first ministry tour reaching out to believers in Maharashtra with the Gospel message.",
+        icon: "✈️"
+      }
+    ]
+  },
+  {
+    year: 2010,
+    events: [
+      {
+        title: "LFNC 3rd Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated three years of ministry with thanksgiving and worship.",
+        icon: "🎉"
+      },
+      {
+        title: "First Branch Church in Sindhupalchowk Nepal",
+        location: "Sindhupalchowk, Nepal",
+        description: "Established our first branch church in Nepal, extending our ministry to our homeland.",
+        icon: "🕊️"
+      }
+    ]
+  },
+  {
+    year: 2011,
+    events: [
+      {
+        title: "LFNC 4th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated four years of faithful ministry and growth.",
+        icon: "🎊"
+      },
+      {
+        title: "Worship First Album - LFNC JEEVIT VISHWAS",
+        location: "Bangalore",
+        description: "Released our first worship album 'LFNC Jeevit Vishwas' featuring original Nepali Christian songs.",
+        icon: "🎵"
+      }
+    ]
+  },
+  {
+    year: 2012,
+    events: [
+      {
+        title: "LFNC 5th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated five years of ministry with special programs and worship.",
+        icon: "🎉"
+      },
+      {
+        title: "LFNC Ministry Tour West Bengal and Sikkim",
+        location: "West Bengal & Sikkim",
+        description: "Conducted ministry tours across West Bengal and Sikkim, spreading the Gospel and encouraging believers.",
+        icon: "🚌"
+      }
+    ]
+  },
+  {
+    year: 2013,
+    events: [
+      {
+        title: "LFNC 6th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated six years of God's faithfulness and ministry growth.",
+        icon: "🎊"
+      },
+      {
+        title: "Branch Opening at Sanga Chowk Nepal",
+        location: "Sanga Chowk, Nepal",
+        description: "Opened a new branch church in Sanga Chowk, expanding our reach in Nepal.",
+        icon: "🏛️"
+      }
+    ]
+  },
+  {
+    year: 2014,
+    events: [
+      {
+        title: "LFNC 7th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated seven years of ministry with thanksgiving and worship.",
+        icon: "🎉"
+      },
+      {
+        title: "Branch Church Opening at Kurseong Nepal",
+        location: "Kurseong, Nepal",
+        description: "Established a new branch church in Kurseong to serve the local community.",
+        icon: "⛪"
+      }
+    ]
+  },
+  {
+    year: 2015,
+    events: [
+      {
+        title: "LFNC 8th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated eight years of faithful ministry and community impact.",
+        icon: "🎊"
+      },
+      {
+        title: "Branch Church Opening at Jagarkot Nepal",
+        location: "Jagarkot, Nepal",
+        description: "Opened a new branch church in Jagarkot, extending our ministry reach.",
+        icon: "🏠"
+      }
+    ]
+  },
+  {
+    year: 2016,
+    events: [
+      {
+        title: "LFNC 9th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated nine years of ministry with special programs.",
+        icon: "🎉"
+      },
+      {
+        title: "Kathmandu Branch Church Opening",
+        location: "Kathmandu, Nepal",
+        description: "Established a major branch church in Kathmandu, Nepal's capital city.",
+        icon: "🌟"
       }
     ]
   },
@@ -14,22 +167,16 @@ export const timelineEvents = [
     year: 2017,
     events: [
       {
-        title: "LFNC Koramangala",
+        title: "LFNC 10th Anniversary",
         location: "Bangalore (Koramangala)",
-        description: "Started our ministry journey in Koramangala, establishing a spiritual home for the Nepali community with powerful worship and teaching. We began with a small group of believers with a vision to reach the Nepali-speaking community.",
-        icon: "🏠"
+        description: "Celebrated a decade of ministry with grand celebrations and thanksgiving.",
+        icon: "🎊"
       },
       {
-        title: "LFNC Electronic City",
+        title: "Branch Church Opening Electronic City",
         location: "Bangalore (Electronic City)",
-        description: "Expanded our reach to Electronic City, serving more families with vibrant programs and community fellowships. This branch became a beacon of hope for families in the tech corridor.",
-        icon: "🌟"
-      },
-      {
-        title: "LFNC Nepal",
-        location: "Nepal (Kathmandu)",
-        description: "Extended our ministry to Nepal, bringing the Gospel to our homeland and establishing strong roots in Kathmandu. This marked the beginning of our international impact.",
-        icon: "🕊️"
+        description: "Expanded our reach to Electronic City, serving more families with vibrant programs.",
+        icon: "🚀"
       }
     ]
   },
@@ -37,22 +184,22 @@ export const timelineEvents = [
     year: 2018,
     events: [
       {
-        title: "LFNC Koramangala Growth",
+        title: "LFNC 11th Anniversary",
         location: "Bangalore (Koramangala)",
-        description: "Continued growth and strengthening of our Koramangala congregation with transformative programs and community impact. We launched new youth and family ministries.",
-        icon: "📈"
+        description: "Celebrated eleven years of faithful ministry and growth.",
+        icon: "🎉"
       },
       {
-        title: "LFNC Electronic City Expansion",
-        location: "Bangalore (Electronic City)",
-        description: "Expanded ministries and launched innovative community outreach programs reaching more families in Electronic City. Our fellowship grew exponentially.",
-        icon: "🚀"
+        title: "Branch Church Opening Nepalgunj Nepal",
+        location: "Nepalgunj, Nepal",
+        description: "Opened a new branch church in Nepalgunj to serve the western region of Nepal.",
+        icon: "⛪"
       },
       {
-        title: "LFNC Nepal Development",
-        location: "Nepal (Kathmandu)",
-        description: "Strengthened our presence in Nepal with increased community engagement, discipleship, and missionary outreach initiatives across multiple regions.",
-        icon: "💪"
+        title: "Branch Church Opening Jorepati Nepal",
+        location: "Jorepati, Nepal",
+        description: "Established a branch church in Jorepati, expanding our ministry network.",
+        icon: "🏛️"
       }
     ]
   },
@@ -60,22 +207,16 @@ export const timelineEvents = [
     year: 2019,
     events: [
       {
-        title: "Digital Ministry Launch",
-        location: "Online Platform",
-        description: "Launched our first digital ministry platform to reach believers across the globe. This initiative allowed us to connect with the diaspora community and share God's Word beyond geographical boundaries.",
-        icon: "💻"
+        title: "LFNC 12th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated twelve years of ministry with worship and thanksgiving.",
+        icon: "🎊"
       },
       {
-        title: "Youth Leadership Program",
-        location: "All Branches",
-        description: "Established a comprehensive youth leadership development program to equip young believers for ministry. The program has transformed hundreds of lives through mentorship and training.",
-        icon: "👥"
-      },
-      {
-        title: "Community Outreach Initiative",
-        location: "Bangalore & Nepal",
-        description: "Started extensive community service programs including free medical camps, educational support for underprivileged children, and social welfare projects in local communities.",
-        icon: "❤️"
+        title: "Healing and Revival in Different Parts of Nepal",
+        location: "Various Locations, Nepal",
+        description: "Conducted healing and revival meetings across Nepal, witnessing miraculous transformations.",
+        icon: "🙏"
       }
     ]
   },
@@ -83,22 +224,28 @@ export const timelineEvents = [
     year: 2020,
     events: [
       {
-        title: "COVID-19 Response Ministry",
+        title: "LFNC 13th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated thirteen years of ministry during challenging times.",
+        icon: "🎉"
+      },
+      {
+        title: "Global Online Fellowship of LFNC",
+        location: "Online Platform",
+        description: "Launched global online fellowship connecting believers worldwide during the pandemic.",
+        icon: "💻"
+      },
+      {
+        title: "Pastor Prayer Tour Malaysia 2020",
+        location: "Malaysia",
+        description: "Pastor Roshan Rai conducted prayer tour in Malaysia ministering to the diaspora community.",
+        icon: "✈️"
+      },
+      {
+        title: "COVID Support for Believers and Non-Believers",
         location: "All Locations",
-        description: "Pivoted to online worship services and launched comprehensive community relief programs during the pandemic. We distributed essential supplies and provided financial assistance to affected families.",
-        icon: "🙏"
-      },
-      {
-        title: "Online Discipleship Groups",
-        location: "Global Reach",
-        description: "Established small group Bible studies and prayer meetings online, enabling deeper spiritual growth and fellowship among our scattered congregation members worldwide.",
-        icon: "📚"
-      },
-      {
-        title: "Humanitarian Aid Campaign",
-        location: "Nepal",
-        description: "Organized special fundraising and aid distribution campaigns to support communities in Nepal affected by economic challenges and natural disasters.",
-        icon: "🤝"
+        description: "Provided essential supplies and support to affected families during the COVID-19 pandemic.",
+        icon: "❤️"
       }
     ]
   },
@@ -106,22 +253,16 @@ export const timelineEvents = [
     year: 2021,
     events: [
       {
-        title: "Ministry Expansion",
-        location: "New Branches",
-        description: "Opened two new ministry centers in emerging Nepali communities. These centers became vibrant hubs for worship, teaching, and community fellowship.",
-        icon: "🌍"
+        title: "LFNC 14th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated fourteen years of faithful ministry and God's provision.",
+        icon: "🎊"
       },
       {
-        title: "Worship Music Production",
-        location: "Recording Studio",
-        description: "Launched our own worship music production team, creating contemporary Christian music in Nepali language to inspire and uplift worshippers globally.",
-        icon: "🎵"
-      },
-      {
-        title: "Missions & Outreach Expansion",
-        location: "Multiple Countries",
-        description: "Expanded our missionary outreach to neighboring countries, sending teams for evangelism, teaching, and community development projects in underserved regions.",
-        icon: "✈️"
+        title: "Grand Healing Crusade at Kathmandu Nepal",
+        location: "Kathmandu, Nepal",
+        description: "Organized a grand healing crusade in Kathmandu with thousands in attendance witnessing God's power.",
+        icon: "🔥"
       }
     ]
   },
@@ -129,22 +270,16 @@ export const timelineEvents = [
     year: 2022,
     events: [
       {
-        title: "Annual Leadership Conference",
-        location: "Bangalore",
-        description: "Organized our first annual church leadership conference bringing together leaders and pastors from all our branches to share vision, strategies, and spiritual insights.",
-        icon: "🎯"
+        title: "LFNC 15th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated fifteen years of ministry with special programs and worship.",
+        icon: "🎉"
       },
       {
-        title: "Children's Ministry Enhancement",
-        location: "All Centers",
-        description: "Developed comprehensive children's ministry programs with trained facilitators, creative teaching materials, and age-appropriate spiritual formation activities.",
-        icon: "👶"
-      },
-      {
-        title: "Building Fund Campaign",
-        location: "Various Locations",
-        description: "Launched a major fundraising campaign to construct permanent church facilities in Nepal and strengthen infrastructure in our Bangalore branches.",
-        icon: "🏗️"
+        title: "Branch Church Opening Banepa Nepal",
+        location: "Banepa, Nepal",
+        description: "Established a new branch church in Banepa, continuing our expansion in Nepal.",
+        icon: "⛪"
       }
     ]
   },
@@ -152,22 +287,10 @@ export const timelineEvents = [
     year: 2023,
     events: [
       {
-        title: "Women's Empowerment Program",
-        location: "All Branches",
-        description: "Established dedicated women's empowerment and discipleship programs focusing on spiritual growth, leadership development, and addressing community issues affecting women.",
-        icon: "👩‍💼"
-      },
-      {
-        title: "Young Professionals Ministry",
-        location: "Bangalore",
-        description: "Launched specialized ministry targeting young professionals in the tech industry, addressing workplace challenges from a Biblical perspective and building faith-based professional networks.",
-        icon: "💼"
-      },
-      {
-        title: "Mobile Clinic Initiative",
-        location: "Rural Nepal",
-        description: "Started mobile health clinics providing free medical checkups and basic healthcare to remote villages in Nepal, demonstrating Christ's love through practical service.",
-        icon: "🚑"
+        title: "Grand LFNC 16th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated sixteen years of ministry with grand celebrations and thanksgiving to God.",
+        icon: "🎊"
       }
     ]
   },
@@ -175,22 +298,45 @@ export const timelineEvents = [
     year: 2024,
     events: [
       {
-        title: "Global Network Building",
-        location: "International",
-        description: "Established partnerships with like-minded churches and ministries worldwide to strengthen our global network and increase collaborative Kingdom impact.",
-        icon: "🌐"
+        title: "LFNC 17th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrated seventeen years of faithful ministry and growth.",
+        icon: "🎉"
       },
       {
-        title: "Next Generation Initiative",
-        location: "All Centers",
-        description: "Launched mentorship programs connecting seasoned believers with younger generations to ensure spiritual legacy and continuity of our ministry vision.",
-        icon: "🔗"
+        title: "Pastor Roshan Rai 25th Silver Jubilee Ministry",
+        location: "Bangalore",
+        description: "Celebrated Pastor Roshan Rai's 25 years of dedicated ministry with special programs and testimonies.",
+        icon: "🏆"
       },
       {
-        title: "Vision 2025 Planning",
-        location: "Strategic Sessions",
-        description: "Completed comprehensive strategic planning sessions to define our vision for the next phase of ministry, focusing on deeper spiritual impact and wider community reach.",
-        icon: "🎪"
+        title: "Couple Seminar by Rev. Dr. Victor Moktan",
+        location: "Bangalore",
+        description: "Organized a transformative couple seminar led by Rev. Dr. Victor Moktan strengthening marriages.",
+        icon: "💑"
+      }
+    ]
+  },
+  {
+    year: 2025,
+    events: [
+      {
+        title: "LFNC 18th Anniversary",
+        location: "Bangalore (Koramangala)",
+        description: "Celebrating eighteen years of ministry with worship and thanksgiving.",
+        icon: "🎊"
+      },
+      {
+        title: "Worship Workshop with Samir Diyali and Santosh Baraily",
+        location: "Bangalore",
+        description: "Conducted worship workshop with renowned worship leaders Samir Diyali and Santosh Baraily.",
+        icon: "🎵"
+      },
+      {
+        title: "LFNC Church Shifting to Maharaj Singal Koramangala",
+        location: "Maharaj Singal, Koramangala",
+        description: "Relocated to a new facility in Maharaj Singal, Koramangala for expanded ministry opportunities.",
+        icon: "🏛️"
       }
     ]
   }

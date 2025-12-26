@@ -1,121 +1,65 @@
-import React from 'react';
-import { FaCross, FaHeart, FaHandsHelping, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import React, { useState, useEffect, useRef } from 'react';
+import { FaCross, FaHeart, FaHandsHelping } from 'react-icons/fa';
+import LeadershipSection from '../../components/reuseable/LeadershipSection';
+import { timelineEvents } from '../../data/timelineData';
+
 
 // Import images for mission and pastors
 import MissionImage from '../../assets/images/Hero/slide4.jpg'
 import SeniorPastor from '../../assets/images/Hero/slide3.jpg';
-import AssociatePastor from '../../assets/images/Hero/slide2.jpg';
+import AssociatePastor from '../..//assets/images/Hero/slide2.jpg';
 import YouthPastor from '../../assets/images/Hero/slide1.jpg';
-import LfncLogo from '../../assets/images/Hero/slide3.jpg'; // Update with your actual logo path
 
 const AboutUs = () => {
-  const timelineData2017 = [
-    {
-      id: 1,
-      title: "LFNC",
-      location: "Bangalore (Koramangala)",
-      period: "January 2017 - June 2017",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      position: "left"
-    },
-    {
-      id: 2,
-      title: "LFNC",
-      location: "Bangalore (Electronic City)",
-      period: "July 2017 - December 2017",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      position: "right"
-    },
-    {
-      id: 3,
-      title: "LFNC",
-      location: "Nepal (Kathmandu)",
-      period: "March 2017 - Ongoing",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      position: "left"
+  const [selectedEvent, setSelectedEvent] = useState({ year: 2007, index: 0 });
+  const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
+  const yearsRef = useRef(null);
+  const dropdownRef = useRef(null);
+
+  // Close dropdown on Escape or outside click
+  useEffect(() => {
+    function onKey(e) {
+      if (e.key === 'Escape') setYearDropdownOpen(false);
     }
-  ];
-
-  const timelineData2018 = [
-    {
-      id: 1,
-      title: "LFNC",
-      location: "Bangalore (Koramangala)",
-      period: "January 2018 - June 2018",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      position: "left"
-    },
-    {
-      id: 2,
-      title: "LFNC",
-      location: "Bangalore (Electronic City)",
-      period: "July 2018 - December 2018",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      position: "right"
-    },
-    {
-      id: 3,
-      title: "LFNC",
-      location: "Nepal (Kathmandu)",
-      period: "March 2018 - Ongoing",
-      description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-      position: "left"
+    function onClick(e) {
+      if (yearDropdownOpen && dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setYearDropdownOpen(false);
+      }
     }
-  ];
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onClick);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClick);
+    };
+  }, [yearDropdownOpen]);
 
-  const TimelineItem = ({ item, index }) => (
-    <div className={`flex mb-8 ${item.position === 'left' ? 'justify-start' : 'justify-end'}`}>
-      <div className={`w-5/12 ${item.position === 'left' ? 'text-right pr-8' : 'text-left pl-8'}`}>
-        <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-          <div className="flex items-center mb-4">
-            <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-              <img src={LfncLogo} alt="LFNC Logo" className="w-full h-full object-cover" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-blue-600">{item.title}</h3>
-              <h4 className="text-orange-500 font-medium">{item.location}</h4>
-              <h5 className="text-gray-500 text-sm">{item.period}</h5>
-            </div>
-          </div>
-          <p className="text-gray-600 text-sm leading-relaxed text-justify">
-            {item.description}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
 
-  const TimelineSection = ({ title, icon, data, sectionId }) => (
-    <section id={sectionId} className="py-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 flex items-center justify-center">
-            <span className="mr-4 text-red-600">
-              {icon}
-            </span>
-            <span className="text-red-600">{title}</span>
-          </h1>
-        </div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-blue-200 h-full"></div>
-          
-          {/* Timeline items */}
-          {data.map((item, index) => (
-            <div key={item.id} className="relative">
-              {/* Timeline dot */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-white z-10"></div>
-              <TimelineItem item={item} index={index} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  // Auto-scroll years column to the selected year
+  useEffect(() => {
+    const el = document.getElementById(`year-btn-${selectedEvent.year}`);
+    if (el && yearsRef.current) {
+      const container = yearsRef.current;
+      const top = el.offsetTop - container.offsetTop - 12;
+      container.scrollTo({ top, behavior: 'smooth' });
+    }
+  }, [selectedEvent]);
 
+  const currentYearData = timelineEvents.find(e => e.year === selectedEvent.year);
+  const currentEvent = currentYearData?.events[selectedEvent.index];
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-white via-purple-50/50 via-pink-50/40 via-red-50/35 via-orange-50/30 to-blue-50/25 relative overflow-hidden">
+      {/* Enhanced decorative gradients */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-gradient-to-br from-purple-400/30 via-pink-300/25 to-red-400/30 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" />
+        <div className="absolute top-60 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-red-400/30 via-orange-300/25 to-yellow-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000" />
+        <div className="absolute -bottom-40 right-1/3 w-[600px] h-[600px] bg-gradient-to-br from-blue-400/25 via-purple-300/30 to-pink-400/25 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-cyan-300/20 via-blue-300/25 to-purple-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-500" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-pink-300/20 via-red-300/25 to-orange-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1500" />
+        <div className="absolute top-10 left-1/2 w-[400px] h-[400px] bg-gradient-to-br from-emerald-300/15 via-teal-300/20 to-cyan-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-750" />
+        <div className="absolute bottom-10 left-1/5 w-[400px] h-[400px] bg-gradient-to-br from-violet-300/15 via-purple-300/20 to-fuchsia-300/15 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1250" />
+      </div>
       {/* Hero Section with Image Background */}
       <section className="relative h-96 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
@@ -131,7 +75,7 @@ const AboutUs = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 via-purple-600/20 to-blue-600/20"></div>
         </div>
         
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl">
+        <div className="relative z-20 text-center text-white px-4 max-w-4xl">
           <p className="text-sm uppercase tracking-widest text-red-400 mb-4">Living Faith Nepali Church</p>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Our Story</h1>
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-medium">
@@ -141,7 +85,7 @@ const AboutUs = () => {
       </section>
 
       {/* Story Section */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
+      <section className="relative z-10 py-16 px-4 max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Mission Image */}
           <div className="relative h-80 rounded-lg overflow-hidden shadow-lg">
@@ -168,7 +112,7 @@ const AboutUs = () => {
       </section>
 
       {/* Values Section */}
-      <section className="py-16 bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <section className="relative z-10 py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-sm uppercase tracking-widest text-red-600 mb-2">Our Foundation</p>
@@ -209,76 +153,148 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Timeline 2017 Section */}
-      <TimelineSection 
-        title="Ministry Timeline (2017)"
-        icon={<FaBriefcase className="w-8 h-8" />}
-        data={timelineData2017}
-        sectionId="experience"
-      />
+      {/* Ministry Timeline Section */}
+      <section className="relative z-10 py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-widest text-red-600 mb-2 font-semibold">Our Journey</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ministry Timeline</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">Click on any year to explore our ministry milestones</p>
+            <div className="mt-6 flex justify-center">
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded={yearDropdownOpen}
+                  onClick={() => setYearDropdownOpen((s) => !s)}
+                  className="inline-flex items-center gap-3 px-4 py-2 bg-white border border-gray-200 rounded-md shadow-sm text-sm font-medium text-gray-800 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-purple-300"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H3.5A1.5 1.5 0 002 5.5v10A1.5 1.5 0 003.5 17h13a1.5 1.5 0 001.5-1.5v-10A1.5 1.5 0 0016.5 4H15V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zM4 8a1 1 0 011-1h10a1 1 0 011 1v2H4V8z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-sm font-black">{selectedEvent.year}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className={`h-4 w-4 ml-1 text-gray-500 transform transition-transform ${yearDropdownOpen ? 'rotate-180' : ''}`} viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                  </svg>
+                </button>
 
-      {/* Timeline 2018 Section */}
-      <TimelineSection 
-        title="Ministry Timeline (2018)"
-        icon={<FaGraduationCap className="w-8 h-8" />}
-        data={timelineData2018}
-        sectionId="education"
-      />
-
-      {/* Leadership Section */}
-      <section className="py-16 px-4 max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-sm uppercase tracking-widest text-red-600 mb-2">Our Leadership</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Meet Our Pastors</h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Senior Pastor */}
-          <div className="text-center group">
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg mx-auto mb-4 group-hover:shadow-xl transition-shadow duration-300">
-              <img 
-                src={SeniorPastor}
-                alt="Senior Pastor"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+                {yearDropdownOpen && (
+                  <ul
+                    role="listbox"
+                    tabIndex={-1}
+                    className="absolute z-50 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg max-h-56 overflow-y-auto py-1"
+                    onMouseLeave={() => setYearDropdownOpen(false)}
+                  >
+                    {timelineEvents.map((item) => (
+                      <li key={item.year} role="option" aria-selected={selectedEvent.year === item.year}>
+                        <button
+                          className={`w-full text-left px-4 py-2 text-sm hover:bg-purple-50 ${selectedEvent.year === item.year ? 'bg-purple-100 font-bold' : ''}`}
+                          onClick={() => {
+                            setSelectedEvent({ year: item.year, index: 0 });
+                            setYearDropdownOpen(false);
+                          }}
+                        >
+                          {item.year}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
-            <h3 className="text-xl font-black text-gray-900">Pastor Roshan Rai</h3>
-            <p className="text-red-600">Senior Pastor</p>
           </div>
 
-          {/* Associate Pastor */}
-          <div className="text-center group">
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg mx-auto mb-4 group-hover:shadow-xl transition-shadow duration-300">
-              <img 
-                src={AssociatePastor}
-                alt="Associate Pastor"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+          <div className="flex flex-col lg:flex-row gap-8 lg:items-stretch">
+            {/* Vertical Timeline */}
+            <div ref={yearsRef} className="lg:w-64 flex lg:flex-col gap-4 lg:gap-6 lg:overflow-y-auto lg:max-h-[420px] overflow-x-hidden bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/10 relative">
+              <div className="hidden lg:block absolute -right-3 top-6 bottom-6 w-1 bg-gradient-to-b from-red-300 to-transparent rounded"></div>
+              {timelineEvents.map((item) => (
+                <div key={item.year} className="flex-shrink-0 flex justify-center">
+                  <button
+                    id={`year-btn-${item.year}`}
+                    onClick={() => setSelectedEvent({ year: item.year, index: 0 })}
+                    className={`w-40 py-3 px-4 rounded-2xl font-bold text-base transition-all duration-300 transform hover:scale-110 shadow-lg mx-auto border-2 ${
+                      selectedEvent.year === item.year
+                        ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-2xl border-red-400 ring-4 ring-red-200/50'
+                        : 'bg-white text-gray-900 border-gray-300 hover:border-purple-400 hover:bg-purple-50 hover:text-purple-700 shadow-md'
+                    }`}
+                  >
+                    {item.year}
+                  </button>
+                </div>
+              ))}
             </div>
-            <h3 className="text-xl font-black text-gray-900">Pastor Samuel Rai</h3>
-            <p className="text-red-600">Associate Pastor</p>
-          </div>
 
-          {/* Youth Pastor */}
-          <div className="text-center group">
-            <div className="relative h-64 rounded-lg overflow-hidden shadow-lg mx-auto mb-4 group-hover:shadow-xl transition-shadow duration-300">
-              <img 
-                src={YouthPastor}
-                alt="Youth Pastor"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+            {/* Events List & Detail Panel */}
+            <div className="lg:flex-1 lg:min-h-[420px]">
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Events Grid */}
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Year {selectedEvent.year}</h3>
+                  <div className="space-y-3">
+                    {currentYearData?.events.map((event, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setSelectedEvent({ year: selectedEvent.year, index: idx })}
+                        className={`w-full p-4 rounded-xl text-left transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-start gap-4 ${
+                          selectedEvent.index === idx
+                            ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white'
+                            : 'bg-white text-gray-900 border border-gray-200'
+                        }`}
+                      >
+                        <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-xl flex-shrink-0">
+                          {event.icon}
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-black text-sm mb-1">{event.title}</p>
+                          <p className="text-xs opacity-90 mb-2">{event.location}</p>
+                          <p className="text-xs text-gray-600 line-clamp-2">{event.description}</p>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Detail Panel */}
+                {currentEvent && (
+                  <div className="md:col-span-1">
+                    <div className="bg-white rounded-2xl shadow-xl p-6 border-l-4 border-transparent h-full transform transition-all duration-500 animate-in">
+                      <div className="bg-gradient-to-r from-red-500 to-purple-600 text-white p-4 rounded-xl mb-6 flex items-center gap-4">
+                        <span className="text-5xl">{currentEvent.icon}</span>
+                        <div>
+                          <h4 className="text-xl font-black">{currentEvent.title}</h4>
+                          <p className="text-white/90 font-medium text-sm">{currentEvent.location}</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="text-gray-700 leading-relaxed text-justify">{currentEvent.description}</p>
+                      </div>
+
+                      <div className="mt-6 flex gap-3">
+                        <div className="flex-1 bg-red-50 rounded-lg p-3 text-center">
+                          <p className="text-2xl font-black text-red-600">{selectedEvent.year}</p>
+                          <p className="text-xs text-red-600 font-semibold">Milestone</p>
+                        </div>
+                        <div className="flex-1 bg-purple-50 rounded-lg p-3 text-center">
+                          <p className="text-2xl font-black text-purple-600">{selectedEvent.index + 1}</p>
+                          <p className="text-xs text-purple-600 font-semibold">Event</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-            <h3 className="text-xl font-black text-gray-900">Elder Joshen</h3>
-            <p className="text-red-600">Youth Leader</p>
           </div>
         </div>
       </section>
 
+      {/* Leadership Section */}
+      <LeadershipSection />
+
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-br from-gray-900 to-black text-white">
+      <section className="relative z-10 py-16 bg-gradient-to-br from-gray-900 to-black text-white">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Join Us This Sunday</h2>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto font-medium">

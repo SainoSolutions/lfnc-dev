@@ -169,7 +169,8 @@ const Services = () => {
               <h3 className="text-2xl font-bold text-white mb-2">Need Immediate Assistance?</h3>
               <p className="text-gray-400">Our pastoral team is available 24/7 for urgent matters</p>
             </div>
-            <button className="bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap">
+            <button onClick={() => { navigate('/contactus');                     
+                    }}className="bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap">
               Contact Us Now
             </button>
           </div>

@@ -21,7 +21,7 @@ const LeadershipSection = () => {
   const [selectedArea, setSelectedArea] = useState('ejipura');
 
   const handleAreaChange = useCallback((value) => {
-    const areaMap = {      
+    const areaMap = {
       'Ejipura': 'ejipura',
       'Koramangala': 'koramangala',
       'Madiwala': 'madiwala',
@@ -65,7 +65,7 @@ const LeadershipSection = () => {
           experience: '15+ Years Leadership',
           specialization: 'Discipleship &  Music Ministry'
         },
-        
+
       ]
     },
     deacons: {
@@ -86,7 +86,7 @@ const LeadershipSection = () => {
           experience: '10+ Years Service',
           specialization: 'Administration & Member Care'
         },
-        
+
       ]
     },
     worship: {
@@ -193,18 +193,18 @@ const LeadershipSection = () => {
           ]
         },
         koramangala: {
-  name: 'Koramangala',
-  members: [
-    {
-      name: 'Manzil Thapa',
-      position: 'Koramangala Area Leader',
-      description: 'Serving our Koramangala community with pastoral care and leadership.',
-      experience: '2+ Years Leadership',
-      specialization: 'Local Church Leadership'
+          name: 'Koramangala',
+          members: [
+            {
+              name: 'Manzil Thapa',
+              position: 'Koramangala Area Leader',
+              description: 'Serving our Koramangala community with pastoral care and leadership.',
+              experience: '2+ Years Leadership',
+              specialization: 'Local Church Leadership'
+            }
+          ]
         }
-      ]
-    }
-    ,        
+        ,
         madiwala: {
           name: 'Madiwala',
           members: [
@@ -216,7 +216,7 @@ const LeadershipSection = () => {
               specialization: 'Community Building & Discipleship'
             }
           ]
-        },         
+        },
         neelsandara: {
           name: 'Neelsandara',
           members: [
@@ -253,7 +253,7 @@ const LeadershipSection = () => {
             }
           ]
         },
-         bannerghatta: {
+        bannerghatta: {
           name: 'Bannerghatta',
           members: [
             {
@@ -264,7 +264,7 @@ const LeadershipSection = () => {
               specialization: 'Church Leadership & Growth'
             }
           ]
-        }        
+        }
       }
     }
   };
@@ -280,7 +280,7 @@ const LeadershipSection = () => {
     { key: 'area', label: 'Area Leaders', icon: <FaMapMarkerAlt className="w-4 h-4" /> }
   ];
 
-  const currentData = activeTab === 'area' 
+  const currentData = activeTab === 'area'
     ? { ...leadershipData?.area, members: leadershipData?.area?.areas[selectedArea]?.members }
     : leadershipData[activeTab];
 
@@ -303,15 +303,13 @@ const LeadershipSection = () => {
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
-                className={`group relative px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-2 ${
-                  activeTab === tab.key
+                className={`group relative px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-2 ${activeTab === tab.key
                     ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-lg'
                     : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-purple-300 hover:text-purple-600 shadow-sm'
-                }`}
+                  }`}
               >
-                <div className={`transition-colors duration-300 ${
-                  activeTab === tab.key ? 'text-white' : 'text-gray-500 group-hover:text-purple-600'
-                }`}>
+                <div className={`transition-colors duration-300 ${activeTab === tab.key ? 'text-white' : 'text-gray-500 group-hover:text-purple-600'
+                  }`}>
                   {tab.icon}
                 </div>
                 <span>{tab.label}</span>
@@ -339,7 +337,7 @@ const LeadershipSection = () => {
                 <div className="mb-6 flex justify-center">
                   <div className="w-64">
                     <CustomDropdown
-                      options={['Ejipura', 'Koramangala', 'Madiwala', 'Neelsandara', 'HSR Layout', 'Indra Nagar', 'Bannerghatta' ]}
+                      options={['Ejipura', 'Koramangala', 'Madiwala', 'Neelsandara', 'HSR Layout', 'Indra Nagar', 'Bannerghatta']}
                       value={selectedArea === 'ejipura' ? 'Ejipura' : selectedArea === 'koramangala' ? 'Koramangala' : selectedArea === 'madiwala' ? 'Madiwala' : selectedArea === 'neelsandara' ? 'Neelsandara' : selectedArea === 'hsrLayout' ? 'HSR Layout' : 'Indra Nagar'}
                       onChange={handleAreaChange}
                       placeholder="Select Area"
@@ -360,111 +358,111 @@ const LeadershipSection = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-red-500/5 pointer-events-none"></div>
                     <div className="absolute -top-20 -right-20 w-40 h-40 bg-purple-600/20 rounded-full blur-3xl group-hover:bg-purple-600/30 transition-all duration-500"></div>
                     <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-red-600/20 rounded-full blur-3xl group-hover:bg-red-600/30 transition-all duration-500"></div>
-                    
+
                     <div className="relative z-10">
-                    {/* Member Avatar */}
-                    <div className="w-40 h-40 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
-                      {member.name === 'Pastor Roshan Rai' ? (
-                        <img 
-                          src={SeniorPastor} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Pastor Samuel Rai' ? (
-                        <img 
-                          src={AsstPastor} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Brother Palko Pariyar' ? (
-                        <img 
-                          src={PalkoPariyar} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Deacon Silas Darnal' ? (
-                        <img 
-                          src={SilasDarnal} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                          style={{ objectPosition: '40% 30%' }}
-                        />
-                      ) : member.name === 'Deacon Sunita Darnal' ? (
-                        <img 
-                          src={SunitaDarnal} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                          style={{ objectPosition: 'center 30%' }}
-                        />
-                      ) : member.name === 'Elder Joshen Lepcha' ? (
-                        <img 
-                          src={Joshen} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Brother Ruthend Santos' ? (
-                        <img 
-                          src={Ruthend} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Brother Santosh Sunar' ? (
-                        <img 
-                          src={Santosh} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Brother Pawan Mukhia' ? (
-                        <img 
-                          src={Pawan} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Brother Andru Sherpa' ? (
-                        <img 
-                          src={Andru} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Sister Gracy Tamang' ? (
-                        <img 
-                          src={GracyTamang} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : member.name === 'Sister Winnie Thapa' ? (
-                        <img 
-                          src={Winnie} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <img 
-                          src={user2} 
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      )}
-                    </div>
-
-                    {/* Member Info */}
-                    <div className="text-center mb-4">
-                      <h4 className="text-lg font-bold text-white mb-1">{member.name}</h4>
-                      <p className="text-red-400 font-semibold text-sm mb-2">{member.position}</p>
-                      <p className="text-gray-200 text-sm leading-relaxed mb-3">{member.description}</p>
-                    </div>
-
-                    {/* Member Details */}
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center justify-between text-xs bg-purple-500/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-500/20">
-                        <span className="text-gray-400">Experience:</span>
-                        <span className="font-semibold text-purple-400">{member.experience}</span>
+                      {/* Member Avatar */}
+                      <div className="w-40 h-40 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
+                        {member.name === 'Pastor Roshan Rai' ? (
+                          <img
+                            src={SeniorPastor}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Pastor Samuel Rai' ? (
+                          <img
+                            src={AsstPastor}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Brother Palko Pariyar' ? (
+                          <img
+                            src={PalkoPariyar}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Deacon Silas Darnal' ? (
+                          <img
+                            src={SilasDarnal}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                            style={{ objectPosition: '40% 30%' }}
+                          />
+                        ) : member.name === 'Deacon Sunita Darnal' ? (
+                          <img
+                            src={SunitaDarnal}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                            style={{ objectPosition: 'center 30%' }}
+                          />
+                        ) : member.name === 'Elder Joshen Lepcha' ? (
+                          <img
+                            src={Joshen}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Brother Ruthend Santos' ? (
+                          <img
+                            src={Ruthend}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Brother Santosh Sunar' ? (
+                          <img
+                            src={Santosh}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Brother Pawan Mukhia' ? (
+                          <img
+                            src={Pawan}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Brother Andru Sherpa' ? (
+                          <img
+                            src={Andru}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Sister Gracy Tamang' ? (
+                          <img
+                            src={GracyTamang}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Sister Winnie Thapa' ? (
+                          <img
+                            src={Winnie}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <img
+                            src={user2}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        )}
                       </div>
-                      <div className="flex flex-col text-xs bg-red-500/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-red-500/20">
-                        <span className="text-gray-400 mb-1">Focus:</span>
-                        <span className="font-semibold text-red-400">{member.specialization}</span>
+
+                      {/* Member Info */}
+                      <div className="text-center mb-4">
+                        <h4 className="text-lg font-bold text-white mb-1">{member.name}</h4>
+                        <p className="text-red-400 font-semibold text-sm mb-2">{member.position}</p>
+                        <p className="text-gray-200 text-sm leading-relaxed mb-3">{member.description}</p>
                       </div>
-                    </div>
+
+                      {/* Member Details */}
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center justify-between text-xs bg-purple-500/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-500/20">
+                          <span className="text-gray-400">Experience:</span>
+                          <span className="font-semibold text-purple-400">{member.experience}</span>
+                        </div>
+                        <div className="flex flex-col text-xs bg-red-500/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-red-500/20">
+                          <span className="text-gray-400 mb-1">Focus:</span>
+                          <span className="font-semibold text-red-400">{member.specialization}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -487,7 +485,7 @@ const LeadershipSection = () => {
           <div className="bg-gradient-to-r from-red-500 to-purple-600 rounded-3xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">Want to Serve?</h3>
             <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-              God has gifted each of us to serve His kingdom. If you feel called to leadership or ministry, 
+              God has gifted each of us to serve His kingdom. If you feel called to leadership or ministry,
               we would love to help you discover and develop your gifts.
             </p>
             <button className="bg-white text-purple-600 font-semibold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">

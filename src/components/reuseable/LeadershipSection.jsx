@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { FaCrown, FaUsers, FaHandsHelping, FaMusic, FaMapMarkerAlt } from 'react-icons/fa';
-import SeniorPastor from '../../assets/images/Hero/slide3.jpg';
+import Pritam from '../../assets/images/MediaTeam/Pritam.png';
 import PsRoshan from '../../assets/images/AreaLeaders/PsRoshan.png';
 import AsstPastor from '../../assets/images/AboutUs/Pastors/AsstPastor.jpeg';
 import PalkoPariyar from '../../assets/images/WorshipLeaders/1.jpeg';
@@ -447,6 +447,12 @@ const LeadershipSection = () => {
                         ) : member.name === 'Erick Subba' ? (
                           <img
                             src={Erick}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ): member.name === 'Brother Pritam Chettry' ? (
+                          <img
+                            src={Pritam}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />

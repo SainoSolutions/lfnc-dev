@@ -302,10 +302,6 @@ const Home = () => {
       </button>
     </div>
       
-      {/* About Us Section */}
-      <section id="aboutus">
-        <AboutUs />
-      </section>
       
       {/* Sermons Section */}
       <section id="sermons">

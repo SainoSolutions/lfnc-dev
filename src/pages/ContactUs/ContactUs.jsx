@@ -118,7 +118,7 @@ const ContactPage = () => {
             </h3>
             <p className="text-gray-300">
               Thank you for contacting us. <br />
-              We will get back to you soon.
+              We will get back to you soon...
             </p>
           </div>
         </div>

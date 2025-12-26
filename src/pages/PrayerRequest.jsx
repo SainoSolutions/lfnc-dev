@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 import CustomDropdown from '../components/reuseable/CustomDropdown';
 import { FaPhone, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
 
@@ -11,6 +12,9 @@ const PrayerRequest = () => {
     prayerRequest: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -18,9 +22,59 @@ const PrayerRequest = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Prayer request submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitMessage('');
+
+    try {
+      // Your NEW EmailJS IDs
+      const templateParams = {
+        to_email: 'prayer@lfnc.org',
+        from_name: formData.name,
+        phone: formData.phone,
+        location: formData.location,
+        membership_status: formData.membershipStatus,
+        prayer_request: formData.prayerRequest,
+        timestamp: new Date().toLocaleString(),
+        reply_to: 'prayer@lfnc.org'
+      };
+
+      // Send email using your NEW exact IDs
+      await emailjs.send(
+        'service_sd17lis',      // Your NEW Service ID
+        'template_8o97lah',     // Your NEW Template ID
+        templateParams,
+        'A4TKGje66VVg0M-2k'     // Your NEW User ID
+      );
+
+      // Success message
+      setSubmitMessage({
+        type: 'success',
+        text: '✅ Your prayer request has been sent successfully! Our prayer team will contact you soon.'
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        phone: '',
+        location: '',
+        membershipStatus: '',
+        prayerRequest: ''
+      });
+
+      console.log('Prayer request submitted and email sent:', formData);
+
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      
+      setSubmitMessage({
+        type: 'error',
+        text: '❌ Failed to send prayer request. Please try again or contact us directly.'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const PrayIcon = () => (
@@ -57,6 +111,17 @@ const PrayerRequest = () => {
 
         <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-xl">
           <h2 className="font-heading text-2xl font-semibold text-white mb-6 text-center">Share Your Prayer Request</h2>
+          
+          {/* Success/Error Message */}
+          {submitMessage && (
+            <div className={`mb-6 p-4 rounded-xl border ${
+              submitMessage.type === 'success' 
+                ? 'bg-green-500/20 border-green-500/30 text-green-200' 
+                : 'bg-red-500/20 border-red-500/30 text-red-200'
+            }`}>
+              <p className="font-body text-center">{submitMessage.text}</p>
+            </div>
+          )}
           
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -132,9 +197,14 @@ const PrayerRequest = () => {
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-purple-600 to-red-600 hover:from-purple-700 hover:to-red-700 text-white font-heading font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+              disabled={isSubmitting}
+              className={`w-full bg-gradient-to-r from-purple-600 to-red-600 text-white font-heading font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform shadow-lg ${
+                isSubmitting 
+                  ? 'opacity-70 cursor-not-allowed' 
+                  : 'hover:scale-105 hover:from-purple-700 hover:to-red-700'
+              }`}
             >
-              Submit Prayer Request
+              {isSubmitting ? 'Sending...' : 'Submit Prayer Request'}
             </button>
           </form>
         </div>

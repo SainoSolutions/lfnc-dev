@@ -21,12 +21,14 @@ const LeadershipSection = () => {
   const [selectedArea, setSelectedArea] = useState('ejipura');
 
   const handleAreaChange = useCallback((value) => {
-    const areaMap = {
+    const areaMap = {      
       'Ejipura': 'ejipura',
-      'Madivala': 'madivala',
+      'Koramangala': 'koramangala',
+      'Madiwala': 'madiwala',
       'Neelsandara': 'neelsandara',
       'HSR Layout': 'hsrLayout',
-      'Indira Nagar': 'indiraNagar'
+      'Indra Nagar': 'indraNagar',
+      'Bannerghatta': 'bannerghatta'
     };
     setSelectedArea(areaMap[value]);
   }, []);
@@ -182,7 +184,7 @@ const LeadershipSection = () => {
           name: 'Ejipura',
           members: [
             {
-              name: 'Area Leader',
+              name: 'Elder Joshen Lepcha ',
               position: 'Ejipura Area Leader',
               description: 'Overseeing our Ejipura branch, ensuring effective ministry and pastoral care for families in the area.',
               experience: '3+ Years Leadership',
@@ -190,23 +192,36 @@ const LeadershipSection = () => {
             }
           ]
         },
-        madivala: {
-          name: 'Madivala',
+        koramangala: {
+  name: 'Koramangala',
+  members: [
+    {
+      name: 'Manzil Thapa',
+      position: 'Koramangala Area Leader',
+      description: 'Serving our Koramangala community with pastoral care and leadership.',
+      experience: '2+ Years Leadership',
+      specialization: 'Local Church Leadership'
+        }
+      ]
+    }
+    ,        
+        madiwala: {
+          name: 'Madiwala',
           members: [
             {
-              name: 'Area Leader',
-              position: 'Madivala Area Leader',
-              description: 'Leading our Madivala congregation with dedication and spiritual guidance.',
+              name: 'Bhupen Tamang',
+              position: 'Madiwala Area Leader',
+              description: 'Leading our Madiwala congregation with dedication and spiritual guidance.',
               experience: '3+ Years Leadership',
               specialization: 'Community Building & Discipleship'
             }
           ]
-        },
+        },         
         neelsandara: {
           name: 'Neelsandara',
           members: [
             {
-              name: 'Area Leader',
+              name: 'Sunita Darnal',
               position: 'Neelsandara Area Leader',
               description: 'Serving our Neelsandara community with pastoral care and leadership.',
               experience: '2+ Years Leadership',
@@ -218,7 +233,7 @@ const LeadershipSection = () => {
           name: 'HSR Layout',
           members: [
             {
-              name: 'Area Leader',
+              name: 'Erick Subba',
               position: 'HSR Layout Area Leader',
               description: 'Overseeing ministry activities in HSR Layout with commitment and care.',
               experience: '3+ Years Leadership',
@@ -227,17 +242,29 @@ const LeadershipSection = () => {
           ]
         },
         indiraNagar: {
-          name: 'Indira Nagar',
+          name: 'Indra Nagar',
           members: [
             {
-              name: 'Area Leader',
-              position: 'Indira Nagar Area Leader',
+              name: 'Jasmine Thapa',
+              position: 'Indra Nagar Area Leader',
               description: 'Leading our Indira Nagar branch with vision and pastoral excellence.',
               experience: '4+ Years Leadership',
               specialization: 'Church Leadership & Growth'
             }
           ]
-        }
+        },
+         bannerghatta: {
+          name: 'Bannerghatta',
+          members: [
+            {
+              name: 'Ps. Roshan Rai',
+              position: 'Bannerghatta Area Leader',
+              description: 'Leading our Bannerghatta branch with vision and pastoral excellence.',
+              experience: '23+ Years Leadership',
+              specialization: 'Church Leadership & Growth'
+            }
+          ]
+        }        
       }
     }
   };
@@ -254,7 +281,7 @@ const LeadershipSection = () => {
   ];
 
   const currentData = activeTab === 'area' 
-    ? { ...leadershipData.area, members: leadershipData.area.areas[selectedArea].members }
+    ? { ...leadershipData?.area, members: leadershipData?.area?.areas[selectedArea]?.members }
     : leadershipData[activeTab];
 
   return (
@@ -312,8 +339,8 @@ const LeadershipSection = () => {
                 <div className="mb-6 flex justify-center">
                   <div className="w-64">
                     <CustomDropdown
-                      options={['Ejipura', 'Madivala', 'Neelsandara', 'HSR Layout', 'Indira Nagar', ]}
-                      value={selectedArea === 'ejipura' ? 'Ejipura' : selectedArea === 'madivala' ? 'Madivala' : selectedArea === 'neelsandara' ? 'Neelsandara' : selectedArea === 'hsrLayout' ? 'HSR Layout' : 'Indira Nagar'}
+                      options={['Ejipura', 'Koramangala', 'Madiwala', 'Neelsandara', 'HSR Layout', 'Indra Nagar', 'Bannerghatta' ]}
+                      value={selectedArea === 'ejipura' ? 'Ejipura' : selectedArea === 'koramangala' ? 'Koramangala' : selectedArea === 'madiwala' ? 'Madiwala' : selectedArea === 'neelsandara' ? 'Neelsandara' : selectedArea === 'hsrLayout' ? 'HSR Layout' : 'Indra Nagar'}
                       onChange={handleAreaChange}
                       placeholder="Select Area"
                       className="membership-dropdown"

@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { FaCrown, FaUsers, FaHandsHelping, FaMusic, FaMapMarkerAlt } from 'react-icons/fa';
 import SeniorPastor from '../../assets/images/Hero/slide3.jpg';
+import PsRoshan from '../../assets/images/AreaLeaders/PsRoshan.png';
 import AsstPastor from '../../assets/images/AboutUs/Pastors/AsstPastor.jpeg';
 import PalkoPariyar from '../../assets/images/WorshipLeaders/1.jpeg';
 import SilasDarnal from '../../assets/images/Decons/1.jpg';
@@ -15,6 +16,7 @@ import Winnie from '../../assets/images/SundaySchool/wini.png';
 import user2 from '../../assets/images/user2.png';
 import CustomDropdown from './CustomDropdown';
 import Manzil from '../../assets/images/AreaLeaders/Manzil.png';
+import Erick from '../../assets/images/AreaLeaders/Erric.png';
 
 const LeadershipSection = () => {
   const [activeTab, setActiveTab] = useState('pastors');
@@ -364,7 +366,7 @@ const LeadershipSection = () => {
                       <div className="w-40 h-40 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
                         {member.name === 'Pastor Roshan Rai' || member.name === 'Ps. Roshan Rai' ? (
                           <img
-                            src={SeniorPastor}
+                            src={PsRoshan}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
@@ -442,7 +444,13 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
-                        ) : (
+                        ) : member.name === 'Erick Subba' ? (
+                          <img
+                            src={Erick}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ):(
                           <img
                             src={user2}
                             alt={member.name}

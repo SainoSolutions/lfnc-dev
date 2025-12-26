@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { FaCrown, FaUsers, FaHandsHelping, FaMusic, FaMapMarkerAlt } from 'react-icons/fa';
-import { GiPrayer } from 'react-icons/gi';
 import SeniorPastor from '../../assets/images/Hero/slide3.jpg';
 import AsstPastor from '../../assets/images/AboutUs/Pastors/AsstPastor.jpeg';
 import PalkoPariyar from '../../assets/images/WorshipLeaders/1.jpeg';
@@ -15,6 +14,7 @@ import GracyTamang from '../../assets/images/SundaySchool/GracyTamang.jpg';
 import Winnie from '../../assets/images/SundaySchool/wini.png';
 import user2 from '../../assets/images/user2.png';
 import CustomDropdown from './CustomDropdown';
+import Manzil from '../../assets/images/AreaLeaders/Manzil.png';
 
 const LeadershipSection = () => {
   const [activeTab, setActiveTab] = useState('pastors');
@@ -184,7 +184,7 @@ const LeadershipSection = () => {
           name: 'Ejipura',
           members: [
             {
-              name: 'Elder Joshen Lepcha ',
+              name: 'Elder Joshen Lepcha',
               position: 'Ejipura Area Leader',
               description: 'Overseeing our Ejipura branch, ensuring effective ministry and pastoral care for families in the area.',
               experience: '3+ Years Leadership',
@@ -241,7 +241,7 @@ const LeadershipSection = () => {
             }
           ]
         },
-        indiraNagar: {
+        indraNagar: {
           name: 'Indra Nagar',
           members: [
             {
@@ -362,7 +362,7 @@ const LeadershipSection = () => {
                     <div className="relative z-10">
                       {/* Member Avatar */}
                       <div className="w-40 h-40 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
-                        {member.name === 'Pastor Roshan Rai' ? (
+                        {member.name === 'Pastor Roshan Rai' || member.name === 'Ps. Roshan Rai' ? (
                           <img
                             src={SeniorPastor}
                             alt={member.name}
@@ -387,7 +387,7 @@ const LeadershipSection = () => {
                             className="w-full h-full object-cover"
                             style={{ objectPosition: '40% 30%' }}
                           />
-                        ) : member.name === 'Deacon Sunita Darnal' ? (
+                        ) : member.name === 'Deacon Sunita Darnal' || member.name === 'Sunita Darnal'  ? (
                           <img
                             src={SunitaDarnal}
                             alt={member.name}
@@ -433,6 +433,12 @@ const LeadershipSection = () => {
                         ) : member.name === 'Sister Winnie Thapa' ? (
                           <img
                             src={Winnie}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Manzil Thapa' ? (
+                          <img
+                            src={Manzil}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />

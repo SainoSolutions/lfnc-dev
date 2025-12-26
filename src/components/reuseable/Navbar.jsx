@@ -138,7 +138,7 @@ const Navbar = () => {
                 }`}
               >
                 Events
-              </Link>
+              </button>
             </li>
             <li>
               <Link 

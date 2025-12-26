@@ -266,40 +266,46 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Navigation Dots - Responsive */}
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition duration-300 ${
-              index === currentSlide 
-                ? 'bg-white scale-125' 
-                : 'bg-white bg-opacity-50 hover:bg-opacity-75'
-            }`}
-          />
-        ))}
-      </div>
+          {/* Navigation Dots */}
+          <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition duration-300 ${
+                  index === currentSlide 
+                    ? 'bg-white scale-125' 
+                    : 'bg-white bg-opacity-50 hover:bg-opacity-75'
+                }`}
+              />
+            ))}
+          </div>
 
-      {/* Navigation Arrows - Hidden on mobile, show on tablet+ */}
-      <button
-        onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-        className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 sm:p-3 rounded-full transition duration-300"
-      >
-        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
+          {/* Navigation Arrows */}
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+            className="hidden sm:block absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 sm:p-3 rounded-full transition duration-300"
+          >
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+            className="hidden sm:block absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 sm:p-3 rounded-full transition duration-300"
+          >
+            <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </section>
       
-      <button
-        onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-        className="hidden sm:block absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 text-white p-2 sm:p-3 rounded-full transition duration-300"
-      >
-        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-      </div>
+      {/* About Us Section */}
+      <section id="aboutus">
+        <AboutUs />
+      </section>
       
       {/* Sermons Section */}
       <section id="sermons">

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 const CustomDropdown = React.memo(({ 
   options, 
@@ -11,17 +12,32 @@ const CustomDropdown = React.memo(({
   const isDarker = className.includes('membership-dropdown');
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const menuRef = useRef(null);
+  const [menuStyle, setMenuStyle] = useState(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      const target = event.target;
+      if (
+        dropdownRef.current && !dropdownRef.current.contains(target) &&
+        menuRef.current && !menuRef.current.contains(target)
+      ) {
         setIsOpen(false);
       }
     };
 
     if (isOpen) {
+      // position menu
+      const rect = dropdownRef.current.getBoundingClientRect();
+      setMenuStyle({ left: rect.left, top: rect.bottom + window.scrollY, width: rect.width });
       document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      window.addEventListener('resize', handleWindowChange);
+      window.addEventListener('scroll', handleWindowChange, true);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        window.removeEventListener('resize', handleWindowChange);
+        window.removeEventListener('scroll', handleWindowChange, true);
+      };
     }
   }, [isOpen]);
 
@@ -29,6 +45,13 @@ const CustomDropdown = React.memo(({
     onChange(option);
     setIsOpen(false);
   };
+
+  function handleWindowChange() {
+    if (dropdownRef.current && isOpen) {
+      const rect = dropdownRef.current.getBoundingClientRect();
+      setMenuStyle({ left: rect.left, top: rect.bottom + window.scrollY, width: rect.width });
+    }
+  }
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
@@ -52,23 +75,25 @@ const CustomDropdown = React.memo(({
         </svg>
       </button>
 
-      {isOpen && (
-        <div className={`absolute z-[9999] w-full mt-1 backdrop-blur-lg border border-white/20 rounded-xl shadow-xl max-h-60 overflow-y-auto ${
-          isDarker ? 'bg-black/70' : 'bg-black/30'
-        }`}>
-          {options.map((option, index) => (
-            <button
-              key={index}
-              type="button"
-              onClick={() => handleSelect(option)}
-              className={`w-full px-4 py-3 text-left transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl ${
-                isDarker ? 'text-white hover:bg-white/20' : 'text-white hover:bg-white/20'
-              }`}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
+      {isOpen && menuStyle && createPortal(
+        <div
+          ref={menuRef}
+          style={{ position: 'absolute', left: menuStyle.left, top: menuStyle.top, width: menuStyle.width, zIndex: 2147483647 }}
+        >
+          <div className={`backdrop-blur-lg border border-white/20 rounded-xl shadow-xl max-h-60 overflow-y-auto ${isDarker ? 'bg-black/90' : 'bg-black/70'}`}>
+            {options.map((option, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => handleSelect(option)}
+                className={`w-full px-4 py-3 text-left transition-colors duration-200 first:rounded-t-xl last:rounded-b-xl ${isDarker ? 'text-white hover:bg-white/20' : 'text-white hover:bg-white/20'}`}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </div>,
+        document.body
       )}
     </div>
   );

@@ -1,4 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import Barsa from '../../assets/images/MediaTeam/Barsa.png';
+import Dipesh from '../../assets/images/MediaTeam/Dipesh.png';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaCrown, FaUsers, FaHandsHelping, FaMusic, FaMapMarkerAlt } from 'react-icons/fa';
 import Pritam from '../../assets/images/MediaTeam/Pritam.png';
 import PsRoshan from '../../assets/images/AreaLeaders/PsRoshan.png';
@@ -21,17 +24,37 @@ import DevKumarLohar from '../../assets/images/Volunteer/DevKumarLohar.jpg';
 import BijenLama from '../../assets/images/Volunteer/BijenLama.jpg';
 import Nipesh from '../../assets/images/Volunteer/Nipesh.jpg';
 import PrameshRai from '../../assets/images/Volunteer/PrameshRai.jpg';
+import Devraj from '../../assets/images/Volunteer/Devraj.jpg';
 import GracyTamang from '../../assets/images/SundaySchool/GracyTamang.jpg';
 import Winnie from '../../assets/images/SundaySchool/wini.png';
 import user2 from '../../assets/images/user2.png';
 import CustomDropdown from './CustomDropdown';
+import LoadingSpinner from './LoadingSpinner';
 import Manzil from '../../assets/images/AreaLeaders/Manzil.png';
 import Erick from '../../assets/images/AreaLeaders/Erric.png';
 import Jasmine from '../../assets/images/AreaLeaders/Jasmine.png';
 
+
 const LeadershipSection = () => {
   const [activeTab, setActiveTab] = useState('pastors');
   const [selectedArea, setSelectedArea] = useState('ejipura');
+  const [loading, setLoading] = useState(false);
+  const startTimeRef = useRef(null);
+  const spinnerTimerRef = useRef(null);
+  const MIN_SPINNER_MS = 300;
+  const sectionRef = useRef(null);
+
+    const navigate = useNavigate();
+  // Preload all leadership images on mount to reduce latency when switching tabs
+  useEffect(() => {
+    const images = [
+      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, Devraj, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh
+    ];
+    images.forEach(src => {
+      const img = new window.Image();
+      img.src = src;
+    });
+  }, []);
 
   const handleAreaChange = useCallback((value) => {
     const areaMap = {
@@ -43,10 +66,13 @@ const LeadershipSection = () => {
       'Indra Nagar': 'indraNagar',
       'Bannerghatta': 'bannerghatta'
     };
+    startTimeRef.current = Date.now();
+    setLoading(true);
     setSelectedArea(areaMap[value]);
   }, []);
 
-  const leadershipData = {
+
+  const leadershipData = useMemo(() => ({
     pastors: {
       title: 'Pastors',
       icon: <FaCrown className="w-5 h-5" />,
@@ -146,6 +172,22 @@ const LeadershipSection = () => {
           description: 'Serving faithfully in our media team, helping to broadcast God\'s message through modern technology.',
           experience: '2+ Years Service',
           specialization: 'Media Production & Support'
+        },
+        {
+          name: 'Sister Barsa',
+          position: 'Media Team Member',
+          description: 'Handling camera shoots and events.',
+          experience: '1+ Years Service',
+          specialization: 'Camera Operations & Event Coverage',
+          image: Barsa
+        },
+        {
+          name: 'Brother Dipesh',
+          position: 'Media Team Member',
+          description: 'Handling camera shoots and events.',
+          experience: '1+ Years Service',
+          specialization: 'Camera Operations & Event Coverage',
+          image: Dipesh
         }
       ]
     },
@@ -222,8 +264,14 @@ const LeadershipSection = () => {
           description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
           experience: '4+ Years Service',
           specialization: 'Guest Services & Hospitality'
+        },
+         {
+          name: 'Brother Devraj Sarki',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '4+ Years Service',
+          specialization: 'Guest Services & Hospitality'
         }
-        
       ]
     },
     sundaySchool: {
@@ -337,7 +385,99 @@ const LeadershipSection = () => {
         }
       }
     }
-  };
+  }), []);
+
+  // Show spinner while images are loading on tab/area change
+  useEffect(() => {
+    if (!loading) return;
+    // Wait for all images in the current tab to load
+    const members = (activeTab === 'area'
+      ? leadershipData?.area?.areas[selectedArea]?.members
+      : leadershipData[activeTab]?.members) || [];
+    let loaded = 0;
+    if (members.length === 0) {
+      const elapsed = startTimeRef.current ? Date.now() - startTimeRef.current : 0;
+      if (elapsed >= MIN_SPINNER_MS) {
+        setLoading(false);
+      } else {
+        spinnerTimerRef.current = setTimeout(() => setLoading(false), MIN_SPINNER_MS - elapsed);
+      }
+      return;
+    }
+    members.forEach(member => {
+      let src = member.image ||
+        (member.name === 'Pastor Roshan Rai' || member.name === 'Ps. Roshan Rai' ? PsRoshan :
+        member.name === 'Pastor Samuel Rai' ? AsstPastor :
+        member.name === 'Brother Palko Pariyar' ? PalkoPariyar :
+        member.name === 'Deacon Silas Darnal' ? SilasDarnal :
+        member.name === 'Deacon Sunita Darnal' || member.name === 'Sunita Darnal' ? SunitaDarnal :
+        member.name === 'Elder Joshen Lepcha' ? Joshen :
+        member.name === 'Brother Ruthend Santos' ? Ruthend :
+        member.name === 'Brother Santosh Sunar' ? Santosh :
+        member.name === 'Brother Pawan Mukhia' ? Pawan :
+        member.name === 'Brother Bhupen Tamang' || member.name === 'Bhupen Tamang' ? BhupenTamang :
+        member.name === 'Sister Srijana Rai' ? SrijanaRai :
+        member.name === 'Sister Neha Rai' ? NehaRai :
+        member.name === 'Sister Asha Rai' ? AshaRai :
+        member.name === 'Brother Ajay Rai' ? AjayRai :
+        member.name === 'Brother Andru Sherpa' ? Andru :
+        member.name === 'Brother Suren Thapa' ? SurenThapa :
+        member.name === 'Brother Dev Kumar Lohar' ? DevKumarLohar :
+        member.name === 'Brother Pramesh Rai' ? PrameshRai :
+        member.name === 'Brother Bijen Lama' ? BijenLama :
+        member.name === 'Brother Nipesh Thapa' ? Nipesh :
+        member.name === 'Brother Devraj Sarki' ? Devraj :
+        member.name === 'Sister Gracy Tamang' ? GracyTamang :
+        member.name === 'Sister Winnie Thapa' ? Winnie :
+        member.name === 'Manzil Thapa' ? Manzil :
+        member.name === 'Erick Subba' ? Erick :
+        member.name === 'Brother Pritam Chettry' ? Pritam :
+        member.name === 'Sister Jasmine Thapa' ? Jasmine : user2);
+      const img = new window.Image();
+      img.onload = () => {
+        loaded++;
+        if (loaded === members.length) {
+          const elapsed = startTimeRef.current ? Date.now() - startTimeRef.current : 0;
+          if (elapsed >= MIN_SPINNER_MS) {
+            setLoading(false);
+          } else {
+            spinnerTimerRef.current = setTimeout(() => setLoading(false), MIN_SPINNER_MS - elapsed);
+          }
+        }
+      };
+      img.onerror = () => {
+        loaded++;
+        if (loaded === members.length) {
+          const elapsed = startTimeRef.current ? Date.now() - startTimeRef.current : 0;
+          if (elapsed >= MIN_SPINNER_MS) {
+            setLoading(false);
+          } else {
+            spinnerTimerRef.current = setTimeout(() => setLoading(false), MIN_SPINNER_MS - elapsed);
+          }
+        }
+      };
+      img.src = src;
+    });
+    return () => {
+      if (spinnerTimerRef.current) {
+        clearTimeout(spinnerTimerRef.current);
+        spinnerTimerRef.current = null;
+      }
+    };
+  }, [loading, activeTab, selectedArea, leadershipData]);
+
+  // Trigger loading spinner on tab change
+  useEffect(() => {
+    startTimeRef.current = Date.now();
+    setLoading(true);
+  }, [activeTab]);
+
+  // Ensure the Meet Our Team section scrolls to top when switching tabs/areas
+  useEffect(() => {
+    if (sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [activeTab, selectedArea]);
 
   const tabs = [
     { key: 'pastors', label: 'Pastors', icon: <FaCrown className="w-4 h-4" /> },
@@ -355,45 +495,46 @@ const LeadershipSection = () => {
     : leadershipData[activeTab];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <p className="text-sm uppercase tracking-widest text-red-400 mb-2 font-semibold">Our Leadership</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 animate-pulse">Team</span></h2>
-          <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed">
-            Dedicated servants of God leading our church with passion, wisdom, and love for the community.
-          </p>
-        </div>
-
-        {/* Interactive Tabs */}
-        <div className="mb-12">
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            {tabs.map((tab) => (
-              <button
-                key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                className={`group relative px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-2 ${activeTab === tab.key
-                    ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-purple-300 hover:text-purple-600 shadow-sm'
-                  }`}
-              >
-                <div className={`transition-colors duration-300 ${activeTab === tab.key ? 'text-white' : 'text-gray-500 group-hover:text-purple-600'
-                  }`}>
-                  {tab.icon}
-                </div>
-                <span>{tab.label}</span>
-                {activeTab === tab.key && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-full opacity-50"></div>
-                )}
-              </button>
-            ))}
+    <>
+      {loading && <LoadingSpinner />}
+      <section ref={sectionRef} className="py-20 px-4 bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <p className="text-sm uppercase tracking-widest text-red-400 mb-2 font-semibold">Our Leadership</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 animate-pulse">Team</span></h2>
+            <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed">
+              Dedicated servants of God leading our church with passion, wisdom, and love for the community.
+            </p>
           </div>
 
+          {/* Interactive Tabs */}
+          <div className="mb-12">
+            <div className="flex flex-wrap justify-center gap-2 mb-8">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.key}
+                  onClick={() => setActiveTab(tab.key)}
+                  className={`group relative px-6 py-3 rounded-full font-semibold text-sm transition-all duration-300 transform hover:scale-105 flex items-center gap-2 ${activeTab === tab.key
+                      ? 'bg-gradient-to-r from-red-500 to-purple-600 text-white shadow-lg'
+                      : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-purple-300 hover:text-purple-600 shadow-sm'
+                    }`}
+                >
+                  <div className={`transition-colors duration-300 ${activeTab === tab.key ? 'text-white' : 'text-gray-500 group-hover:text-purple-600'
+                    }`}>
+                    {tab.icon}
+                  </div>
+                  <span>{tab.label}</span>
+                  {activeTab === tab.key && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-full opacity-50"></div>
+                  )}
+                </button>
+              ))}
+          </div>
           {/* Tab Content */}
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-red-500/10 to-blue-500/10 rounded-3xl blur-xl"></div>
-            <div className="relative bg-white/5 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/10">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-900/60 via-slate-900/80 to-blue-900/60 rounded-3xl blur-xl"></div>
+            <div className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-2xl">
               {/* Tab Header */}
               <div className="flex items-center justify-center gap-3 mb-8">
                 <div className="p-3 bg-gradient-to-r from-red-500 to-purple-600 rounded-full text-white shadow-lg">
@@ -418,20 +559,20 @@ const LeadershipSection = () => {
               )}
 
               {/* Members Grid */}
-              <div className={`grid md:grid-cols-2 gap-8 ${activeTab === 'area' ? 'max-h-[500px] overflow-y-auto pr-2' : ''}`}>
+              <div className={`grid ${activeTab === 'area' ? 'grid-cols-1 justify-items-center max-h-[500px] overflow-y-auto pr-2' : 'md:grid-cols-2'} gap-8`}>
                 {currentData.members.map((member, index) => (
                   <div
                     key={index}
-                    className="group relative bg-gradient-to-br from-gray-900 to-black rounded-2xl p-6 shadow-2xl border border-gray-800 hover:border-purple-500/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
+                    className="group relative bg-white/20 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-white/30 ring-1 ring-white/40 hover:border-purple-500/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
                   >
-                    {/* Dark glossy overlay effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-red-500/5 pointer-events-none"></div>
+                    {/* Glossy overlay effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/30 via-white/10 to-white/5 pointer-events-none"></div>
                     <div className="absolute -top-20 -right-20 w-40 h-40 bg-purple-600/20 rounded-full blur-3xl group-hover:bg-purple-600/30 transition-all duration-500"></div>
                     <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-red-600/20 rounded-full blur-3xl group-hover:bg-red-600/30 transition-all duration-500"></div>
 
                     <div className="relative z-10">
                       {/* Member Avatar */}
-                      <div className="w-40 h-40 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
+                      <div className="w-56 h-56 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
                         {member.name === 'Pastor Roshan Rai' || member.name === 'Ps. Roshan Rai' ? (
                           <img
                             src={PsRoshan}
@@ -555,6 +696,12 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
+                        ) :member.name === 'Brother Devraj Sarki' ? (
+                          <img
+                            src={Devraj}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
                         )  :member.name === 'Sister Gracy Tamang' ? (
                           <img
                             src={GracyTamang}
@@ -585,6 +732,18 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
+                        ): member.name === 'Sister Barsa' ? (
+                          <img
+                            src={Barsa}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ): member.name === 'Brother Dipesh' ? (
+                          <img
+                            src={Dipesh}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
                         ): member.name === 'Sister Jasmine Thapa' ? (
                           <img
                             src={Jasmine}
@@ -602,20 +761,20 @@ const LeadershipSection = () => {
 
                       {/* Member Info */}
                       <div className="text-center mb-4">
-                        <h4 className="text-lg font-bold text-white mb-1">{member.name}</h4>
-                        <p className="text-red-400 font-semibold text-sm mb-2">{member.position}</p>
-                        <p className="text-gray-200 text-sm leading-relaxed mb-3">{member.description}</p>
+                        <h4 className="text-lg font-bold text-gray-900 drop-shadow mb-1">{member.name}</h4>
+                        <p className="text-purple-700 font-semibold text-sm mb-2">{member.position}</p>
+                        <p className="text-gray-800 text-sm leading-relaxed mb-3">{member.description}</p>
                       </div>
 
                       {/* Member Details */}
                       <div className="space-y-2 mb-4">
-                        <div className="flex items-center justify-between text-xs bg-purple-500/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-500/20">
-                          <span className="text-gray-400">Experience:</span>
-                          <span className="font-semibold text-purple-400">{member.experience}</span>
+                        <div className="flex items-center justify-between text-xs bg-purple-200/40 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-300/40">
+                          <span className="text-gray-700">Experience:</span>
+                          <span className="font-semibold text-purple-700">{member.experience}</span>
                         </div>
-                        <div className="flex flex-col text-xs bg-red-500/10 backdrop-blur-sm rounded-lg px-3 py-2 border border-red-500/20">
-                          <span className="text-gray-400 mb-1">Focus:</span>
-                          <span className="font-semibold text-red-400">{member.specialization}</span>
+                        <div className="flex flex-col text-xs bg-red-200/40 backdrop-blur-sm rounded-lg px-3 py-2 border border-red-300/40">
+                          <span className="text-gray-700 mb-1">Focus:</span>
+                          <span className="font-semibold text-red-700">{member.specialization}</span>
                         </div>
                       </div>
                     </div>
@@ -643,13 +802,14 @@ const LeadershipSection = () => {
               God has gifted each of us to serve His kingdom. If you feel called to leadership or ministry,
               we would love to help you discover and develop your gifts.
             </p>
-            <button className="bg-white text-purple-600 font-semibold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">
+            <button onClick={()=> navigate('/contactus')} className="bg-white text-purple-600 font-semibold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">
               Contact Leadership
             </button>
           </div>
         </div>
       </div>
     </section>
+    </>
   );
 };
 

@@ -104,6 +104,7 @@ const SowASeed = () => {
                 value={''}
                 onChange={() => {}}
                 placeholder="Select purpose"
+                className="membership-dropdown z-50"
               />
             </div>
           </div>
@@ -209,7 +210,7 @@ const SowASeed = () => {
         </div>
 
         {/* Impact Section */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 text-center relative z-0">
           <h2 className="font-heading text-3xl font-semibold text-gray-900 mb-8">Your Impact</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white/60 backdrop-blur-lg border border-amber-200/50 rounded-2xl p-6">

@@ -1,6 +1,7 @@
 import Barsa from '../../assets/images/MediaTeam/Barsa.png';
 import Dipesh from '../../assets/images/MediaTeam/Dipesh.png';
 import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaCrown, FaUsers, FaHandsHelping, FaMusic, FaMapMarkerAlt } from 'react-icons/fa';
 import Pritam from '../../assets/images/MediaTeam/Pritam.png';
 import PsRoshan from '../../assets/images/AreaLeaders/PsRoshan.png';
@@ -23,6 +24,7 @@ import DevKumarLohar from '../../assets/images/Volunteer/DevKumarLohar.jpg';
 import BijenLama from '../../assets/images/Volunteer/BijenLama.jpg';
 import Nipesh from '../../assets/images/Volunteer/Nipesh.jpg';
 import PrameshRai from '../../assets/images/Volunteer/PrameshRai.jpg';
+import Devraj from '../../assets/images/Volunteer/Devraj.jpg';
 import GracyTamang from '../../assets/images/SundaySchool/GracyTamang.jpg';
 import Winnie from '../../assets/images/SundaySchool/wini.png';
 import user2 from '../../assets/images/user2.png';
@@ -42,10 +44,11 @@ const LeadershipSection = () => {
   const MIN_SPINNER_MS = 300;
   const sectionRef = useRef(null);
 
+    const navigate = useNavigate();
   // Preload all leadership images on mount to reduce latency when switching tabs
   useEffect(() => {
     const images = [
-      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh
+      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, Devraj, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh
     ];
     images.forEach(src => {
       const img = new window.Image();
@@ -261,8 +264,14 @@ const LeadershipSection = () => {
           description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
           experience: '4+ Years Service',
           specialization: 'Guest Services & Hospitality'
+        },
+         {
+          name: 'Brother Devraj Sarki',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '4+ Years Service',
+          specialization: 'Guest Services & Hospitality'
         }
-        
       ]
     },
     sundaySchool: {
@@ -417,6 +426,7 @@ const LeadershipSection = () => {
         member.name === 'Brother Pramesh Rai' ? PrameshRai :
         member.name === 'Brother Bijen Lama' ? BijenLama :
         member.name === 'Brother Nipesh Thapa' ? Nipesh :
+        member.name === 'Brother Devraj Sarki' ? Devraj :
         member.name === 'Sister Gracy Tamang' ? GracyTamang :
         member.name === 'Sister Winnie Thapa' ? Winnie :
         member.name === 'Manzil Thapa' ? Manzil :
@@ -686,6 +696,12 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
+                        ) :member.name === 'Brother Devraj Sarki' ? (
+                          <img
+                            src={Devraj}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
                         )  :member.name === 'Sister Gracy Tamang' ? (
                           <img
                             src={GracyTamang}
@@ -786,7 +802,7 @@ const LeadershipSection = () => {
               God has gifted each of us to serve His kingdom. If you feel called to leadership or ministry,
               we would love to help you discover and develop your gifts.
             </p>
-            <button className="bg-white text-purple-600 font-semibold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">
+            <button onClick={()=> navigate('/contactus')} className="bg-white text-purple-600 font-semibold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors duration-300 transform hover:scale-105">
               Contact Leadership
             </button>
           </div>

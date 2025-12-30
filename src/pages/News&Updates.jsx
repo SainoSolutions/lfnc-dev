@@ -445,7 +445,7 @@ const NewsAndUpdates = () => {
           </div>
         </div>
 
-        {/* Community Help Line */}
+        {/* Community Help Line section */}
         <div className="mt-16 mb-12">
           <div className="bg-gradient-to-br from-purple-900/50 to-red-900/50 backdrop-blur-lg border border-white/20 rounded-3xl p-8 lg:p-12">
             <div className="max-w-3xl mx-auto text-center">

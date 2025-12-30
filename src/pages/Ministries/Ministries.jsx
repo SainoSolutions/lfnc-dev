@@ -5,7 +5,7 @@ export default function Ministries() {
   const navigate = useNavigate();
   const ministries = [
     {
-      title: "Youth Fellowship",
+      title: "LFNC Youth Fellowship",
       shortTitle: "Youth",
       description: "Empowering the next generation through dynamic teaching, mentorship, and community.",
       imageUrl: "https://images.unsplash.com/photo-1551847633-314d50cd36e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJchaHwxfHx5b3V0aCUyMGdyb3VwJTIwY29tbXVuaXR5fGVufDF8fHx8MTc2MjAxOTQzOHww&ixlib=rb-4.1.0&q=80&w=1080",
@@ -15,7 +15,7 @@ export default function Ministries() {
       age: "13-18 Years"
     },
     {
-      title: "Kids Fellowship",
+      title: "LFNC Kids Fellowship",
       shortTitle: "Kids",
       description: "Nurturing young hearts with age-appropriate teaching and fun activities.",
       imageUrl: "https://images.unsplash.com/photo-1644822861244-1257985cbf0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMHByYXlpbmclMjB0b2dldGhlcnxlbnwxfHx8fDE3NjIwMTk0Mzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -35,10 +35,20 @@ export default function Ministries() {
       age: "All Ages"
     },
     {
-      title: "Men's Fellowship",
+      title: "LFNC Men's Fellowship",
       shortTitle: "Men",
       description: "Building strong men of faith through fellowship, study, and accountability.",
       imageUrl: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      icon: "🤝",
+      day: "Saturday",
+      time: "8:00 AM",
+      age: "18+ Years"
+    },
+    {
+      title: "LFNC Women's Fellowship",
+      shortTitle: "Women",
+      description: "Building strong women of faith through fellowship, study, and accountability.",
+      imageUrl: "https://plus.unsplash.com/premium_photo-1715588659565-3b6e1b31b4ac?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       icon: "🤝",
       day: "Saturday",
       time: "8:00 AM",

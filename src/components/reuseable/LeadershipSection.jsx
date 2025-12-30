@@ -25,6 +25,7 @@ import BijenLama from '../../assets/images/Volunteer/BijenLama.jpg';
 import Nipesh from '../../assets/images/Volunteer/Nipesh.jpg';
 import PrameshRai from '../../assets/images/Volunteer/PrameshRai.jpg';
 import Devraj from '../../assets/images/Volunteer/Devraj.jpg';
+import Kamal from '../../assets/images/Volunteer/kamalghimire.png';
 import GracyTamang from '../../assets/images/SundaySchool/GracyTamang.jpg';
 import Winnie from '../../assets/images/SundaySchool/wini.png';
 import user2 from '../../assets/images/user2.png';
@@ -48,7 +49,7 @@ const LeadershipSection = () => {
   // Preload all leadership images on mount to reduce latency when switching tabs
   useEffect(() => {
     const images = [
-      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, Devraj, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh
+      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, Devraj, Kamal, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh
     ];
     images.forEach(src => {
       const img = new window.Image();
@@ -271,6 +272,13 @@ const LeadershipSection = () => {
           description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
           experience: '4+ Years Service',
           specialization: 'Guest Services & Hospitality'
+        },
+           {
+          name: 'Brother Kamal Ghimiray',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '3+ Years Service',
+          specialization: 'Services & Hospitality'
         }
       ]
     },
@@ -427,6 +435,7 @@ const LeadershipSection = () => {
         member.name === 'Brother Bijen Lama' ? BijenLama :
         member.name === 'Brother Nipesh Thapa' ? Nipesh :
         member.name === 'Brother Devraj Sarki' ? Devraj :
+        member.name === 'Brother Kamal Ghimiray' ? Kamal :
         member.name === 'Sister Gracy Tamang' ? GracyTamang :
         member.name === 'Sister Winnie Thapa' ? Winnie :
         member.name === 'Manzil Thapa' ? Manzil :
@@ -702,9 +711,15 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
-                        )  :member.name === 'Sister Gracy Tamang' ? (
+                        ) :member.name === 'Brother Devraj Sarki' ? (
                           <img
-                            src={GracyTamang}
+                            src={Devraj}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        )  :member.name === 'Brother Kamal Ghimiray' ? (
+                          <img
+                            src={Kamal}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />

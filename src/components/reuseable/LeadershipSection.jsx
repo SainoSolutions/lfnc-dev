@@ -729,6 +729,12 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
+                        ) : member.name === 'Sister Gracy Tamang' ? (
+                          <img
+                            src={GracyTamang}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
                         ) : member.name === 'Manzil Thapa' ? (
                           <img
                             src={Manzil}

@@ -6,7 +6,7 @@ const DetailsModal = ({ isOpen, onClose, data, type, onNext, onPrevious, showNav
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-80 backdrop-blur-md overflow-y-auto">
-      <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-white/20 my-auto">
+      <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-white/20 my-auto" style={{marginTop: '3rem'}}>
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -60,7 +60,7 @@ const DetailsModal = ({ isOpen, onClose, data, type, onNext, onPrevious, showNav
         </div>
 
         {/* Content */}
-        <div className="p-8 pl-10 pr-10" style={{paddingLeft: "6rem", paddingRight: "6rem"}}>
+        <div className="p-8" style={{paddingLeft: "3rem", paddingRight: "3rem"}}>
           <h2 className="text-4xl font-bold text-white mb-4 leading-tight">{data.title}</h2>
           <p className="text-gray-300 text-lg mb-8 leading-relaxed">{data.description}</p>
 

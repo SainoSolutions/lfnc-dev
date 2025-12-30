@@ -60,7 +60,7 @@ const DetailsModal = ({ isOpen, onClose, data, type, onNext, onPrevious, showNav
         </div>
 
         {/* Content */}
-        <div className="p-8">
+        <div className="p-8 pl-10 pr-10" style={{paddingLeft: "6rem", paddingRight: "6rem"}}>
           <h2 className="text-4xl font-bold text-white mb-4 leading-tight">{data.title}</h2>
           <p className="text-gray-300 text-lg mb-8 leading-relaxed">{data.description}</p>
 

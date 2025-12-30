@@ -194,20 +194,20 @@ const Home = () => {
               <span className="text-white text-xs font-bold uppercase tracking-wide">Upcoming Event</span>
             </div>
             <img src={slide3} alt="New Year 2025" className="w-full h-32 object-cover rounded-xl mb-3" />
-            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">New Year 2025 Celebration</h3>
-            <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Welcome 2025 with worship, prayer, and thanksgiving</p>
+            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">New Year 2026 Celebration</h3>
+            <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Welcome 2026 with worship, prayer, and thanksgiving</p>
             <div className="space-y-2 text-xs text-gray-300">
               <div className="flex items-center gap-2">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                 </svg>
-                <span>Tuesday, December 31, 2024</span>
+                <span>Thurday, January 1, 2026</span>
               </div>
               <div className="flex items-center gap-2">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                <span>09:00 PM - 12:30 AM</span>
+                <span>07:30 AM - 9.30 AM</span>
               </div>
             </div>
             <button onClick={() => openModal('event')} className="font-heading w-full mt-3 bg-gradient-to-r from-red-500 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition-all duration-300 transform hover:scale-105 tracking-wide">

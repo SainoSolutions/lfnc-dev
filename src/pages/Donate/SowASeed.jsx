@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CustomDropdown from '../../components/reuseable/CustomDropdown';
+import scannerQR from '../../assets/images/scan.jpeg';
 
 const SowASeed = () => {
   const [selectedAmount, setSelectedAmount] = useState('');
@@ -133,7 +134,7 @@ const SowASeed = () => {
               </button>
 
               {/* Contact Pastor */}
-              <button
+              {/* <button
                 onClick={() => setSelectedMethod('contact')}
                 className={`w-full p-6 rounded-xl border-2 transition-all duration-300 text-left ${
                   selectedMethod === 'contact'
@@ -148,7 +149,7 @@ const SowASeed = () => {
                     <p className="font-body text-sm opacity-90">Speak directly with Pastor Roshan</p>
                   </div>
                 </div>
-              </button>
+              </button> */}
 
               {/* Card Payment */}
               <button
@@ -173,10 +174,11 @@ const SowASeed = () => {
             {selectedMethod === 'qr' && (
               <div className="mt-6 p-6 bg-amber-50 rounded-xl border border-amber-200">
                 <div className="text-center">
-                  <div className="w-48 h-48 bg-white rounded-xl mx-auto mb-4 flex items-center justify-center border-2 border-amber-300">
-                    <span className="text-gray-500">QR Code</span>
+                  <div className="w-48 h-48 bg-white rounded-xl mx-auto mb-4 flex items-center justify-center border-2 border-amber-300 overflow-hidden">
+                    <img src={scannerQR} alt="UPI QR Code" className="w-full h-full object-cover" />
                   </div>
-                  <p className="font-body text-gray-700">UPI ID: lfnc@paytm</p>
+                  <p className="font-body text-gray-700 font-semibold text-lg mb-2">UPI ID: 9986225964@sbi</p>
+                  <p className="font-body text-gray-600 text-sm">Scan the QR code above with any UPI app to donate</p>
                 </div>
               </div>
             )}

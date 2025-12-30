@@ -20,7 +20,6 @@ const NewsAndUpdates = () => {
       views: 1542,
       comments: 78,
       featured: true,
-      image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80',
       urgent: false
     },
     {
@@ -35,7 +34,6 @@ const NewsAndUpdates = () => {
       views: 2890,
       comments: 145,
       featured: true,
-      image: 'https://images.unsplash.com/photo-1516549655669-df6654e435de?auto=format&fit=crop&w=800&q=80',
       urgent: true
     },
     {
@@ -50,113 +48,7 @@ const NewsAndUpdates = () => {
       views: 1876,
       comments: 92,
       featured: true,
-      image: 'https://images.unsplash.com/photo-1516549655669-df6654e435de?auto=format&fit=crop&w=800&q=80',
       urgent: true
-    },
-    {
-      id: 4,
-      title: 'Food Pantry Needs Donations',
-      excerpt: 'Our food pantry is running low on canned goods and essentials. Help us feed 200 families this week.',
-      content: 'Due to increased demand, our community food pantry needs immediate donations of canned vegetables, pasta, rice, and baby formula. We serve over 200 families weekly. Drop-off donations at the church office Monday-Friday 9AM-5PM.',
-      date: 'Dec 16, 2024',
-      author: 'Food Pantry Coordinator',
-      category: 'community',
-      tags: ['Food Drive', 'Donations', 'Community'],
-      views: 1234,
-      comments: 56,
-      featured: false,
-      image: 'https://images.unsplash.com/photo-1507041957456-9c397ce37d1d?auto=format&fit=crop&w=800&q=80',
-      urgent: false
-    },
-    {
-      id: 5,
-      title: 'Volunteers Needed for Hospital Visitation',
-      excerpt: 'Join our hospital visitation team to bring comfort and prayer to members in medical facilities.',
-      content: 'We are expanding our hospital visitation ministry. Volunteers are needed to visit sick members, pray with them, and provide emotional support. Training will be provided. Commitment: 2-4 hours per week.',
-      date: 'Dec 15, 2024',
-      author: 'Hospital Ministry Leader',
-      category: 'community', // Changed from 'volunteer'
-      tags: ['Volunteers', 'Hospital', 'Ministry'],
-      views: 876,
-      comments: 34,
-      featured: false,
-      image: 'https://images.unsplash.com/photo-1516549655669-df6654e435de?auto=format&fit=crop&w=800&q=80',
-      urgent: false
-    },
-    {
-      id: 6,
-      title: 'New Pharmacy Opening Near Church',
-      excerpt: 'MediCare Pharmacy opens next week with 20% discount for LFNC members on prescriptions.',
-      content: 'Great news for our community! MediCare Pharmacy opens December 22nd at 456 Church Street. They are offering LFNC members a 20% discount on all prescriptions and over-the-counter medications. Show your church ID for the discount.',
-      date: 'Dec 14, 2024',
-      author: 'Community Services',
-      category: 'community',
-      tags: ['Pharmacy', 'Discount', 'Health'],
-      views: 945,
-      comments: 41,
-      featured: false,
-      image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&q=80',
-      urgent: false
-    },
-    {
-      id: 7,
-      title: 'Emergency Housing Assistance Available',
-      excerpt: 'Temporary housing support for members facing eviction or homelessness. Contact the outreach office.',
-      content: 'Through our partnership with Community Housing Alliance, we can provide temporary housing assistance for members facing eviction or homelessness. Limited funds available. Contact Sister Sarah at the outreach office for confidential assistance.',
-      date: 'Dec 13, 2024',
-      author: 'Housing Assistance Program',
-      category: 'community',
-      tags: ['Housing', 'Emergency', 'Support'],
-      views: 1102,
-      comments: 67,
-      featured: false,
-      image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
-      urgent: false
-    },
-    {
-      id: 8,
-      title: 'Blood Drive This Saturday at Church',
-      excerpt: 'American Red Cross Blood Drive in the church parking lot. All blood types needed. Walk-ins welcome.',
-      content: 'Join us for a community blood drive this Saturday from 9AM-3PM in the church parking lot. The American Red Cross will be on site. All blood types are needed, especially O-negative. Donors receive a free t-shirt and refreshments.',
-      date: 'Dec 12, 2024',
-      author: 'Health & Wellness Ministry',
-      category: 'community',
-      tags: ['Blood Drive', 'Health', 'Community'],
-      views: 1321,
-      comments: 89,
-      featured: true,
-      image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80',
-      urgent: false
-    },
-    {
-      id: 9,
-      title: 'Member Success: New Business Opening',
-      excerpt: 'Congratulations to Brother James on opening "Heavenly Bakes" bakery in downtown.',
-      content: 'We celebrate with Brother James Wilson who has opened "Heavenly Bakes" bakery at 789 Market Street. After years of prayer and preparation, his dream has become reality. Stop by for a 15% discount with your church ID.',
-      date: 'Dec 11, 2024',
-      author: 'Celebration Committee',
-      category: 'community', // Changed from 'celebration'
-      tags: ['Business', 'Success', 'Community'],
-      views: 765,
-      comments: 45,
-      featured: false,
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80',
-      urgent: false
-    },
-    {
-      id: 10,
-      title: 'Medical Equipment Loan Program',
-      excerpt: 'Borrow wheelchairs, walkers, and hospital beds from our medical equipment library.',
-      content: 'Our medical equipment loan program now has available: 5 wheelchairs, 8 walkers, 3 shower chairs, and 2 hospital beds. Available to members and community residents free of charge. Contact Deacon Thomas to arrange pickup.',
-      date: 'Dec 10, 2024',
-      author: 'Medical Ministry',
-      category: 'community',
-      tags: ['Medical', 'Equipment', 'Support'],
-      views: 892,
-      comments: 38,
-      featured: false,
-      image: 'https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?auto=format&fit=crop&w=800&q=80',
-      urgent: false
     }
   ];
 
@@ -212,6 +104,36 @@ const NewsAndUpdates = () => {
     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.342 16.5c-.77.833.192 2.5 1.732 2.5z"/>
     </svg>
+  );
+
+  // Coming Soon Image Component
+  const ComingSoonImage = ({ urgent = false }) => (
+    <div className={`w-full h-full flex flex-col items-center justify-center p-6 ${
+      urgent 
+        ? 'bg-gradient-to-br from-red-900/40 to-pink-900/30' 
+        : 'bg-gradient-to-br from-purple-900/30 to-blue-900/20'
+    }`}>
+      <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${
+        urgent 
+          ? 'bg-gradient-to-r from-red-600/30 to-pink-600/30 border-2 border-red-500/30' 
+          : 'bg-gradient-to-r from-purple-600/30 to-blue-600/30 border-2 border-purple-500/30'
+      }`}>
+        {urgent ? (
+          <svg className="w-8 h-8 text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.342 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+          </svg>
+        ) : (
+          <svg className="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+        )}
+      </div>
+      <span className={`text-sm font-medium ${
+        urgent ? 'text-red-200' : 'text-purple-200'
+      }`}>
+        Updates Coming Soon
+      </span>
+    </div>
   );
 
   return (
@@ -286,12 +208,7 @@ const NewsAndUpdates = () => {
             {filteredNews.filter(n => n.urgent).slice(0, 2).map((urgent) => (
               <div key={urgent.id} className="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-red-900/30 to-pink-900/20 backdrop-blur-lg border-2 border-red-500/30 shadow-2xl">
                 <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={urgent.image}
-                    alt={urgent.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-red-900/80 via-red-900/50 to-transparent" />
+                  <ComingSoonImage urgent={true} />
                   <div className="absolute top-4 right-4">
                     <button
                       onClick={() => toggleBookmark(urgent.id)}
@@ -341,8 +258,8 @@ const NewsAndUpdates = () => {
                       >
                         <FaShareAlt className="text-red-300" />
                       </button>
-                      <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-pink-600 text-white rounded-full hover:from-red-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 animate-pulse">
-                        Take Action
+                      <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-600 to-pink-600 text-white rounded-full hover:from-red-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105">
+                        View Details
                         <FaArrowRight />
                       </button>
                     </div>
@@ -364,12 +281,7 @@ const NewsAndUpdates = () => {
                   : 'border-white/20 hover:shadow-purple-500/20'
               }`}>
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={news.image}
-                    alt={news.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+                  <ComingSoonImage urgent={news.urgent} />
                   <div className="absolute top-4 right-4">
                     <button
                       onClick={() => toggleBookmark(news.id)}
@@ -442,36 +354,6 @@ const NewsAndUpdates = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-
-        {/* Community Help Line section */}
-        <div className="mt-16 mb-12">
-          <div className="bg-gradient-to-br from-purple-900/50 to-red-900/50 backdrop-blur-lg border border-white/20 rounded-3xl p-8 lg:p-12">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-red-600 rounded-full mb-6">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-4">Stay Updated</h3>
-              <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-                Subscribe to our newsletter and never miss an update. Get the latest news, event announcements, and spiritual insights delivered directly to your inbox.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-1 px-6 py-4 bg-white/10 border-2 border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
-                />
-                <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-red-600 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-red-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                  Subscribe Now
-                </button>
-              </div>
-              <p className="text-gray-400 text-sm mt-4">
-                By subscribing, you agree to our Privacy Policy. You may unsubscribe at any time.
-              </p>
-            </div>
           </div>
         </div>
       </div>

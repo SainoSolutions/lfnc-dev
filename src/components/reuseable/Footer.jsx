@@ -197,7 +197,7 @@ const Footer = () => {
                 <p className="font-bold text-gray-900 mb-2 flex items-center gap-2">
                   <FaPhone className="text-blue-500" /> Contact
                 </p>
-                <p className="text-sm text-gray-800">Pastor Roshan: +91 XXXXX XXXXX</p>
+                <p className="text-sm text-gray-800">Admin: +91 6362222318</p>
               </div>
             </div>
             <div className="space-y-3">
@@ -218,7 +218,7 @@ const Footer = () => {
         </div>
 
         {/* Email Subscription Bar */}
-        <div className="text-center mb-8">
+        {/* <div className="text-center mb-8">
           <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row justify-center gap-3">
             <input 
               type="email" 
@@ -227,15 +227,15 @@ const Footer = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="px-5 py-3 border border-gray-300 rounded w-full sm:w-80 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
-            />
-            <button 
+            /> */}
+            {/* <button 
               type="submit"
               className="px-6 py-3 bg-gradient-to-r from-red-500 to-purple-600 text-white border-none rounded cursor-pointer text-sm font-medium transition-all duration-300 hover:from-red-600 hover:to-purple-700 transform hover:scale-105"
             >
               Subscribe
-            </button>
-          </form>
-        </div>
+            </button> */}
+          {/* </form>
+        </div> */}
 
         {/* Social Media Links */}
         <div className="text-center mb-6">

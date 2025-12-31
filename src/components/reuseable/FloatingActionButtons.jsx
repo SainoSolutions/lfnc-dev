@@ -9,7 +9,7 @@ const FloatingActionButtons = () => {
   return (
     <div className="fixed bottom-6 right-6 z-50 pointer-events-none">
       {/* Secondary Buttons */}
-      <div className={`flex flex-col gap-3 mb-4 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0 pointer-events-auto z-[999998]' : 'opacity-0 translate-y-4 pointer-events-none'} hidden md:flex`}>
+      <div className={`flex flex-col gap-3 mb-4 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0 pointer-events-auto z-[999998]' : 'opacity-0 translate-y-4 pointer-events-none'}`}>
         {/* Members Registration Button - New */}
         <Link
           to="/members-registration"

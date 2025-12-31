@@ -145,12 +145,7 @@ const Services = () => {
 
                   {/* CTA Button - Same as Donate button */}
                   <button 
-                    onClick={() => {
-                      if (service.id === 1) navigate('/baptism-service');
-                      else if (service.id === 2) navigate('/birthday-service');
-                      else if (service.id === 3) navigate('/funeral-service');
-                      else if (service.id === 4) navigate('/volunteer-service');
-                    }}
+                    onClick={() => navigate('/unified-service-form')}
                     className="w-full mt-6 bg-gradient-to-r from-red-500 to-purple-600 hover:from-red-600 hover:to-purple-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
                   >
                     <span>Learn More</span>

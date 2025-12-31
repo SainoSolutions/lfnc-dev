@@ -30,6 +30,33 @@ function AppContent() {
   const [isLoading, setIsLoading] = useState(false);
   const prevPathname = useRef(pathname);
 
+    useEffect(() => {
+    const disableRightClick = (e) => e.preventDefault();
+    document.addEventListener('contextmenu', disableRightClick);
+
+    return () => {
+      document.removeEventListener('contextmenu', disableRightClick);
+    };
+    
+  }, []);
+  useEffect(() => {
+  const disableInspectKeys = (e) => {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && ['I', 'C', 'J'].includes(e.key)) ||
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+    }
+  };
+
+  document.addEventListener('keydown', disableInspectKeys);
+
+  return () => {
+    document.removeEventListener('keydown', disableInspectKeys);
+  };
+}, []);
+
   const showLoading = () => {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 800);

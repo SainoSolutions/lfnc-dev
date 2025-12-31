@@ -16,7 +16,7 @@ export default function Ministries() {
       icon: "👥",
       day: "Friday",
       time: "6:30 PM",
-      age: "13-18 Years"
+      age: "13-25 Years"
     },
     {
       title: "Kids Fellowship",
@@ -26,7 +26,7 @@ export default function Ministries() {
       icon: "👶",
       day: "Sunday",
       time: "10:00 AM",
-      age: "3-12 Years"
+      age: "4-12 Years"
     },
     {
       title: "Worship & Prayer",
@@ -46,7 +46,7 @@ export default function Ministries() {
       icon: "💪",
       day: "Saturday",
       time: "8:00 AM",
-      age: "18+ Years"
+      age: "Women 18+"
     },
     {
       title: "Bible Study",
@@ -56,7 +56,7 @@ export default function Ministries() {
       icon: "📖",
       day: "Tuesday",
       time: "7:30 PM",
-      age: "Adults"
+      age: "Adults 18+"
     },
     {
       title: "Sunday School",
@@ -66,7 +66,7 @@ export default function Ministries() {
       icon: "📚",
       day: "Sunday",
       time: "9:00 AM",
-      age: "All Ages"
+      age: "Children & Youth"
     }
   ];
 

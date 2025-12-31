@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaTimes, FaCheckCircle } from 'react-icons/fa';
+import CustomDropdown from '../../components/reuseable/CustomDropdown';
 
 const UnifiedServiceForm = () => {
   const [formData, setFormData] = useState({
@@ -320,21 +321,24 @@ const UnifiedServiceForm = () => {
             {/* Service Type Selection */}
             <div>
               <label className="font-body block text-white font-medium mb-2">Select Service *</label>
-              <select
-                name="serviceType"
-                value={formData.serviceType}
-                onChange={handleInputChange}
-                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                  formErrors.serviceType ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
-                }`}
-              >
-                <option value="">-- Choose a service --</option>
-                {services.map((service) => (
-                  <option key={service.id} value={service.value}>
-                    {service.name}
-                  </option>
-                ))}
-              </select>
+              <CustomDropdown
+                options={services.map(service => service.name)}
+                value={services.find(s => s.value === formData.serviceType)?.name || ''}
+                onChange={(value) => {
+                  const service = services.find(s => s.name === value);
+                  setFormData({
+                    ...formData,
+                    serviceType: service?.value || ''
+                  });
+                  if (formErrors.serviceType) {
+                    setFormErrors({
+                      ...formErrors,
+                      serviceType: ''
+                    });
+                  }
+                }}
+                placeholder="Select a service"
+              />
               {formErrors.serviceType && <p className="text-red-400 text-sm mt-1">{formErrors.serviceType}</p>}
             </div>
 
@@ -345,21 +349,23 @@ const UnifiedServiceForm = () => {
                   {serviceDetails[formData.serviceType]?.label} *
                 </label>
                 {serviceDetails[formData.serviceType]?.options ? (
-                  <select
-                    name="additionalDetails"
+                  <CustomDropdown
+                    options={serviceDetails[formData.serviceType].options}
                     value={formData.additionalDetails}
-                    onChange={handleInputChange}
-                    className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white transition-colors ${
-                      formErrors.additionalDetails ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
-                    }`}
-                  >
-                    <option value="">-- Select an option --</option>
-                    {serviceDetails[formData.serviceType].options.map((option, idx) => (
-                      <option key={idx} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
+                    onChange={(value) => {
+                      setFormData({
+                        ...formData,
+                        additionalDetails: value
+                      });
+                      if (formErrors.additionalDetails) {
+                        setFormErrors({
+                          ...formErrors,
+                          additionalDetails: ''
+                        });
+                      }
+                    }}
+                    placeholder="Select an option"
+                  />
                 ) : (
                   <input
                     type="text"

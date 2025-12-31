@@ -21,8 +21,6 @@ const ClockIcon = () => (
 
 const SermonsSection = () => {
   const [playingVideo, setPlayingVideo] = useState(null);
-  const [selectedSermon, setSelectedSermon] = useState(null);
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const navigate = useNavigate();
   
   const sermons = [
@@ -173,17 +171,6 @@ const SermonsSection = () => {
                     <PlayIcon />
                     <span className="font-heading font-semibold tracking-wide">Watch Now</span>
                   </button>
-
-                  {/* View Details Button */}
-                  <button 
-                    onClick={() => {
-                      setSelectedSermon(sermon);
-                      setIsDetailModalOpen(true);
-                    }}
-                    className="w-full mt-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105"
-                  >
-                    View Details
-                  </button>
                 </div>
               </div>
             </div>
@@ -201,91 +188,6 @@ const SermonsSection = () => {
         </div>
 
         {/* Detail Modal */}
-        {isDetailModalOpen && selectedSermon && (
-          <div className="fixed inset-0 z-[999999] flex items-center justify-center p-4 bg-black bg-opacity-80 backdrop-blur-md overflow-y-auto mt-16">
-            <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-white/20 my-auto md:mt-0 mt-20">
-              {/* Close Button */}
-              <button
-                onClick={() => setIsDetailModalOpen(false)}
-                className="absolute top-6 right-6 z-20 bg-red-500 hover:bg-red-600 text-white p-3 rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={selectedSermon.thumbnail}
-                  alt={selectedSermon.title}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                
-                {/* Badge */}
-                <div className="absolute top-6 left-6 z-10">
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md border bg-purple-500/30 border-purple-400/50">
-                    <div className="w-2 h-2 rounded-full animate-pulse bg-purple-400"></div>
-                    <span className="text-white text-xs font-bold uppercase tracking-wider">
-                      Sermon
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-4 sm:p-6 md:p-8">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4 leading-tight">{selectedSermon.title}</h2>
-                <p className="text-gray-300 text-base sm:text-lg md:text-lg mb-6 sm:mb-8 leading-relaxed">{selectedSermon.description}</p>
-
-                {/* Details Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                  <div className="flex items-start gap-3 sm:gap-4 bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
-                    <div className="p-2 sm:p-3 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex-shrink-0">
-                      <CalendarIcon />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-gray-400 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-1">Date</p>
-                      <p className="text-white font-semibold text-sm sm:text-base">{selectedSermon.date}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4 bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/10 hover:bg-white/10 transition-all duration-300">
-                    <div className="p-2 sm:p-3 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex-shrink-0">
-                      <ClockIcon />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-gray-400 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-1">Duration</p>
-                      <p className="text-white font-semibold text-sm sm:text-base">{selectedSermon.duration}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4 bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/10 hover:bg-white/10 transition-all duration-300 md:col-span-2">
-                    <div className="p-2 sm:p-3 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-lg flex-shrink-0">
-                      <svg className="w-5 sm:w-6 h-5 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                      </svg>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-gray-400 text-xs sm:text-sm font-semibold uppercase tracking-wide mb-1">Speaker</p>
-                      <p className="text-white font-semibold text-sm sm:text-base">{selectedSermon.speaker}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Watch Now Button */}
-                <button 
-                  onClick={() => window.open(selectedSermon.videoUrl, '_blank')}
-                  className="w-full bg-gradient-to-r from-purple-600 to-red-600 hover:from-purple-700 hover:to-red-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
-                >
-                  <PlayIcon />
-                  <span className="font-heading font-semibold tracking-wide">Watch Full Sermon</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       <style>{`

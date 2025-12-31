@@ -56,7 +56,8 @@ export default function ChurchEvents() {
             date: currentEvent.date,
             time: currentEvent.time || 'TBA',
             location: currentEvent.location || 'LFNC Church',
-            image: currentEvent.image
+            image: currentEvent.image,
+            videoUrl: currentEvent.videoUrl
           }}
           type="event"
           onNext={handleNext}

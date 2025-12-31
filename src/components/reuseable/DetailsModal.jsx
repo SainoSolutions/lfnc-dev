@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import { FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const DetailsModal = ({ isOpen, onClose, data, type, onNext, onPrevious, showNavigation }) => {
+    const videoRef = useRef(null);
+        // Stop video on close
+  useEffect(() => {
+    if (!isOpen && videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [isOpen]);
+  if (!isOpen) return null;
   if (!isOpen) return null;
 
   return (
@@ -34,30 +43,34 @@ const DetailsModal = ({ isOpen, onClose, data, type, onNext, onPrevious, showNav
         )}
 
         {/* Image */}
-        <div className="relative h-48 overflow-hidden">
-          <img
-            src={data.image}
-            alt={data.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-          
-          {/* Badge */}
-          <div className="absolute top-6 left-6 z-10">
-            <div className={`flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-md border ${
-              type === 'sermon' 
-                ? 'bg-purple-500/30 border-purple-400/50' 
-                : 'bg-red-500/30 border-red-400/50'
-            }`}>
-              <div className={`w-2 h-2 rounded-full animate-pulse ${
-                type === 'sermon' ? 'bg-purple-400' : 'bg-red-400'
-              }`}></div>
-              <span className="text-white text-xs font-bold uppercase tracking-wider">
-                {type === 'sermon' ? 'Upcoming Sermon' : 'Upcoming Event'}
-              </span>
-            </div>
-          </div>
-        </div>
+        <div className="relative aspect-video overflow-hidden">
+
+
+  {data.videoUrl !== undefined ? (
+    <video
+      ref={videoRef}
+      // src={data.videoUrl}
+      controls
+      autoPlay      
+      playsInline
+      preload="metadata"
+      poster={data.image}
+      className="w-full h-full object-cover rounded-lg bg-black"
+    >
+          <source src={data.videoUrl} type="video/mp4" />
+    Your browser does not support the video tag.
+    </video>
+  ) : (
+    <>
+      <img
+        src={data.image}
+        alt={data.title}
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+    </>
+  )}
+</div>
 
         {/* Content */}
         <div className="p-4 sm:p-6 md:p-8 md:pl-10 md:pr-10">

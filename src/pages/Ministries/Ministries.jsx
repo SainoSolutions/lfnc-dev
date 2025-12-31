@@ -9,7 +9,7 @@ export default function Ministries() {
   const navigate = useNavigate();
   const ministries = [
     {
-      title: "Youth Fellowship",
+      title: "LFNC Youth Fellowship",
       shortTitle: "Youth",
       description: "Empowering the next generation through dynamic teaching, mentorship, and community.",
       imageUrl: YouthFellowshipImg,
@@ -19,7 +19,7 @@ export default function Ministries() {
       age: "13-25 Years"
     },
     {
-      title: "Kids Fellowship",
+      title: "LFNC Kids Fellowship",
       shortTitle: "Kids",
       description: "Nurturing young hearts with age-appropriate teaching and fun activities.",
       imageUrl: KidsFellowshipImg,
@@ -47,6 +47,16 @@ export default function Ministries() {
       day: "Saturday",
       time: "8:00 AM",
       age: "Women 18+"
+    },
+    {
+      title: "LFNC Women's Fellowship",
+      shortTitle: "Women",
+      description: "Building strong women of faith through fellowship, study, and accountability.",
+      imageUrl: "https://plus.unsplash.com/premium_photo-1715588659565-3b6e1b31b4ac?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      icon: "🤝",
+      day: "Saturday",
+      time: "8:00 AM",
+      age: "18+ Years"
     },
     {
       title: "Bible Study",

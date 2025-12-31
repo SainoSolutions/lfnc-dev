@@ -188,8 +188,8 @@ const Footer = () => {
                   <FaMapMarkerAlt className="text-red-500" /> Locations
                 </p>
                 <div className="text-sm text-gray-800 space-y-1">
-                  <p>Koramangala, Bangalore</p>
-                  <p>Electronic City, Bangalore</p>
+                  <p>Maharaja signal, 80 Feet Rd, New Friends Colony, 4th Block,Koramangala, Bangalore</p>
+                  <p>Hulimangala Rd, Neeladri Nagar, Electronic City Phase I, Bangalore</p>
                   <p>Kathmandu, Nepal</p>
                 </div>
               </div>

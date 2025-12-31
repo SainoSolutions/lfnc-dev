@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { FaTimes, FaCheckCircle } from 'react-icons/fa';
 import CustomDropdown from '../../components/reuseable/CustomDropdown';
+import { UnifiedService } from './UnifiedAPIservice';
 
 const UnifiedServiceForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    firstname: '',
+    lastname: '',
     email: '',
-    phone: '',
-    serviceType: '',
-    additionalDetails: '',
-    message: ''
+    phone_no: '',
+    service_type: '',
+    additional_message: ''
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -63,16 +63,16 @@ const UnifiedServiceForm = () => {
   const validateForm = () => {
     const errors = {};
 
-    if (!formData.firstName.trim()) {
-      errors.firstName = 'First Name is required';
-    } else if (!/^[a-zA-Z\s]+$/.test(formData.firstName.trim())) {
-      errors.firstName = 'First Name should only contain letters';
+    if (!formData.firstname.trim()) {
+      errors.firstname = 'First Name is required';
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.firstname.trim())) {
+      errors.firstname = 'First Name should only contain letters';
     }
 
-    if (!formData.lastName.trim()) {
-      errors.lastName = 'Last Name is required';
-    } else if (!/^[a-zA-Z\s]+$/.test(formData.lastName.trim())) {
-      errors.lastName = 'Last Name should only contain letters';
+    if (!formData.lastname.trim()) {
+      errors.lastname = 'Last Name is required';
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.lastname.trim())) {
+      errors.lastname = 'Last Name should only contain letters';
     }
 
     if (!formData.email.trim()) {
@@ -81,19 +81,16 @@ const UnifiedServiceForm = () => {
       errors.email = 'Please enter a valid email address';
     }
 
-    if (!formData.phone.trim()) {
-      errors.phone = 'Phone Number is required';
-    } else if (!/^\d{10}$/.test(formData.phone.trim().replace(/\D/g, ''))) {
-      errors.phone = 'Phone Number must be exactly 10 digits';
+    if (!formData.phone_no.trim()) {
+      errors.phone_no = 'Phone Number is required';
+    } else if (!/^\d{10}$/.test(formData.phone_no.trim().replace(/\D/g, ''))) {
+      errors.phone_no = 'Phone Number must be exactly 10 digits';
     }
 
-    if (!formData.serviceType) {
-      errors.serviceType = 'Please select a service';
+    if (!formData.service_type) {
+      errors.service_type = 'Please select a service';
     }
 
-    if (!formData.additionalDetails.trim()) {
-      errors.additionalDetails = 'This field is required';
-    }
 
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -120,21 +117,18 @@ const UnifiedServiceForm = () => {
       );
       return;
     }
-
+console.log('Submitting form with data:', formData);
     setIsSubmitting(true);
 
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+     try {
+      await UnifiedService.postServiceRequest(formData);
       setFormData({
-        firstName: '',
-        lastName: '',
+        firstname: '',
+        lastname: '',
         email: '',
-        phone: '',
-        serviceType: '',
-        additionalDetails: '',
-        message: ''
+        phone_no: '',
+        service_type: '',
+        additional_message: ''
       });
 
       showMessageModal(
@@ -246,29 +240,29 @@ const UnifiedServiceForm = () => {
                 <label className="font-body block text-white font-medium mb-2">First Name *</label>
                 <input
                   type="text"
-                  name="firstName"
-                  value={formData.firstName}
+                  name="firstname"
+                  value={formData.firstname}
                   onChange={handleInputChange}
                   placeholder="Enter your first name"
                   className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                    formErrors.firstName ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
+                    formErrors.firstname ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
                   }`}
                 />
-                {formErrors.firstName && <p className="text-red-400 text-sm mt-1">{formErrors.firstName}</p>}
+                {formErrors.firstname && <p className="text-red-400 text-sm mt-1">{formErrors.firstname}</p>}
               </div>
               <div>
                 <label className="font-body block text-white font-medium mb-2">Last Name *</label>
                 <input
                   type="text"
-                  name="lastName"
-                  value={formData.lastName}
+                  name="lastname"
+                  value={formData.lastname}
                   onChange={handleInputChange}
                   placeholder="Enter your last name"
                   className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                    formErrors.lastName ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
+                    formErrors.lastname ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
                   }`}
                 />
-                {formErrors.lastName && <p className="text-red-400 text-sm mt-1">{formErrors.lastName}</p>}
+                {formErrors.lastname && <p className="text-red-400 text-sm mt-1">{formErrors.lastname}</p>}
               </div>
             </div>
 
@@ -292,29 +286,29 @@ const UnifiedServiceForm = () => {
                 <label className="font-body block text-white font-medium mb-2">Phone Number (10 digits) *</label>
                 <input
                   type="tel"
-                  name="phone"
-                  value={formData.phone}
+                  name="phone_no"
+                  value={formData.phone_no}
                   onChange={(e) => {
                     const cleaned = e.target.value.replace(/\D/g, '').slice(0, 10);
                     setFormData({
                       ...formData,
-                      phone: cleaned
+                      phone_no: cleaned
                     });
-                    if (formErrors.phone) {
+                    if (formErrors.phone_no) {
                       setFormErrors({
                         ...formErrors,
-                        phone: ''
+                        phone_no: ''
                       });
                     }
                   }}
                   placeholder="Enter your 10-digit phone number"
                   maxLength="10"
                   className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                    formErrors.phone ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
+                    formErrors.phone_no ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
                   }`}
                 />
-                {formErrors.phone && <p className="text-red-400 text-sm mt-1">{formErrors.phone}</p>}
-                {formData.phone && <p className="text-gray-300 text-sm mt-1">{formData.phone.length}/10 digits</p>}
+                {formErrors.phone_no && <p className="text-red-400 text-sm mt-1">{formErrors.phone_no}</p>}
+                {formData.phone_no && <p className="text-gray-300 text-sm mt-1">{formData.phone_no.length}/10 digits</p>}
               </div>
             </div>
 
@@ -323,71 +317,32 @@ const UnifiedServiceForm = () => {
               <label className="font-body block text-white font-medium mb-2">Select Service *</label>
               <CustomDropdown
                 options={services.map(service => service.name)}
-                value={services.find(s => s.value === formData.serviceType)?.name || ''}
+                value={services.find(s => s.value === formData.service_type)?.name || ''}
                 onChange={(value) => {
                   const service = services.find(s => s.name === value);
                   setFormData({
                     ...formData,
-                    serviceType: service?.value || ''
+                    service_type: service?.value || ''
                   });
-                  if (formErrors.serviceType) {
+                  if (formErrors.service_type) {
                     setFormErrors({
                       ...formErrors,
-                      serviceType: ''
+                      service_type: ''
                     });
                   }
                 }}
                 placeholder="Select a service"
               />
-              {formErrors.serviceType && <p className="text-red-400 text-sm mt-1">{formErrors.serviceType}</p>}
+              {formErrors.service_type && <p className="text-red-400 text-sm mt-1">{formErrors.service_type}</p>}
             </div>
 
-            {/* Additional Details Based on Service Type */}
-            {formData.serviceType && (
-              <div>
-                <label className="font-body block text-white font-medium mb-2">
-                  {serviceDetails[formData.serviceType]?.label} *
-                </label>
-                {serviceDetails[formData.serviceType]?.options ? (
-                  <CustomDropdown
-                    options={serviceDetails[formData.serviceType].options}
-                    value={formData.additionalDetails}
-                    onChange={(value) => {
-                      setFormData({
-                        ...formData,
-                        additionalDetails: value
-                      });
-                      if (formErrors.additionalDetails) {
-                        setFormErrors({
-                          ...formErrors,
-                          additionalDetails: ''
-                        });
-                      }
-                    }}
-                    placeholder="Select an option"
-                  />
-                ) : (
-                  <input
-                    type="text"
-                    name="additionalDetails"
-                    value={formData.additionalDetails}
-                    onChange={handleInputChange}
-                    placeholder={serviceDetails[formData.serviceType]?.placeholder}
-                    className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                      formErrors.additionalDetails ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
-                    }`}
-                  />
-                )}
-                {formErrors.additionalDetails && <p className="text-red-400 text-sm mt-1">{formErrors.additionalDetails}</p>}
-              </div>
-            )}
-
+            
             {/* Additional Message */}
             <div>
               <label className="font-body block text-white font-medium mb-2">Additional Message (Optional)</label>
               <textarea
-                name="message"
-                value={formData.message}
+                name="additional_message"
+                value={formData.additional_message}
                 onChange={handleInputChange}
                 placeholder="Add any additional details or special requests..."
                 rows="4"

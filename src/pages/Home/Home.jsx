@@ -35,7 +35,7 @@ const Home = () => {
     description: 'Join Pastor Roshan Rai for an inspiring message that will uplift your spirit and strengthen your faith. This week\'s sermon focuses on God\'s love and grace in our daily lives.',
     date: getNextSunday(),
     time: '07:30 AM - 09:00 AM',
-    location: 'LFNC Koramangala',
+    location: 'LFNC, Maharaja signal, 80 Feet Rd, New Friends Colony, 4th Block,Koramangala',
     speaker: 'Pastor Roshan Rai',
     image: slide1
   };
@@ -43,9 +43,9 @@ const Home = () => {
   const eventData = {
     title: 'New Year 2025 Celebration',
     description: 'Join us for a special New Year celebration service as we welcome 2025 together in worship, prayer, and thanksgiving. Let\'s reflect on God\'s faithfulness and step into the new year with hope and renewed faith.',
-    date: 'Tuesday, December 31, 2024',
-    time: '09:00 PM - 12:30 AM',
-    location: 'LFNC Koramangala',
+    date: 'Thursday, January 1, 2025',
+    time: '07:30 AM - 09:30 AM',
+    location: 'LFNC, Maharaja signal, 80 Feet Rd, New Friends Colony, 4th Block,Koramangala',
     image: slide3
   };
 

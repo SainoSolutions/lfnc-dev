@@ -3,12 +3,13 @@ import CustomDropdown from '../../components/reuseable/CustomDropdown';
 import scannerQR from '../../assets/images/scan.jpeg';
 
 const SowASeed = () => {
-  const [selectedAmount, setSelectedAmount] = useState('');
-  const [customAmount, setCustomAmount] = useState('');
   const [selectedMethod, setSelectedMethod] = useState('');
   const [showQR, setShowQR] = useState(false);
+  const [donorName, setDonorName] = useState('');
+  const [donorPhone, setDonorPhone] = useState('');
 
-  const predefinedAmounts = ['₹500', '₹1000', '₹2500', '₹5000'];
+  const isPhoneValid = donorPhone.trim().length === 10 && /^\d{10}$/.test(donorPhone);
+  const isFormValid = donorName.trim() && isPhoneValid;
 
   const HeartIcon = () => (
     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -63,116 +64,103 @@ const SowASeed = () => {
         </div>
 
         {/* Donation Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Column - Amount Selection */}
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-xl">
-            <h2 className="font-heading text-2xl font-semibold text-white mb-6">Choose Your Contribution</h2>
-            
-            {/* Predefined Amounts */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              {predefinedAmounts.map((amount) => (
-                <button
-                  key={amount}
-                  onClick={() => {setSelectedAmount(amount); setCustomAmount('');}}
-                  className={`font-heading py-4 px-6 rounded-xl border-2 transition-all duration-300 ${
-                    selectedAmount === amount
-                      ? 'bg-gradient-to-r from-purple-600 to-red-600 border-purple-500 text-white shadow-lg'
-                      : 'bg-white/20 border-white/30 text-white hover:border-white/50 hover:bg-white/30'
-                  }`}
-                >
-                  {amount}
-                </button>
-              ))}
-            </div>
-
-            {/* Custom Amount */}
-            <div className="mb-6">
-              <label className="font-body block text-white font-medium mb-2">Custom Amount</label>
+        <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-xl max-w-2xl mx-auto">
+          <h2 className="font-heading text-2xl font-semibold text-white mb-8">Make Your Contribution</h2>
+          
+          <div className="space-y-6">
+            {/* Donor Name */}
+            <div>
+              <label className="font-body block text-white font-medium mb-2">Your Name *</label>
               <input
-                type="number"
-                placeholder="Enter amount in ₹"
-                value={customAmount}
-                onChange={(e) => {setCustomAmount(e.target.value); setSelectedAmount('');}}
+                type="text"
+                placeholder="Enter your full name"
+                value={donorName}
+                onChange={(e) => setDonorName(e.target.value)}
                 className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white placeholder-gray-300"
               />
             </div>
 
-            {/* Purpose Selection */}
-            <div className="mb-6">
-              <label className="font-body block text-white font-medium mb-2">Purpose (Optional)</label>
-              <CustomDropdown
-                options={['General Ministry', 'Youth Programs', 'Community Outreach', 'Building Fund', 'Missions']}
-                value={''}
-                onChange={() => {}}
-                placeholder="Select purpose"
-                className="membership-dropdown z-50"
+            {/* Donor Phone */}
+            <div>
+              <label className="font-body block text-white font-medium mb-2">Phone Number *</label>
+              <input
+                type="tel"
+                placeholder="Enter 10-digit phone number"
+                value={donorPhone}
+                onChange={(e) => setDonorPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                maxLength="10"
+                className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white placeholder-gray-300"
               />
+              <p className={`font-body text-sm mt-2 ${isPhoneValid ? 'text-green-300' : donorPhone.length > 0 ? 'text-yellow-300' : 'text-gray-400'}`}>
+                {donorPhone.length}/10 digits
+              </p>
             </div>
-          </div>
 
-          {/* Right Column - Payment Methods */}
-          <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-xl">
-            <h2 className="font-heading text-2xl font-semibold text-white mb-6">Payment Methods</h2>
-            
-            <div className="space-y-4">
-              {/* QR Code Payment */}
-              <button
-                onClick={() => {setSelectedMethod('qr'); setShowQR(true);}}
-                className={`w-full p-6 rounded-xl border-2 transition-all duration-300 text-left ${
-                  selectedMethod === 'qr'
-                    ? 'bg-gradient-to-r from-yellow-400 to-amber-500 border-amber-500 text-white'
-                    : 'bg-white border-amber-200 hover:border-amber-400 hover:bg-amber-50'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <QRIcon />
-                  <div>
-                    <h3 className="font-heading font-semibold">UPI / QR Code</h3>
-                    <p className="font-body text-sm opacity-90">Scan QR code for instant payment</p>
+            {/* Payment Methods */}
+            <div>
+              <label className="font-body block text-white font-medium mb-3">Select Payment Method</label>
+              
+              <div className="space-y-3">
+                {/* QR Code Payment */}
+                <button
+                  onClick={() => {
+                    if (isFormValid) {
+                      setSelectedMethod('qr');
+                      setShowQR(true);
+                    }
+                  }}
+                  disabled={!isFormValid}
+                  className={`w-full p-4 rounded-xl border-2 transition-all duration-300 text-left ${
+                    !isFormValid
+                      ? 'bg-gray-400/20 border-gray-400/30 text-gray-400 cursor-not-allowed'
+                      : selectedMethod === 'qr'
+                      ? 'bg-gradient-to-r from-yellow-400 to-amber-500 border-amber-500 text-white'
+                      : 'bg-white border-amber-200 hover:border-amber-400 hover:bg-amber-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <QRIcon />
+                    <div>
+                      <h3 className="font-heading font-semibold">UPI / QR Code</h3>
+                      <p className={`font-body text-sm ${!isFormValid ? 'opacity-60' : 'opacity-90'}`}>Scan QR code for instant payment</p>
+                    </div>
                   </div>
-                </div>
-              </button>
+                </button>
 
-              {/* Contact Pastor */}
-              {/* <button
-                onClick={() => setSelectedMethod('contact')}
-                className={`w-full p-6 rounded-xl border-2 transition-all duration-300 text-left ${
-                  selectedMethod === 'contact'
-                    ? 'bg-gradient-to-r from-yellow-400 to-amber-500 border-amber-500 text-white'
-                    : 'bg-white border-amber-200 hover:border-amber-400 hover:bg-amber-50'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <PhoneIcon />
-                  <div>
-                    <h3 className="font-heading font-semibold">Contact Pastor</h3>
-                    <p className="font-body text-sm opacity-90">Speak directly with Pastor Roshan</p>
+                {/* Card Payment */}
+                <button
+                  onClick={() => {
+                    if (isFormValid) {
+                      setSelectedMethod('card');
+                    }
+                  }}
+                  disabled={!isFormValid}
+                  className={`w-full p-4 rounded-xl border-2 transition-all duration-300 text-left ${
+                    !isFormValid
+                      ? 'bg-gray-400/20 border-gray-400/30 text-gray-400 cursor-not-allowed'
+                      : selectedMethod === 'card'
+                      ? 'bg-gradient-to-r from-yellow-400 to-amber-500 border-amber-500 text-white'
+                      : 'bg-white border-amber-200 hover:border-amber-400 hover:bg-amber-50'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <CreditCardIcon />
+                    <div>
+                      <h3 className="font-heading font-semibold">Card Payment</h3>
+                      <p className={`font-body text-sm ${!isFormValid ? 'opacity-60' : 'opacity-90'}`}>Secure online payment</p>
+                    </div>
                   </div>
-                </div>
-              </button> */}
+                </button>
+              </div>
 
-              {/* Card Payment */}
-              <button
-                onClick={() => setSelectedMethod('card')}
-                className={`w-full p-6 rounded-xl border-2 transition-all duration-300 text-left ${
-                  selectedMethod === 'card'
-                    ? 'bg-gradient-to-r from-yellow-400 to-amber-500 border-amber-500 text-white'
-                    : 'bg-white border-amber-200 hover:border-amber-400 hover:bg-amber-50'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <CreditCardIcon />
-                  <div>
-                    <h3 className="font-heading font-semibold">Card Payment</h3>
-                    <p className="font-body text-sm opacity-90">Secure online payment</p>
-                  </div>
-                </div>
-              </button>
+              {!isFormValid && (
+                <p className="text-yellow-300 text-sm mt-3 font-body">Please fill in your name and enter exactly 10 digits for phone number to proceed</p>
+              )}
             </div>
 
             {/* Payment Details */}
-            {selectedMethod === 'qr' && (
-              <div className="mt-6 p-6 bg-amber-50 rounded-xl border border-amber-200">
+            {selectedMethod === 'qr' && isFormValid && (
+              <div className="p-6 bg-amber-50 rounded-xl border border-amber-200">
                 <div className="text-center">
                   <div className="w-48 h-48 bg-white rounded-xl mx-auto mb-4 flex items-center justify-center border-2 border-amber-300 overflow-hidden">
                     <img src={scannerQR} alt="UPI QR Code" className="w-full h-full object-cover" />
@@ -183,30 +171,17 @@ const SowASeed = () => {
               </div>
             )}
 
-            {selectedMethod === 'contact' && (
-              <div className="mt-6 p-6 bg-amber-50 rounded-xl border border-amber-200">
-                <h4 className="font-heading font-semibold text-gray-900 mb-3">Contact Information</h4>
-                <div className="space-y-2 font-body text-gray-700">
-                  <p>📞 Pastor Roshan: +91 98765 43210</p>
-                  <p>📧 Email: pastor@lfnc.org</p>
-                  <p>💬 WhatsApp: +91 98765 43210</p>
-                </div>
-              </div>
-            )}
-
-            {selectedMethod === 'card' && (
-              <div className="mt-6 p-6 bg-amber-50 rounded-xl border border-amber-200">
-                <p className="font-body text-gray-700 text-center">
+            {selectedMethod === 'card' && isFormValid && (
+              <div className="p-6 bg-amber-50 rounded-xl border border-amber-200">
+                <p className="font-body text-gray-700 text-center mb-6">
                   Secure card payment processing will be available soon. Please use UPI or contact us directly.
                 </p>
+                
+                {/* Proceed Button for Card Payment */}
+                <button className="w-full bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-heading font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                  Proceed to Payment
+                </button>
               </div>
-            )}
-
-            {/* Proceed Button */}
-            {(selectedAmount || customAmount) && selectedMethod && (
-              <button className="w-full mt-6 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-600 hover:to-amber-700 text-white font-heading font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
-                Proceed with {selectedAmount || `₹${customAmount}`}
-              </button>
             )}
           </div>
         </div>

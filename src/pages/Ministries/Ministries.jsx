@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import YouthFellowshipImg from '../../assets/images/MinistriesImg/YouthFellowShip.png.jpeg';
+import KidsFellowshipImg from '../../assets/images/MinistriesImg/KidsFellowShip.png.jpeg';
+import WomenFellowshipImg from '../../assets/images/MinistriesImg/WomenFellowShip.png.jpeg';
+import SundaySchoolImg from '../../assets/images/MinistriesImg/SundaySchool.png.jpeg';
 
 export default function Ministries() {
   const navigate = useNavigate();
@@ -8,7 +12,7 @@ export default function Ministries() {
       title: "Youth Fellowship",
       shortTitle: "Youth",
       description: "Empowering the next generation through dynamic teaching, mentorship, and community.",
-      imageUrl: "https://images.unsplash.com/photo-1551847633-314d50cd36e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJchaHwxfHx5b3V0aCUyMGdyb3VwJTIwY29tbXVuaXR5fGVufDF8fHx8MTc2MjAxOTQzOHww&ixlib=rb-4.1.0&q=80&w=1080",
+      imageUrl: YouthFellowshipImg,
       icon: "👥",
       day: "Friday",
       time: "6:30 PM",
@@ -18,7 +22,7 @@ export default function Ministries() {
       title: "Kids Fellowship",
       shortTitle: "Kids",
       description: "Nurturing young hearts with age-appropriate teaching and fun activities.",
-      imageUrl: "https://images.unsplash.com/photo-1644822861244-1257985cbf0f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMHByYXlpbmclMjB0b2dldGhlcnxlbnwxfHx8fDE3NjIwMTk0Mzh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      imageUrl: KidsFellowshipImg,
       icon: "👶",
       day: "Sunday",
       time: "10:00 AM",
@@ -35,11 +39,11 @@ export default function Ministries() {
       age: "All Ages"
     },
     {
-      title: "Men's Fellowship",
-      shortTitle: "Men",
-      description: "Building strong men of faith through fellowship, study, and accountability.",
-      imageUrl: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-      icon: "🤝",
+      title: "Women's Fellowship",
+      shortTitle: "Women",
+      description: "Empowering women through prayer, study, and sisterhood in Christ.",
+      imageUrl: WomenFellowshipImg,
+      icon: "💪",
       day: "Saturday",
       time: "8:00 AM",
       age: "18+ Years"
@@ -55,14 +59,14 @@ export default function Ministries() {
       age: "Adults"
     },
     {
-      title: "Music & Arts",
-      shortTitle: "Music",
-      description: "Glorifying God through creative expression and worship.",
-      imageUrl: "https://images.unsplash.com/photo-1617544517952-991273adcbdc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaHVyY2glMjBtdXNpYyUyMGNob2lyfGVufDF8fHx8MTc2MjAxOTQ0MHww&ixlib=rb-4.1.0&q=80&w=1080",
-      icon: "🎵",
-      day: "Thursday",
-      time: "6:00 PM",
-      age: "12+ Years"
+      title: "Sunday School",
+      shortTitle: "Sunday School",
+      description: "Teaching God's Word to all ages with engaging lessons and activities.",
+      imageUrl: SundaySchoolImg,
+      icon: "📚",
+      day: "Sunday",
+      time: "9:00 AM",
+      age: "All Ages"
     }
   ];
 
@@ -286,10 +290,10 @@ export default function Ministries() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="flex gap-4 mt-8 md:hidden">
+        <div className="flex gap-4 mt-8 md:hidden relative z-30 pointer-events-auto">
           <button
             onClick={handlePrevious}
-            className="bg-gray-900/80 rounded-full shadow-lg transition-all duration-300 border border-gray-800 p-3"
+            className="bg-gray-900/80 rounded-full shadow-lg transition-all duration-300 border border-gray-800 p-3 hover:bg-gray-900/95"
             style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
           >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -298,7 +302,7 @@ export default function Ministries() {
           </button>
           <button
             onClick={handleNext}
-            className="bg-gray-900/80 rounded-full shadow-lg transition-all duration-300 border border-gray-800 p-3"
+            className="bg-gray-900/80 rounded-full shadow-lg transition-all duration-300 border border-gray-800 p-3 hover:bg-gray-900/95"
             style={{ pointerEvents: 'auto', touchAction: 'manipulation' }}
           >
             <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

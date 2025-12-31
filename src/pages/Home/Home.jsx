@@ -125,7 +125,7 @@ const Home = () => {
       {/* Hero Section */}
       <div className="relative w-full h-screen overflow-hidden">
       {/* Upcoming Card Switcher */}
-      <div className="absolute top-4 right-4 z-20 w-80">
+      <div className="absolute top-20 md:top-4 right-4 z-50 w-80">
         {/* Tab Switcher */}
         <div className="flex gap-2 mb-3">
           <button

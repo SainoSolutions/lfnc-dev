@@ -7,6 +7,7 @@ import Pritam from '../../assets/images/MediaTeam/Pritam.png';
 import PsRoshan from '../../assets/images/AreaLeaders/PsRoshan.png';
 import AsstPastor from '../../assets/images/AboutUs/Pastors/AsstPastor.jpeg';
 import PalkoPariyar from '../../assets/images/WorshipLeaders/1.jpeg';
+import MediaTeamImg from '../../assets/images/WorshipLeaders/media.png';
 import SilasDarnal from '../../assets/images/Decons/1.jpg';
 import SunitaDarnal from '../../assets/images/Decons/2.jpeg';
 import Joshen from '../../assets/images/Leaders/Joshen.png';
@@ -139,6 +140,14 @@ const LeadershipSection = () => {
           description: "Gifted musician and worship leader who creates an atmosphere of praise and worship, leading our congregation into God's presence through music.",
           experience: '10+ Years Ministry',
           specialization: 'Worship Leading & Music Ministry'
+        },
+        {
+          name: 'Palko Pariyar Team',
+          position: 'Worship Team',
+          description: 'A dedicated team working alongside Brother Palko Pariyar, contributing to our music ministry with passion and skill.',
+          experience: '5+ Years Service',
+          specialization: 'Music & Worship Ministry',
+          image: MediaTeamImg
         }
       ]
     },
@@ -581,7 +590,7 @@ const LeadershipSection = () => {
 
                     <div className="relative z-10">
                       {/* Member Avatar */}
-                      <div className="w-56 h-56 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
+                      <div className={`${member.name === 'Palko Pariyar Team' ? 'w-full h-72 rounded-xl' : 'w-56 h-56 rounded-full mx-auto'} mb-4 group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl`}>
                         {member.name === 'Pastor Roshan Rai' || member.name === 'Ps. Roshan Rai' ? (
                           <img
                             src={PsRoshan}
@@ -771,6 +780,12 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
+                        ) : member.name === 'Palko Pariyar Team' ? (
+                          <img
+                            src={MediaTeamImg}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
                         ):(
                           <img
                             src={user2}
@@ -789,10 +804,12 @@ const LeadershipSection = () => {
 
                       {/* Member Details */}
                       <div className="space-y-2 mb-4">
-                        <div className="flex items-center justify-between text-xs bg-purple-200/40 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-300/40">
-                          <span className="text-gray-700">Experience:</span>
-                          <span className="font-semibold text-purple-700">{member.experience}</span>
-                        </div>
+                        {activeTab === 'pastors' && (
+                          <div className="flex items-center justify-between text-xs bg-purple-200/40 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-300/40">
+                            <span className="text-gray-700">Experience:</span>
+                            <span className="font-semibold text-purple-700">{member.experience}</span>
+                          </div>
+                        )}
                         <div className="flex flex-col text-xs bg-red-200/40 backdrop-blur-sm rounded-lg px-3 py-2 border border-red-300/40">
                           <span className="text-gray-700 mb-1">Focus:</span>
                           <span className="font-semibold text-red-700">{member.specialization}</span>

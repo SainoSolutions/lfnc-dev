@@ -7,6 +7,7 @@ import Pritam from '../../assets/images/MediaTeam/Pritam.png';
 import PsRoshan from '../../assets/images/AreaLeaders/PsRoshan.png';
 import AsstPastor from '../../assets/images/AboutUs/Pastors/AsstPastor.jpeg';
 import PalkoPariyar from '../../assets/images/WorshipLeaders/1.jpeg';
+import MediaTeamImg from '../../assets/images/WorshipLeaders/media.png';
 import SilasDarnal from '../../assets/images/Decons/1.jpg';
 import SunitaDarnal from '../../assets/images/Decons/2.jpeg';
 import Joshen from '../../assets/images/Leaders/Joshen.png';
@@ -34,6 +35,10 @@ import LoadingSpinner from './LoadingSpinner';
 import Manzil from '../../assets/images/AreaLeaders/Manzil.png';
 import Erick from '../../assets/images/AreaLeaders/Erric.png';
 import Jasmine from '../../assets/images/AreaLeaders/Jasmine.png';
+import MinuRai from '../../assets/images/Pastors/Minu.jpeg';
+import RitaRai from '../../assets/images/Pastors/Rita.jpeg';
+import SovaVolunteer from '../../assets/images/Volunteer/Sova.jpeg';
+import JasmineVolunteer from '../../assets/images/Volunteer/Jasmine.jpeg';
 
 
 const LeadershipSection = () => {
@@ -49,7 +54,7 @@ const LeadershipSection = () => {
   // Preload all leadership images on mount to reduce latency when switching tabs
   useEffect(() => {
     const images = [
-      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, Devraj, Kamal, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh
+      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, Devraj, Kamal, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh, MinuRai, RitaRai, SovaVolunteer, JasmineVolunteer
     ];
     images.forEach(src => {
       const img = new window.Image();
@@ -86,11 +91,23 @@ const LeadershipSection = () => {
           specialization: 'Pastoral Care & Counseling, Church Planting & Leadership'
         },
         {
+          name: 'Pastor Minu Rai',
+          position: 'Wife of Pastor Roshan Rai',
+          description: 'Serving alongside Pastor Roshan Rai, Pastor Minu brings dedication and spiritual leadership to our pastoral team.',
+          specialization: 'Discipleship & Spiritual Growth'
+        },
+        {
           name: 'Pastor Samuel Rai',
           position: 'Senior Pastor & Founder',
           description: 'Dedicated to pastoral care and community outreach, Pastor Samuel brings deep theological knowledge and compassionate leadership to our congregation.',
           experience: '16+ Years Ministry',
           specialization: 'Pastoral Care & Counseling'
+        },
+        {
+          name: 'Pastor Rita Rai',
+          position: 'Wife of Pastor Samuel Rai',
+          description: 'Working with Pastor Samuel Rai, Pastor Rita contributes valuable leadership and pastoral care to our congregation.',
+          specialization: 'Pastoral Care & Women Ministry'
         }
       ]
     },
@@ -100,7 +117,7 @@ const LeadershipSection = () => {
       members: [
         {
           name: 'Elder Joshen Lepcha',
-          position: 'Youth Leader',
+          position: 'Leadership',
           description: 'Passionate about empowering the next generation, Elder Joshen leads our youth ministry with energy and biblical wisdom.',
           experience: '15+ Years Leadership',
           specialization: 'Discipleship &  Music Ministry'
@@ -139,6 +156,14 @@ const LeadershipSection = () => {
           description: "Gifted musician and worship leader who creates an atmosphere of praise and worship, leading our congregation into God's presence through music.",
           experience: '10+ Years Ministry',
           specialization: 'Worship Leading & Music Ministry'
+        },
+        {
+          name: 'Palko Pariyar Team',
+          position: 'Worship Team',
+          description: 'A dedicated team working alongside Brother Palko Pariyar, contributing to our music ministry with passion and skill.',
+          experience: '5+ Years Service',
+          specialization: 'Music & Worship Ministry',
+          image: MediaTeamImg
         }
       ]
     },
@@ -175,7 +200,7 @@ const LeadershipSection = () => {
           specialization: 'Media Production & Support'
         },
         {
-          name: 'Sister Barsa',
+          name: 'Sister Barsa Tamang',
           position: 'Media Team Member',
           description: 'Handling camera shoots and events.',
           experience: '1+ Years Service',
@@ -183,7 +208,7 @@ const LeadershipSection = () => {
           image: Barsa
         },
         {
-          name: 'Brother Dipesh',
+          name: 'Brother Dipesh Pradhan',
           position: 'Media Team Member',
           description: 'Handling camera shoots and events.',
           experience: '1+ Years Service',
@@ -279,6 +304,22 @@ const LeadershipSection = () => {
           description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
           experience: '3+ Years Service',
           specialization: 'Services & Hospitality'
+        },
+        {
+          name: 'Sister Sova Rai',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '2+ Years Service',
+          specialization: 'Guest Services & Hospitality',
+          image: SovaVolunteer
+        },
+        {
+          name: 'Sister Jasmine Thapa',
+          position: 'Hospitality Volunteer',
+          description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
+          experience: '2+ Years Service',
+          specialization: 'Guest Services & Hospitality',
+          image: JasmineVolunteer
         }
       ]
     },
@@ -415,7 +456,9 @@ const LeadershipSection = () => {
     members.forEach(member => {
       let src = member.image ||
         (member.name === 'Pastor Roshan Rai' || member.name === 'Ps. Roshan Rai' ? PsRoshan :
+        member.name === 'Pastor Minu Rai' ? MinuRai :
         member.name === 'Pastor Samuel Rai' ? AsstPastor :
+        member.name === 'Pastor Rita Rai' ? RitaRai :
         member.name === 'Brother Palko Pariyar' ? PalkoPariyar :
         member.name === 'Deacon Silas Darnal' ? SilasDarnal :
         member.name === 'Deacon Sunita Darnal' || member.name === 'Sunita Darnal' ? SunitaDarnal :
@@ -441,6 +484,10 @@ const LeadershipSection = () => {
         member.name === 'Manzil Thapa' ? Manzil :
         member.name === 'Erick Subba' ? Erick :
         member.name === 'Brother Pritam Chettry' ? Pritam :
+        member.name === 'Sister Barsa Tamang' ? Barsa :
+        member.name === 'Brother Dipesh Pradhan' ? Dipesh :
+        member.name === 'Sister Sova Rai' ? SovaVolunteer :
+        member.name === 'Sister Jasmine Thapa' && src.image ? JasmineVolunteer :
         member.name === 'Sister Jasmine Thapa' ? Jasmine : user2);
       const img = new window.Image();
       img.onload = () => {
@@ -511,7 +558,7 @@ const LeadershipSection = () => {
           {/* Header */}
           <div className="text-center mb-16">
             <p className="text-sm uppercase tracking-widest text-red-400 mb-2 font-semibold">Our Leadership</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400 animate-pulse">Team</span></h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Meet Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-red-400">Team</span></h2>
             <p className="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed">
               Dedicated servants of God leading our church with passion, wisdom, and love for the community.
             </p>
@@ -581,16 +628,28 @@ const LeadershipSection = () => {
 
                     <div className="relative z-10">
                       {/* Member Avatar */}
-                      <div className="w-56 h-56 rounded-full mb-4 mx-auto group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl">
+                      <div className={`${member.name === 'Palko Pariyar Team' ? 'w-full h-72 rounded-xl' : 'w-56 h-56 rounded-full mx-auto'} mb-4 group-hover:scale-105 transition-transform duration-300 overflow-hidden ring-4 ring-purple-500/30 group-hover:ring-purple-500/50 shadow-2xl`}>
                         {member.name === 'Pastor Roshan Rai' || member.name === 'Ps. Roshan Rai' ? (
                           <img
                             src={PsRoshan}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
+                        ) : member.name === 'Pastor Minu Rai' ? (
+                          <img
+                            src={MinuRai}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
                         ) : member.name === 'Pastor Samuel Rai' ? (
                           <img
                             src={AsstPastor}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Pastor Rita Rai' ? (
+                          <img
+                            src={RitaRai}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
@@ -753,13 +812,13 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
-                        ): member.name === 'Sister Barsa' ? (
+                        ): member.name === 'Sister Barsa Tamang' ? (
                           <img
                             src={Barsa}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
-                        ): member.name === 'Brother Dipesh' ? (
+                        ): member.name === 'Brother Dipesh Pradhan' ? (
                           <img
                             src={Dipesh}
                             alt={member.name}
@@ -768,6 +827,24 @@ const LeadershipSection = () => {
                         ): member.name === 'Sister Jasmine Thapa' ? (
                           <img
                             src={Jasmine}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Sister Sova Rai' ? (
+                          <img
+                            src={SovaVolunteer}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Sister Jasmine Thapa' && member.image ? (
+                          <img
+                            src={JasmineVolunteer}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : member.name === 'Palko Pariyar Team' ? (
+                          <img
+                            src={MediaTeamImg}
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
@@ -789,10 +866,12 @@ const LeadershipSection = () => {
 
                       {/* Member Details */}
                       <div className="space-y-2 mb-4">
-                        <div className="flex items-center justify-between text-xs bg-purple-200/40 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-300/40">
-                          <span className="text-gray-700">Experience:</span>
-                          <span className="font-semibold text-purple-700">{member.experience}</span>
-                        </div>
+                        {activeTab === 'pastors' && (
+                          <div className="flex items-center justify-between text-xs bg-purple-200/40 backdrop-blur-sm rounded-lg px-3 py-2 border border-purple-300/40">
+                            <span className="text-gray-700">Experience:</span>
+                            <span className="font-semibold text-purple-700">{member.experience}</span>
+                          </div>
+                        )}
                         <div className="flex flex-col text-xs bg-red-200/40 backdrop-blur-sm rounded-lg px-3 py-2 border border-red-300/40">
                           <span className="text-gray-700 mb-1">Focus:</span>
                           <span className="font-semibold text-red-700">{member.specialization}</span>

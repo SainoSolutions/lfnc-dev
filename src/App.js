@@ -18,6 +18,8 @@ import Media from "./pages/Media/Media";
 import Sermons from "./pages/Sermons/Sermons";
 import ContactUs from "./pages/ContactUs/ContactUs";
 import NewsAndUpdates from  "./pages/News&Updates";
+import MembersRegistration from "./pages/MembersRegistration/MembersRegistration";
+import UnifiedServiceForm from "./pages/Services/UnifiedServiceForm";
 import LoadingSpinner from "./components/reuseable/LoadingSpinner";
 
 const LoadingContext = createContext();
@@ -77,7 +79,9 @@ function AppContent() {
           <Route path="/media" element={<Media />} />
           <Route path="/sermons" element={<Sermons />} />
           <Route path="/contactus" element={<ContactUs />} />
-          <Route path="/news-updates" element={<NewsAndUpdates />} /> {/* Added this line */}
+          <Route path="/news-updates" element={<NewsAndUpdates />} />
+          <Route path="/members-registration" element={<MembersRegistration />} />
+          <Route path="/unified-service-form" element={<UnifiedServiceForm />} />
         </Routes>
       </Layout>
     </LoadingContext.Provider>

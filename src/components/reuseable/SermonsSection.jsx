@@ -186,6 +186,8 @@ const SermonsSection = () => {
             View All Sermons
           </button>
         </div>
+
+        {/* Detail Modal */}
       </div>
 
       <style>{`

@@ -52,7 +52,7 @@ const Home = () => {
 
   const openModal = (type) => {
     setModalType(type);
-    setModalData(type === 'sermon' ? sermonData : eventOne ? eventOne : eventData);
+    setModalData(type === 'sermon' ? sermonData : eventOne.length > 1 ? eventOne : eventData);
     setIsModalOpen(true);
   };
 

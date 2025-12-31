@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { FaTimes, FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 
 const MembersRegistration = () => {
@@ -7,10 +8,10 @@ const MembersRegistration = () => {
     phoneNumber: '',
     email: '',
     address: '',
-    location: '',
-    memberSince: ''
+    journey_with_lfnc: ''
   });
 
+  const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({ type: '', title: '', message: '' });
@@ -20,6 +21,51 @@ const MembersRegistration = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error for this field when user starts typing
+    if (formErrors[e.target.name]) {
+      setFormErrors({
+        ...formErrors,
+        [e.target.name]: ''
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+
+    // Name validation - only alphabets and spaces
+    if (!formData.fullName.trim()) {
+      errors.fullName = 'Full Name is required';
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.fullName.trim())) {
+      errors.fullName = 'Full Name should only contain letters and spaces';
+    }
+
+    // Phone validation - exactly 10 digits
+    if (!formData.phoneNumber.trim()) {
+      errors.phoneNumber = 'Phone Number is required';
+    } else if (!/^\d{10}$/.test(formData.phoneNumber.trim().replace(/\D/g, ''))) {
+      errors.phoneNumber = 'Phone Number must be exactly 10 digits';
+    }
+
+    // Email validation (optional but if provided, should be valid)
+    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      errors.email = 'Please enter a valid email address';
+    }
+
+    // Address validation
+    if (!formData.address.trim()) {
+      errors.address = 'Address is required';
+    }
+
+    // Journey validation - only numbers
+    if (!formData.journey_with_lfnc.trim()) {
+      errors.journey_with_lfnc = 'Journey with LFNC is required';
+    } else if (!/^\d+$/.test(formData.journey_with_lfnc.trim())) {
+      errors.journey_with_lfnc = 'Journey with LFNC must be a number';
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const showMessageModal = (type, title, message) => {
@@ -34,26 +80,41 @@ const MembersRegistration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate form
+    if (!validateForm()) {
+      showMessageModal(
+        'error',
+        'Validation Error',
+        '❌ Please fix the errors in the form and try again'
+      );
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      // Form validation
-      if (!formData.fullName || !formData.phoneNumber || !formData.address || !formData.location || !formData.memberSince) {
-        showMessageModal(
-          'error',
-          'Missing Required Fields',
-          '❌ Please fill in all required fields (*)'
-        );
-        setIsSubmitting(false);
-        return;
-      }
+      // Prepare API payload according to the required format
+      const apiPayload = {
+        fullname: formData.fullName.trim(),
+        email: formData.email.trim() || 'not-provided@example.com',
+        phonenumber: '+' + formData.phoneNumber.trim(),
+        address: formData.address.trim(),
+        journey_with_lfnc: formData.journey_with_lfnc.trim() + 'years'
+      };
 
-      // Show success message (API integration will be done later)
-      showMessageModal(
-        'success',
-        'Registration Successful!',
-        '✅ Your membership registration has been submitted successfully! Welcome to LFNC.'
+      // Send to backend API
+      const apiResponse = await axios.post(
+        'https://lfnc-dev-backend.onrender.com/api/member-registration',
+        apiPayload,
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
+
+      console.log('API Response:', apiResponse.data);
 
       // Reset form
       setFormData({
@@ -61,15 +122,42 @@ const MembersRegistration = () => {
         phoneNumber: '',
         email: '',
         address: '',
-        location: '',
-        memberSince: ''
+        journey_with_lfnc: ''
       });
 
-      console.log('Form submitted:', formData);
+      // Show success modal
+      showMessageModal(
+        'success',
+        'Registration Successful!',
+        '✅ Your membership registration has been submitted successfully! Welcome to LFNC.'
+      );
 
     } catch (error) {
       console.error('Submission Error:', error);
-      showMessageModal('error', 'Submission Failed', '❌ Failed to submit registration. Please try again.');
+      
+      let errorTitle = 'Registration Failed';
+      let errorMessage = '❌ Failed to submit registration. Please try again or contact us directly.';
+      
+      if (error.response) {
+        console.error('API Error Response:', error.response.data);
+        console.error('API Error Status:', error.response.status);
+        
+        if (error.response.status === 404) {
+          errorMessage = '❌ The server endpoint was not found. Please contact support.';
+        } else if (error.response.status === 400) {
+          errorMessage = '❌ Please check your information and try again.';
+        } else if (error.response.status === 500) {
+          errorMessage = '❌ Server error. Please try again later or contact us directly.';
+        }
+      } else if (error.request) {
+        console.error('No API Response:', error.request);
+        errorMessage = '❌ Unable to connect to the server. Please check your internet connection.';
+      } else {
+        console.error('Request Setup Error:', error.message);
+      }
+      
+      // Show error modal
+      showMessageModal('error', errorTitle, errorMessage);
     } finally {
       setIsSubmitting(false);
     }
@@ -175,24 +263,42 @@ const MembersRegistration = () => {
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleInputChange}
-                required
                 placeholder="Enter your full name"
-                className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white placeholder-gray-300"
+                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+                  formErrors.fullName ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
+                }`}
               />
+              {formErrors.fullName && <p className="text-red-400 text-sm mt-1">{formErrors.fullName}</p>}
             </div>
 
             {/* Phone Number */}
             <div>
-              <label className="font-body block text-white font-medium mb-2">Phone Number *</label>
+              <label className="font-body block text-white font-medium mb-2">Phone Number (10 digits) *</label>
               <input
                 type="tel"
                 name="phoneNumber"
                 value={formData.phoneNumber}
-                onChange={handleInputChange}
-                required
-                placeholder="Enter your phone number"
-                className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white placeholder-gray-300"
+                onChange={(e) => {
+                  const cleaned = e.target.value.replace(/\D/g, '').slice(0, 10);
+                  setFormData({
+                    ...formData,
+                    phoneNumber: cleaned
+                  });
+                  if (formErrors.phoneNumber) {
+                    setFormErrors({
+                      ...formErrors,
+                      phoneNumber: ''
+                    });
+                  }
+                }}
+                placeholder="Enter your 10-digit phone number"
+                maxLength="10"
+                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+                  formErrors.phoneNumber ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
+                }`}
               />
+              {formErrors.phoneNumber && <p className="text-red-400 text-sm mt-1">{formErrors.phoneNumber}</p>}
+              {formData.phoneNumber && <p className="text-gray-300 text-sm mt-1">{formData.phoneNumber.length}/10 digits</p>}
             </div>
 
             {/* Email (Optional) */}
@@ -204,8 +310,11 @@ const MembersRegistration = () => {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="Enter your email address (Optional)"
-                className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white placeholder-gray-300"
+                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+                  formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
+                }`}
               />
+              {formErrors.email && <p className="text-red-400 text-sm mt-1">{formErrors.email}</p>}
             </div>
 
             {/* Address */}
@@ -216,24 +325,12 @@ const MembersRegistration = () => {
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
-                required
                 placeholder="Enter your street address"
-                className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white placeholder-gray-300"
+                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+                  formErrors.address ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
+                }`}
               />
-            </div>
-
-            {/* Location */}
-            <div>
-              <label className="font-body block text-white font-medium mb-2">Location *</label>
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-                required
-                placeholder="Enter your city/location"
-                className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white placeholder-gray-300"
-              />
+              {formErrors.address && <p className="text-red-400 text-sm mt-1">{formErrors.address}</p>}
             </div>
 
             {/* Journey with LFNC (Years) */}
@@ -241,13 +338,27 @@ const MembersRegistration = () => {
               <label className="font-body block text-white font-medium mb-2">Journey with LFNC (Years) *</label>
               <input
                 type="text"
-                name="memberSince"
-                value={formData.memberSince}
-                onChange={handleInputChange}
-                required
+                name="journey_with_lfnc"
+                value={formData.journey_with_lfnc}
+                onChange={(e) => {
+                  const cleaned = e.target.value.replace(/\D/g, '');
+                  setFormData({
+                    ...formData,
+                    journey_with_lfnc: cleaned
+                  });
+                  if (formErrors.journey_with_lfnc) {
+                    setFormErrors({
+                      ...formErrors,
+                      journey_with_lfnc: ''
+                    });
+                  }
+                }}
                 placeholder="e.g., 1, 2, 3..."
-                className="font-body w-full px-4 py-3 border-2 border-white/30 rounded-xl focus:border-purple-500 focus:outline-none bg-white/20 text-white placeholder-gray-300"
+                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+                  formErrors.journey_with_lfnc ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
+                }`}
               />
+              {formErrors.journey_with_lfnc && <p className="text-red-400 text-sm mt-1">{formErrors.journey_with_lfnc}</p>}
             </div>
 
             {/* Privacy Notice */}

@@ -190,7 +190,7 @@ const ContactPage = () => {
                 <p className="text-sm text-gray-300">Email</p>
                 <p className="font-semibold">lfncit2025@gmail.com</p>
               </div>
-              <a href="mailto:info@lfnc.org" className="text-sm text-purple-300">Email</a>
+              <a href="mailto:lfncit2025@gmail.com" className="text-sm text-purple-300">Email</a>
             </div>
           </div>
         </div>

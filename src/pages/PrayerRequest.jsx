@@ -336,9 +336,8 @@ const PrayerRequest = () => {
               For urgent prayer requests, you can contact our prayer team directly:
             </p>
             <div className="space-y-2 font-body text-gray-200 text-center">
-              <p className="flex items-center justify-center gap-2"><FaPhone className="text-blue-400" /> Prayer Hotline: +91 98765 43210</p>
-              <p className="flex items-center justify-center gap-2"><FaEnvelope className="text-red-400" /> Email: prayer@lfnc.org</p>
-              <p className="flex items-center justify-center gap-2"><FaWhatsapp className="text-green-400" /> WhatsApp: +91 98765 43210</p>
+              <p className="flex items-center justify-center gap-2"><FaEnvelope className="text-red-400" /> <a href="mailto:lfncit2025@gmail.com">lfncit2025@gmail.com</a></p>
+              <p className="flex items-center justify-center gap-2"><FaWhatsapp className="text-green-400" /> <a href="tel:+916362222318">+91 6362222318</a></p>
             </div>
           </div>
         </div>

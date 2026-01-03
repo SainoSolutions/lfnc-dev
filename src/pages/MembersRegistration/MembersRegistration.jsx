@@ -48,7 +48,10 @@ const MembersRegistration = () => {
     }
 
     // Email validation (optional but if provided, should be valid)
-    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+    if(!formData.email.trim()){
+       errors.email = 'Email is required';
+    }
+    else if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
       errors.email = 'Please enter a valid email address';
     }
 
@@ -98,7 +101,7 @@ const MembersRegistration = () => {
       const apiPayload = {
         fullname: formData.fullName.trim(),
         email: formData.email.trim() || 'not-provided@example.com',
-        phonenumber: '+' + formData.phoneNumber.trim(),
+        phonenumber: formData.phoneNumber.trim(),
         address: formData.address.trim(),
         journey_with_lfnc: formData.journey_with_lfnc.trim() + 'years'
       };
@@ -113,7 +116,6 @@ const MembersRegistration = () => {
           }
         }
       );
-
       console.log('API Response:', apiResponse.data);
 
       // Reset form
@@ -254,141 +256,169 @@ const MembersRegistration = () => {
         <div className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 shadow-xl">
           <h2 className="font-heading text-2xl font-semibold text-white mb-6 text-center">Membership Registration Form</h2>
           
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Full Name */}
-            <div>
-              <label className="font-body block text-white font-medium mb-2">Full Name *</label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                placeholder="Enter your full name"
-                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                  formErrors.fullName ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
-                }`}
-              />
-              {formErrors.fullName && <p className="text-red-400 text-sm mt-1">{formErrors.fullName}</p>}
-            </div>
+         <form onSubmit={handleSubmit} className="space-y-6">
 
-            {/* Phone Number */}
-            <div>
-              <label className="font-body block text-white font-medium mb-2">Phone Number (10 digits) *</label>
-              <input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={(e) => {
-                  const cleaned = e.target.value.replace(/\D/g, '').slice(0, 10);
-                  setFormData({
-                    ...formData,
-                    phoneNumber: cleaned
-                  });
-                  if (formErrors.phoneNumber) {
-                    setFormErrors({
-                      ...formErrors,
-                      phoneNumber: ''
-                    });
-                  }
-                }}
-                placeholder="Enter your 10-digit phone number"
-                maxLength="10"
-                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                  formErrors.phoneNumber ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
-                }`}
-              />
-              {formErrors.phoneNumber && <p className="text-red-400 text-sm mt-1">{formErrors.phoneNumber}</p>}
-              {formData.phoneNumber && <p className="text-gray-300 text-sm mt-1">{formData.phoneNumber.length}/10 digits</p>}
-            </div>
+  {/* Full Name */}
+  <div>
+    <label className="font-body block text-white font-medium mb-2">
+      Full Name (पूरा नाम) *
+    </label>
+    <input
+      type="text"
+      name="fullName"
+      value={formData.fullName}
+      onChange={handleInputChange}
+      placeholder="Enter your full name / आफ्नो पूरा नाम लेख्नुहोस्"
+      className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+        formErrors.fullName
+          ? 'border-red-500 focus:border-red-500'
+          : 'border-white/30 focus:border-purple-500'
+      }`}
+    />
+    {formErrors.fullName && (
+      <p className="text-red-400 text-sm mt-1">{formErrors.fullName}</p>
+    )}
+  </div>
 
-            {/* Email (Optional) */}
-            <div>
-              <label className="font-body block text-white font-medium mb-2">Email ID</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Enter your email address (Optional)"
-                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                  formErrors.email ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
-                }`}
-              />
-              {formErrors.email && <p className="text-red-400 text-sm mt-1">{formErrors.email}</p>}
-            </div>
+  {/* Phone Number */}
+  <div>
+    <label className="font-body block text-white font-medium mb-2">
+      Phone Number (फोन नम्बर – १० अंक) *
+    </label>
+    <input
+      type="tel"
+      name="phoneNumber"
+      value={formData.phoneNumber}
+      onChange={(e) => {
+        const cleaned = e.target.value.replace(/\D/g, '').slice(0, 10);
+        setFormData({ ...formData, phoneNumber: cleaned });
+        if (formErrors.phoneNumber) {
+          setFormErrors({ ...formErrors, phoneNumber: '' });
+        }
+      }}
+      placeholder="Enter your 10-digit phone number / १० अंकको फोन नम्बर लेख्नुहोस्"
+      maxLength="10"
+      className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+        formErrors.phoneNumber
+          ? 'border-red-500 focus:border-red-500'
+          : 'border-white/30 focus:border-purple-500'
+      }`}
+    />
+    {formErrors.phoneNumber && (
+      <p className="text-red-400 text-sm mt-1">{formErrors.phoneNumber}</p>
+    )}
+    {formData.phoneNumber && (
+      <p className="text-gray-300 text-sm mt-1">
+        {formData.phoneNumber.length}/10 अंक
+      </p>
+    )}
+  </div>
 
-            {/* Address */}
-            <div>
-              <label className="font-body block text-white font-medium mb-2">Address *</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-                placeholder="Enter your street address"
-                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                  formErrors.address ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
-                }`}
-              />
-              {formErrors.address && <p className="text-red-400 text-sm mt-1">{formErrors.address}</p>}
-            </div>
+  {/* Email */}
+  <div>
+    <label className="font-body block text-white font-medium mb-2">
+      Email ID (इमेल ठेगाना)
+    </label>
+    <input
+      type="email"
+      name="email"
+      value={formData.email}
+      onChange={handleInputChange}
+      placeholder="Enter your email address (Optional) / इमेल ठेगाना (ऐच्छिक)"
+      className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+        formErrors.email
+          ? 'border-red-500 focus:border-red-500'
+          : 'border-white/30 focus:border-purple-500'
+      }`}
+    />
+    {formErrors.email && (
+      <p className="text-red-400 text-sm mt-1">{formErrors.email}</p>
+    )}
+  </div>
 
-            {/* Journey with LFNC (Years) */}
-            <div>
-              <label className="font-body block text-white font-medium mb-2">Journey with LFNC (Years) *</label>
-              <input
-                type="text"
-                name="journey_with_lfnc"
-                value={formData.journey_with_lfnc}
-                onChange={(e) => {
-                  const cleaned = e.target.value.replace(/\D/g, '');
-                  setFormData({
-                    ...formData,
-                    journey_with_lfnc: cleaned
-                  });
-                  if (formErrors.journey_with_lfnc) {
-                    setFormErrors({
-                      ...formErrors,
-                      journey_with_lfnc: ''
-                    });
-                  }
-                }}
-                placeholder="e.g., 1, 2, 3..."
-                className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
-                  formErrors.journey_with_lfnc ? 'border-red-500 focus:border-red-500' : 'border-white/30 focus:border-purple-500'
-                }`}
-              />
-              {formErrors.journey_with_lfnc && <p className="text-red-400 text-sm mt-1">{formErrors.journey_with_lfnc}</p>}
-            </div>
+  {/* Address */}
+  <div>
+    <label className="font-body block text-white font-medium mb-2">
+      Address (ठेगाना) *
+    </label>
+    <input
+      type="text"
+      name="address"
+      value={formData.address}
+      onChange={handleInputChange}
+      placeholder="Enter your address / आफ्नो ठेगाना लेख्नुहोस्"
+      className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+        formErrors.address
+          ? 'border-red-500 focus:border-red-500'
+          : 'border-white/30 focus:border-purple-500'
+      }`}
+    />
+    {formErrors.address && (
+      <p className="text-red-400 text-sm mt-1">{formErrors.address}</p>
+    )}
+  </div>
 
-            {/* Privacy Notice */}
-            <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-              <p className="font-body text-gray-300 text-sm">
-                <strong>Privacy Notice:</strong> Your information will be kept confidential and used only for church member services and communications.
-              </p>
-            </div>
+  {/* Journey with LFNC */}
+  <div>
+    <label className="font-body block text-white font-medium mb-2">
+      Journey with LFNC (Years)
+      <span className="block text-sm text-gray-300">
+        LFNC सँगको यात्रा (वर्षमा) *
+      </span>
+    </label>
+    <input
+      type="text"
+      name="journey_with_lfnc"
+      value={formData.journey_with_lfnc}
+      onChange={(e) => {
+        const cleaned = e.target.value.replace(/\D/g, '').slice(0, 2);
+        setFormData({ ...formData, journey_with_lfnc: cleaned });
+        if (formErrors.journey_with_lfnc) {
+          setFormErrors({ ...formErrors, journey_with_lfnc: '' });
+        }
+      }}
+      maxLength="2"
+      placeholder="e.g., 1, 2, 3 (Numbers only) / जस्तै: १, २, ३ (अंक मात्र)"
+      className={`font-body w-full px-4 py-3 border-2 rounded-xl focus:outline-none bg-white/20 text-white placeholder-gray-300 transition-colors ${
+        formErrors.journey_with_lfnc
+          ? 'border-red-500 focus:border-red-500'
+          : 'border-white/30 focus:border-purple-500'
+      }`}
+    />
+    {formErrors.journey_with_lfnc && (
+      <p className="text-red-400 text-sm mt-1">
+        {formErrors.journey_with_lfnc}
+      </p>
+    )}
+  </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className={`w-full bg-gradient-to-r from-purple-600 to-red-600 text-white font-heading font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform shadow-lg ${
-                isSubmitting 
-                  ? 'opacity-70 cursor-not-allowed' 
-                  : 'hover:scale-105 hover:from-purple-700 hover:to-red-700'
-              }`}
-            >
-              {isSubmitting ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Submitting...
-                </span>
-              ) : 'Register as Member'}
-            </button>
-          </form>
+  {/* Privacy Notice */}
+  <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+    <p className="font-body text-gray-300 text-sm">
+      <strong>Privacy Notice:</strong> Your information will be kept confidential
+      and used only for church member services and communications.
+    </p>
+    <p className="font-body text-gray-400 text-sm mt-2">
+      <strong>गोपनीयता सूचना:</strong> तपाईंको जानकारी गोप्य राखिनेछ र केवल
+      चर्चका सदस्य सेवाहरू तथा सूचनाका लागि मात्र प्रयोग गरिनेछ।
+    </p>
+  </div>
+
+  {/* Submit Button */}
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    className={`w-full bg-gradient-to-r from-purple-600 to-red-600 text-white font-heading font-semibold py-4 px-8 rounded-xl transition-all duration-300 transform shadow-lg ${
+      isSubmitting
+        ? 'opacity-70 cursor-not-allowed'
+        : 'hover:scale-105 hover:from-purple-700 hover:to-red-700'
+    }`}
+  >
+    {isSubmitting ? 'Submitting... / पठाउँदैछ...' : 'Register as Member / सदस्यको रूपमा दर्ता गर्नुहोस्'}
+  </button>
+
+</form>
+
         </div>
 
         {/* Benefits Section */}

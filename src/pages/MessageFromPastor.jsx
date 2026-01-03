@@ -12,7 +12,7 @@ const MessageFromPastor = () => {
   const navigate = useNavigate();
 
   const handleVisitUsClick = () => {
-    navigate('/');
+    navigate('/ContactUs');
     setTimeout(() => {
       document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);

@@ -9,9 +9,9 @@ export default function GetInvolved() {
       title: "Sunday Services",
       icon: FaPray,
       activities: [
-        "Worship & The Word: 8:00 am – 9:30 am",
-        "Kid's Service: 8:30 am – 9:30 am",
-        "Electronic City Branch: 8:00 am – 9:30 am",
+        "Worship & The Word: 7:30 am – 9:00 am",
+        "Kid's Service: 8:00 am – 9:00 am",
+        "Electronic City Branch: 7:30 am – 9:00 am",
       ],
     },
     {
@@ -24,14 +24,14 @@ export default function GetInvolved() {
         "Bannerghatta: 1st Tuesday, 12:30 pm – 2:00 pm",
         "Koramangala: 1st & 3rd Wednesday, 7:30 am – 9:00 am",
         "Madiwala: 2nd & 4th Wednesday, 7:30 am – 9:00 am",
-        "Visiting New Fellowship: Last Tuesday – Any time",
+        "Visiting New Fellowship: Every Last Tuesday – Any time",
       ],
     },
     {
       title: "Bible & Prayer",
       icon: FaBible,
       activities: [
-        "Bible Study: Thursday, 8:00 am – 9:00 am",
+        "Bible Study: Thursday, 9:00 am – 10:00 am",
         "Intercessory Prayer: Friday, 7:30 am – 8:30 am",
         "Fasting Prayer: Friday, 11:00 am – 1:00 pm",
       ],
@@ -41,21 +41,21 @@ export default function GetInvolved() {
       icon: FaHeart,
       activities: [
         "Youth Fellowship: Tuesday, 7:30 am – 9:00 am",
-        "Teen's Fellowship: Saturday, 4:00 pm – 5:30 pm",
+        "Teen's Fellowship: Saturday, 10:00 am – 11:00 am",
       ],
     },
     {
       title: "Women & Couple Fellowships",
       icon: FaUsers,
       activities: [
-        "Couple Fellowship: 2nd Tuesday, 11:00 am – 12:30 pm",
-        "Women's Fellowship: Last Wednesday, 9:00 pm – 10:30 pm",
+        "Couple Fellowship: 2nd Tuesday, 10:00 am – 12:00 pm",
+        "Women's Fellowship: Every 2nd Tuesday, 12:00 am – 1:00 pm",
       ],
     },
     {
       title: "Saturday Worship & Practice",
       icon: FaPray,
-      activities: ["Worship Practice: Saturday, 7:30 am – 9:30 am"],
+      activities: ["Worship Practice: Saturday, 7:30 am – 9:00 am"],
     },
     {
       title: "Monthly Activities",

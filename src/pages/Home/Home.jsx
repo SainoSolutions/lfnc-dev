@@ -10,6 +10,7 @@ import slide1 from '../../assets/images/Hero/slide1.jpg'
 import slide2 from '../../assets/images/Hero/slide2.jpg'
 import slide3 from '../../assets/images/Hero/slide3.jpg'
 import slide4 from '../../assets/images/Hero/slide4.jpg'
+import firstLordSupper from '../../assets/images/Hero/HeroSurmons&Events/4Jan2026.png'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,14 +32,41 @@ const Home = () => {
     return nextSunday.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   };
 
+
   const sermonData = {
-    title: 'Sunday Message',
-    description: 'Join Pastor Roshan Rai for an inspiring message that will uplift your spirit and strengthen your faith. This week\'s sermon focuses on God\'s love and grace in our daily lives.',
+    title: 'Sunday Service cum Holy Communion',
+    description: `Jai Mashi! 🙏
+
+Greetings from Living Faith Nepali Church
+
+We are delighted to invite you and your family to our Sunday Service cum Holy Communion. Join us as we come together in worship, prayer, and the Word of God.
+
+✨ Sunday Service & Holy Communion
+📅 Date: Sunday, January 04, 2026
+⏰ Time: 07:30 AM – 09:00 AM
+📍 Location: Scan the QR code in the poster for directions
+
+📍 Location (Map): <a>https://share.google/HcPQcLBBTDI2se1cf </a>
+
+📝 Register: https://www.lfnc.in/members-registration
+🎥 Live Streaming Available
+
+🎤 Speaker: Pastor Roshan Rai
+
+Let us gather with grateful hearts to remember the sacrifice of our Lord and experience His presence, grace, and renewal.
+
+🌐 Website: www.lfnc.in
+
+We look forward to worshiping with you.
+May God bless you abundantly.
+
+In Christ - Pastor Roshan Philip Rai
+Living Faith Nepali Church, Koramangala, Bengaluru`,
     date: getNextSunday(),
     time: '07:30 AM - 09:00 AM',
     location: 'LFNC, Maharaja signal, 80 Feet Rd, New Friends Colony, 4th Block,Koramangala',
     speaker: 'Pastor Roshan Rai',
-    image: slide1
+    image: firstLordSupper ? firstLordSupper: slide1
   };
 
   const eventData = {
@@ -175,8 +203,8 @@ const Home = () => {
               <span className="text-white text-xs font-bold uppercase tracking-wide">Upcoming Sermon</span>
             </div>
             
-            <img src={slide1} alt="Sunday Message" className="w-full h-32 object-cover rounded-xl mb-3" />
-            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">Sunday Message</h3>
+            <img src={firstLordSupper ? firstLordSupper : slide1} alt="Sunday Message" className="w-full h-32 object-cover rounded-xl mb-3" />
+            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">Sunday Service cum First Holy Communion of 2026</h3>
             <p className="font-body text-gray-200 text-sm mb-3 opacity-90">Join Pastor Roshan Rai for an inspiring message</p>
             <div className="space-y-2 text-xs text-gray-300">
               <div className="flex items-center gap-2">

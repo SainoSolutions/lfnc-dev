@@ -54,7 +54,7 @@ const LeadershipSection = () => {
   // Preload all leadership images on mount to reduce latency when switching tabs
   useEffect(() => {
     const images = [
-      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, Devraj, Kamal, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh, MinuRai, RitaRai, SovaVolunteer, JasmineVolunteer
+      PsRoshan, AsstPastor, PalkoPariyar, SilasDarnal, SunitaDarnal, Joshen, Ruthend, Santosh, Pawan, BhupenTamang, SrijanaRai, NehaRai, AshaRai, AjayRai, DevKumarLohar, BijenLama, Nipesh, PrameshRai, Devraj, Kamal, GracyTamang, Winnie, user2, Manzil, Erick, Jasmine, Pritam, Barsa, Dipesh, MinuRai, RitaRai, SovaVolunteer
     ];
     images.forEach(src => {
       const img = new window.Image();
@@ -132,14 +132,14 @@ const LeadershipSection = () => {
         {
           name: 'Deacon Silas Darnal',
           position: 'Community Outreach Deacon',
-          description: 'Leading our community service initiatives and charitable programs, Deacon Maya coordinates our outreach efforts with local communities.',
+          description: 'Leading our community service initiatives and charitable programs, Deacon Silas Darnal coordinates our outreach efforts with local communities.',
           experience: '10+ Years Service',
           specialization: 'Community Service & Outreach'
         },
         {
           name: 'Deacon Sunita Darnal',
           position: 'Head Deacon',
-          description: 'Serving faithfully in church administration and community service, Deacon Rajesh ensures smooth operations and member care.',
+          description: 'Serving faithfully in church administration and community service, Deacon Sunita Darnal ensures smooth operations and member care.',
           experience: '10+ Years Service',
           specialization: 'Administration & Member Care'
         },
@@ -186,7 +186,7 @@ const LeadershipSection = () => {
           specialization: 'Audio-Visual Production'
         },
         {
-          name: 'Brother Pritam Chettry',
+          name: 'Brother Pritam Chettri',
           position: 'Media Team Member',
           description: 'Contributing to our media ministry with technical skills, ensuring smooth production of church content.',
           experience: '2+ Years Service',
@@ -319,7 +319,7 @@ const LeadershipSection = () => {
           description: 'Welcoming guests and ensuring everyone feels at home, serving with warmth and genuine care for our community.',
           experience: '2+ Years Service',
           specialization: 'Guest Services & Hospitality',
-          image: JasmineVolunteer
+          image: Jasmine
         }
       ]
     },
@@ -487,8 +487,8 @@ const LeadershipSection = () => {
         member.name === 'Sister Barsa Tamang' ? Barsa :
         member.name === 'Brother Dipesh Pradhan' ? Dipesh :
         member.name === 'Sister Sova Rai' ? SovaVolunteer :
-        member.name === 'Sister Jasmine Thapa' && src.image ? JasmineVolunteer :
-        member.name === 'Sister Jasmine Thapa' ? Jasmine : user2);
+        member.name === 'Sister Jasmine Thapa' && Jasmine ? JasmineVolunteer :
+        member.name === '' ?  user2 : user2);
       const img = new window.Image();
       img.onload = () => {
         loaded++;

@@ -239,29 +239,29 @@ Living Faith Nepali Church, Koramangala, Bengaluru`,
               <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
               <span className="text-white text-xs font-bold uppercase tracking-wide">Upcoming Event</span>
             </div>
-            {eventOne && eventOne.videoUrl !== undefined ? (
-    <video
-      ref={videoRef}
-      // src={data.videoUrl}
-      controls
-      autoPlay      
-      playsInline
-      preload="metadata"
-      poster={eventOne.image}
-      className="w-full h-full object-cover rounded-lg bg-black"
-    >
-          <source src={eventOne.videoUrl} type="video/mp4" />
-    Your browser does not support the video tag.
-    </video>
-  ) : (
-    <>
-            <img src={slide3} alt="New Year 2025" className="w-full h-32 object-cover rounded-xl mb-3" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-    </>
-  )}
+            {(eventOne && eventOne.videoUrl !== undefined )|| (eventOne && eventOne.videoUrl) ?  (
+        <video
+          ref={videoRef}
+          controls
+          autoPlay      
+          playsInline
+          preload="metadata"
+          poster={eventOne.image}
+          className="w-full h-full object-cover rounded-lg bg-black"
+        >
+              <source src={eventOne.videoUrl} type="video/mp4" />
+        Your browser does not support the video tag.
+        </video>
+      ) : (
       
-            <h3 className="font-heading text-white font-semibold text-lg mb-2 text-shadow-soft">{eventOne?.title}</h3>
-            <p className="font-body text-gray-200 text-sm mb-3 opacity-90">{eventOne?.description}</p>
+                <img src={eventOne?.image ? eventOne.image : slide3} alt="New Year 2025" className="w-full h-32 object-cover rounded-xl mb-3" />
+          
+
+          )}
+          <img src={eventOne?.image ? eventOne.image : slide3} alt="New Year 2025" className="w-full h-32 object-cover rounded-xl mb-3" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+            <h3 className="font-heading text-white font-semibold text-sm mb-2 text-shadow-soft">{eventOne?.title}</h3>
+            <p className="line-clamp-2 font-body text-gray-200 text-sm mb-3 opacity-90">{eventOne?.description}</p>
             <div className="space-y-2 text-xs text-gray-300">
               <div className="flex items-center gap-2">
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

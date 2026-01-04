@@ -483,7 +483,7 @@ const LeadershipSection = () => {
         member.name === 'Sister Winnie Thapa' ? Winnie :
         member.name === 'Manzil Thapa' ? Manzil :
         member.name === 'Erick Subba' ? Erick :
-        member.name === 'Brother Pritam Chettry' ? Pritam :
+        member.name === 'Brother Pritam Chettri' ? Pritam :
         member.name === 'Sister Barsa Tamang' ? Barsa :
         member.name === 'Brother Dipesh Pradhan' ? Dipesh :
         member.name === 'Sister Sova Rai' ? SovaVolunteer :
@@ -806,7 +806,7 @@ const LeadershipSection = () => {
                             alt={member.name}
                             className="w-full h-full object-cover"
                           />
-                        ): member.name === 'Brother Pritam Chettry' ? (
+                        ): member.name === 'Brother Pritam Chettri' ? (
                           <img
                             src={Pritam}
                             alt={member.name}

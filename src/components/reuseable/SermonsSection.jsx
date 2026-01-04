@@ -23,9 +23,20 @@ const SermonsSection = () => {
   const [playingVideo, setPlayingVideo] = useState(null);
   const navigate = useNavigate();
   
-  const sermons = [
-    {
+  const sermons = [    
+     {
       id: 1,
+      title: "२०२६ नयाँ सालको बचन। 2026 New Year Sermon. Ps.Roshan",
+      speaker: "Ps. Roshan Rai",
+      date: "Jan 4, 2026",
+      duration: "45 min",
+      description: "Join us for a powerful time of worship, praise, and sermon in the Nepali language. Whether you are joining from Nepal or around the world, we are glad you are here to experience the presence of God with us",
+      videoUrl: 'https://www.youtube.com/embed/i8KXgkO5OvQ',
+      thumbnail: 'https://img.youtube.com/vi/i8KXgkO5OvQ/hqdefault.jpg', 
+      isNew: true
+    },
+    {
+      id: 2,
       title: "We are seated with Christ in the heavenly places",
       speaker: "Ps Roshan Rai",
       date: "Jan 12, 2025",
@@ -33,10 +44,9 @@ const SermonsSection = () => {
       description: "Join us for a powerful time of worship, praise, and sermon in the Nepali language. Whether you are joining from Nepal or around the world, we are glad you are here to experience the presence of God with us",
       videoUrl: "https://www.youtube.com/embed/q0BlX-BM_oI",
       thumbnail: "https://img.youtube.com/vi/q0BlX-BM_oI/hqdefault.jpg",
-      isNew: true
     },
     {
-      id: 2,
+      id: 3,
       title: "Worhsip Breaks Bondages",
       speaker: "Ps Roshan Rai",
       date: "Jan 5, 2025",
@@ -44,16 +54,6 @@ const SermonsSection = () => {
       description: "Join us for a powerful time of worship, praise, and sermon in the Nepali language. Whether you are joining from Nepal or around the world, we are glad you are here to experience the presence of God with us",
       videoUrl: "https://www.youtube.com/embed/-gove3-uNRw",
       thumbnail: "https://img.youtube.com/vi/-gove3-uNRw/hqdefault.jpg"
-    },
-    {
-      id: 3,
-      title: "The Lord should be the first place in our lives, not wealth.",
-      speaker: "Ps Roshan Rai",
-      date: "Dec 29, 2024",
-      duration: "38 min",
-      description: "Join us for a powerful time of worship, praise, and sermon in the Nepali language. Whether you are joining from Nepal or around the world, we are glad you are here to experience the presence of God with us",
-      videoUrl: "https://www.youtube.com/embed/sWxGqhckhIQ",
-      thumbnail: "https://img.youtube.com/vi/sWxGqhckhIQ/hqdefault.jpg"
     }
   ];
 

@@ -258,7 +258,6 @@ Living Faith Nepali Church, Koramangala, Bengaluru`,
           
 
           )}
-          <img src={eventOne?.image ? eventOne.image : slide3} alt="New Year 2025" className="w-full h-32 object-cover rounded-xl mb-3" />
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
             <h3 className="font-heading text-white font-semibold text-sm mb-2 text-shadow-soft">{eventOne?.title}</h3>
             <p className="line-clamp-2 font-body text-gray-200 text-sm mb-3 opacity-90">{eventOne?.description}</p>

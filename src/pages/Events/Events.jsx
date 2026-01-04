@@ -167,7 +167,7 @@ export default function ChurchEvents() {
                       <span className="font-semibold">{event.date}</span>
                     </div>
                     <h3 className="text-xl font-bold mb-2">{event.title}</h3>
-                    <p className="text-sm opacity-90">{event.description}</p>
+                    <p className="line-clamp-2 text-sm opacity-90">{event.description}</p>
                     <div className="flex items-center gap-2 text-sm text-zinc-300 mt-3">
                       <Users className="w-4 h-4" />
                       <span>{event.audience}</span>
